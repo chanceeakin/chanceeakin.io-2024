@@ -1,5 +1,4 @@
 "use client";
-import * as THREE from "three";
 import React from "react";
 import { Canvas } from "@react-three/fiber";
 import { Stars } from "./stars";
