@@ -3,8 +3,8 @@ import { animated, useSpring } from "react-spring";
 import React, { useState, useEffect, ReactNode } from "react";
 
 export const Boop = ({
-  rotation = 30,
-  timing = 40,
+  rotation = 70,
+  timing = 30,
   children,
 }: {
   rotation?: number;
