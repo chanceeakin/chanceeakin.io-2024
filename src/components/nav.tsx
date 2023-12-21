@@ -63,6 +63,7 @@ const RadioContent = () => {
     <div className="flex flex-col text-white">
       <Link href="/">Home</Link>
       <Link href="/about">About</Link>
+      <Link href="/links">Links</Link>
     </div>
   );
 };

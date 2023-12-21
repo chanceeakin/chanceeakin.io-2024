@@ -1,10 +1,13 @@
 "use client";
 import React from "react";
 import { Canvas } from "@react-three/fiber";
+import { usePathname } from "next/navigation";
 import { Stars } from "./stars";
 import { Environment } from "@react-three/drei";
 
-export function Animation() {
+export function BackgroundAnimation() {
+  const pathname = usePathname();
+
   return (
     <Canvas flat shadows camera={{ position: [0, 0, 1] }}>
       <ambientLight intensity={Math.PI / 2} />

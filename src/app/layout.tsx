@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
-import { Animation } from "@/components/animation";
+import { BackgroundAnimation } from "@/components/animations/background";
 import "./globals.css";
 import "./styles.css";
 import Nav from "@/components/nav";
@@ -19,7 +19,7 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <Suspense fallback={null}>
-          <Animation />
+          <BackgroundAnimation />
         </Suspense>
         <Nav />
         {children}
