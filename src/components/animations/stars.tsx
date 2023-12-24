@@ -54,11 +54,11 @@ export function Stars(props) {
   return (
     <group rotation={[0, 0, Math.PI / 4]}>
       <Points
+        {...props}
         ref={ref}
         positions={sphere}
         stride={3}
         frustumCulled={false}
-        {...props}
       >
         <PointMaterial
           transparent

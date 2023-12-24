@@ -25,11 +25,11 @@ export default function RootLayout({
         <Suspense fallback={<div></div>}>
           <BackgroundAnimation />
         </Suspense>
+        <Suspense>
+          <Nav />
+          {children}
+        </Suspense>
       </body>
-      <Suspense>
-        <Nav />
-        {children}
-      </Suspense>
     </html>
   );
 }
