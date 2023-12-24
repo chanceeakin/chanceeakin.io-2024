@@ -19,21 +19,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <noscript>
-          <iframe
-            src="https://www.googletagmanager.com/ns.html?id=GTM-WWR789GK"
-            height="0"
-            width="0"
-            style={{ display: "none", visibility: "hidden" }}
-          ></iframe>
-        </noscript>
-        <Suspense fallback={null}>
-          <BackgroundAnimation />
-        </Suspense>
-        <Nav />
         <Suspense>
           <Analytics />
+          <Nav />
           {children}
+        </Suspense>
+        <Suspense fallback={<div></div>}>
+          <BackgroundAnimation />
         </Suspense>
       </body>
     </html>
