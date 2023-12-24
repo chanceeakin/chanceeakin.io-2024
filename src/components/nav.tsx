@@ -35,6 +35,7 @@ const Burger = () => {
   return (
     <div className="m-5 z-50 absolute top-0 left-0">
       <button
+        aria-label="nav-dropdown"
         onClick={() => toggle(!isOpen)}
         tabIndex={0}
         className="hover:cursor-pointer"

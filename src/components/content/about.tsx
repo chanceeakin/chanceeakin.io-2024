@@ -38,7 +38,7 @@ export const AboutContent = () => {
         </h1>
         <div className="place-self-center">
           <Boop>
-            <button onClick={scroll}>
+            <button aria-label="scroll-down-page" onClick={scroll}>
               <svg width="0" height="0">
                 <linearGradient
                   id="orange-gradient"
