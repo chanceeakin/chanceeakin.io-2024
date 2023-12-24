@@ -24,7 +24,7 @@ export const AboutContent = () => {
   }, [scrollPosition, updateScrollPosition]);
 
   return (
-    <Parallax pages={7} ref={parallax} horizontal>
+    <Parallax pages={7} ref={parallax} horizontal className="!touch-auto">
       <ParallaxLayer
         offset={0}
         speed={1.5}

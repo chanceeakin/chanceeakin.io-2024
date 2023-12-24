@@ -17,7 +17,7 @@ export const LinksContent = () => {
   const GITHUB_LINK = `https://github.com/chanceeakin/`;
 
   return (
-    <div className="flex justify-center flex-col">
+    <div className="flex justify-center flex-col !touch-auto">
       <h1
         className="place-self-center text-6xl lg:text-9xl
 				bg-gradient-to-r from-pink-500 via-red-500 to-orange-500 inline-block text-transparent bg-clip-text background-animate"
