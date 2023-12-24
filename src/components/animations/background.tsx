@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { Suspense } from "react";
 import { Canvas } from "@react-three/fiber";
 import { usePathname } from "next/navigation";
 import { Stars } from "./stars";
@@ -20,7 +20,9 @@ export function BackgroundAnimation() {
       />
       <pointLight position={[-10, -10, -10]} decay={0} intensity={Math.PI} />
       <Environment preset="warehouse" />
-      <Stars />
+      <Suspense fallback={<div></div>}>
+        <Stars />
+      </Suspense>
     </Canvas>
   );
 }
