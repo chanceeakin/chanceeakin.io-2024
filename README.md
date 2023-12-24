@@ -37,7 +37,15 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 
 
 ## Todo
+* add google tags
+	* add env var for gtm-ID
+* add links 
+* add link animations
+* add about->links link
 
+
+
+## Done
 * add blog and blog folders
 	* check next.js as an [example](https://github.com/timlrx/tailwind-nextjs-starter-blog)
 * add animation for name for blog. [example](https://codepen.io/zadvorsky/pen/BKJQep)

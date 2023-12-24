@@ -6,10 +6,12 @@ export const Boop = ({
   rotation = 70,
   timing = 30,
   children,
+  className = "",
 }: {
   rotation?: number;
   timing?: number;
   children: ReactNode;
+  className?: string;
 }) => {
   const [isBooped, setIsBooped] = useState(false);
   const style = useSpring({
@@ -37,7 +39,7 @@ export const Boop = ({
 
   return (
     // @ts-ignore
-    <animated.span onMouseEnter={trigger} style={style}>
+    <animated.span onMouseEnter={trigger} className={className} style={style}>
       {children}
     </animated.span>
   );

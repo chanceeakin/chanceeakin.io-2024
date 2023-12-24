@@ -4,6 +4,7 @@ import { BackgroundAnimation } from "@/components/animations/background";
 import "./globals.css";
 import "./styles.css";
 import Nav from "@/components/nav";
+import Analytics from "@/components/gtm";
 
 export const metadata: Metadata = {
   title: "Chance Eakin",
@@ -22,7 +23,10 @@ export default function RootLayout({
           <BackgroundAnimation />
         </Suspense>
         <Nav />
-        {children}
+        <Suspense>
+          <Analytics />
+          {children}
+        </Suspense>
       </body>
     </html>
   );

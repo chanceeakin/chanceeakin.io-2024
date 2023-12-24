@@ -36,7 +36,7 @@ export const HomeContent = () => {
           Hi, I&apos;m
         </p>
         <h1
-          className="place-self-center text-center text-5xl lg:text-9xl
+          className="place-self-center text-center text-6xl lg:text-9xl
       bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 inline-block text-transparent bg-clip-text background-animate"
         >
           Chance Eakin
@@ -87,12 +87,7 @@ export const HomeContent = () => {
         className="flex justify-center"
         onClick={scroll}
       >
-        <p
-          className="place-self-center text-5xl
-      bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 inline-block text-transparent bg-clip-text"
-        >
-          live in Austin,
-        </p>
+        <p className={PARAGRAPH_CLASSES}>live in Austin,</p>
       </ParallaxLayer>
 
       <ParallaxLayer
@@ -101,21 +96,19 @@ export const HomeContent = () => {
         className="flex justify-center"
         onClick={scroll}
       >
-        <p
-          className="place-self-center text-5xl
-      bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 inline-block text-transparent bg-clip-text leading-relaxed"
-        >
-          and love building and learning.
-        </p>
+        <p className={PARAGRAPH_CLASSES}>and love building and learning.</p>
       </ParallaxLayer>
       <ParallaxLayer offset={4} speed={1.5} className="flex justify-center">
-        <h3
-          className="place-self-center text-5xl
-      bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 inline-block text-transparent bg-clip-text hover:from-pink-500 hover:to-yellow-500"
-        >
+        <h3 className={ABOUT_LINK_CLASSES}>
           <Link href="/about">Find out more.</Link>
         </h3>
       </ParallaxLayer>
     </Parallax>
   );
 };
+
+const PARAGRAPH_CLASSES = `place-self-center text-5xl text-center
+      bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 inline-block text-transparent bg-clip-text leading-relaxed`;
+
+const ABOUT_LINK_CLASSES = `place-self-center text-5xl
+      bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 inline-block text-transparent bg-clip-text hover:from-pink-500 hover:to-yellow-500`;
