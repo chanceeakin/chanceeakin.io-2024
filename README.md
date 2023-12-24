@@ -37,11 +37,6 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 
 
 ## Todo
-* add google tags
-	* add env var for gtm-ID
-* add links 
-* add link animations
-* add about->links link
 
 
 

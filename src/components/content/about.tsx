@@ -91,7 +91,7 @@ export const AboutContent = () => {
         </p>
       </ParallaxLayer>
       <ParallaxLayer
-        offset={2}
+        offset={3}
         speed={1.5}
         className="flex justify-center"
         sticky={{ start: 3, end: 5 }}
@@ -103,9 +103,17 @@ export const AboutContent = () => {
           University of Cincinnati, and BM Voice, cum laude, Baylor University.
         </p>
       </ParallaxLayer>
+      <ParallaxLayer offset={6} speed={1.5} className="flex justify-center">
+        <h3 className={ABOUT_LINK_CLASSES}>
+          <Link href="/links">Pertinent Links</Link>
+        </h3>
+      </ParallaxLayer>
     </Parallax>
   );
 };
 
 const PARAGRAPH_CLASSES = `text-md md:text-2xl p-10 md:p-20
 				bg-gradient-to-r from-pink-500 via-red-500 to-orange-500 inline-block text-transparent bg-clip-text`;
+
+const ABOUT_LINK_CLASSES = `place-self-center text-5xl
+      bg-gradient-to-r from-pink-500 via-red-500 to-orange-500 inline-block text-transparent bg-clip-text hover:from-indigo-500 hover:to-purple-500`;
