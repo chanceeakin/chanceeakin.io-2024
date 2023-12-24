@@ -42,6 +42,21 @@ export default function Analytics() {
   `,
         }}
       />
+      <Script
+        async
+        src="https://www.googletagmanager.com/gtag/js?id=G-Q0D6N7ZPMK"
+      />
+      <Script
+        id="ga-4-tag"
+        strategy="afterInteractive"
+        dangerouslySetInnerHTML={{
+          __html: `
+					window.dataLayer = window.dataLayer || [];
+					function gtag(){dataLayer.push(arguments);}
+					gtag('js', new Date());
+					gtag('config', 'G-Q0D6N7ZPMK');`,
+        }}
+      />
     </>
   );
 }
