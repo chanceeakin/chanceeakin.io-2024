@@ -25,7 +25,7 @@ export default function RootLayout({
         <Suspense fallback={<div></div>}>
           <BackgroundAnimation />
         </Suspense>
-        <Suspense>
+        <Suspense fallback={<div></div>}>
           <Nav />
           {children}
         </Suspense>
