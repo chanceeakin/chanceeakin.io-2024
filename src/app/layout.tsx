@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
-import { Suspense } from "react";
+import { lazy, Suspense } from "react";
 import { BackgroundAnimation } from "@/components/animations/background";
 import "./globals.css";
 import "./styles.css";
-import Nav from "@/components/nav";
-import Analytics from "@/components/gtm";
+
+const Nav = lazy(() => import("@/components/nav"));
+const Analytics = lazy(() => import("@/components/gtm"));
 
 export const metadata: Metadata = {
   title: "Chance Eakin",
@@ -19,7 +20,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <Suspense>
+        <Suspense fallback={null}>
           <Analytics />
         </Suspense>
         <Suspense fallback={<div></div>}>
