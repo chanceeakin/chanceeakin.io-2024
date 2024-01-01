@@ -8,6 +8,8 @@ import { Environment } from "@react-three/drei";
 export function BackgroundAnimation() {
   const pathname = usePathname();
 
+  if (pathname.includes("blog")) return null;
+
   return (
     <Canvas flat shadows camera={{ position: [0, 0, 1] }}>
       <ambientLight intensity={Math.PI / 2} />
