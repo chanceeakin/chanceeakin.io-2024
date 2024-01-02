@@ -12,7 +12,6 @@ export function MDXImage({
   alt: string;
 }) {
   let widthFromSrc, heightFromSrc;
-  console.log({ src });
   const url = new URL(src, process.env.NEXT_PUBLIC_URL);
   const widthParam = url.searchParams.get("w") || url.searchParams.get("width");
   const heightParam =

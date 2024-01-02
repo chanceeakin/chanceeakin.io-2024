@@ -7,11 +7,9 @@ export const mdxComponents: MDXComponents = {
   a: ({ children, ...props }) => {
     return <MDXLink {...props}>{children}</MDXLink>;
   },
-  // @ts-ignore
-  img: ({ props, src, alt }) => {
-    // You need to do some work here to get the width and height of the image.
-    // See the details below for my solution.
-    return <MDXImage src={src} alt={alt} {...props} />;
+  img: ({ src, alt }) => {
+    if (!src || !alt) return null;
+    return <MDXImage src={src} alt={alt} />;
   },
   h1: ({ children, ...props }) => (
     <h1 className="text-4xl mb-10" {...props}>
@@ -43,6 +41,5 @@ export const mdxComponents: MDXComponents = {
       {children}
     </h6>
   ),
-  // .comany other components you want to use in your markdown
   pre: Code,
 };
