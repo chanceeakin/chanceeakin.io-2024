@@ -8,8 +8,11 @@ const Nav = lazy(() => import("@/components/nav"));
 const Analytics = lazy(() => import("@/components/gtm"));
 
 export const metadata: Metadata = {
-  title: "Chance Eakin",
-  description: "I write code sometimes",
+  title: {
+    template: "%s | Chance Eakin",
+    default: "Chance Eakin",
+  },
+  description: "Software Engineer.",
 };
 
 export default function RootLayout({

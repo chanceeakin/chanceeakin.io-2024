@@ -7,7 +7,7 @@ import rehypeAutolinkHeadings from "rehype-autolink-headings";
 //@ts-ignore
 import remarkA11yEmoji from "@fec/remark-a11y-emoji";
 import remarkToc from "remark-toc";
-import { mdxComponents } from "./custom-md-components";
+import { mdxComponents } from "../../mdx/custom-mdx-components";
 
 export function PostBody({ children }: { children: string }) {
   return (

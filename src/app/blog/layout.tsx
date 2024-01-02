@@ -1,18 +1,13 @@
-import type { Metadata } from "next";
-import { lazy, Suspense } from "react";
-
-const Nav = lazy(() => import("@/components/nav"));
-const Analytics = lazy(() => import("@/components/gtm"));
-
-export const metadata: Metadata = {
-  title: "Chance Eakin",
-  description: "I write code sometimes",
-};
-
-export default function RootLayout({
+export default function BlogLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  return <div className="bg-slate-50">{children}</div>;
+  return (
+    <div className="text-slate-50 container m-auto grid grid-cols-12 gap-4 pt-16">
+      <div className="flex flex-col col-span-10 col-start-2 md:col-span-8 md:col-start-3 lg:col-start-4 lg:col-span-6">
+        {children}
+      </div>
+    </div>
+  );
 }

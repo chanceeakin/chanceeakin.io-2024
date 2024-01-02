@@ -10,6 +10,14 @@ const nextConfig = withMDX(
     reactStrictMode: false,
     pageExtensions: ["ts", "tsx", "js", "jsx", "md", "mdx"],
     productionBrowserSourceMaps: true,
+    images: {
+      remotePatterns: [
+        {
+          protocol: "https",
+          hostname: "via.placeholder.com",
+        },
+      ],
+    },
   })
 );
 

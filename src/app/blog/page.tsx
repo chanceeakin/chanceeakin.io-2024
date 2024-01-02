@@ -1,4 +1,4 @@
-import { PostListRSC } from "@/components/mdx/posts-list";
+import { PostListRSC } from "@/components/content/blog/posts-list";
 import { Suspense } from "react";
 
 const Blog = async () => {

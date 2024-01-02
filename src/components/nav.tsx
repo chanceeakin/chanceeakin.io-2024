@@ -65,6 +65,7 @@ const RadioContent = () => {
       <Link href="/">Home</Link>
       <Link href="/about">About</Link>
       <Link href="/links">Links</Link>
+      <Link href="/blog">Blog</Link>
     </div>
   );
 };

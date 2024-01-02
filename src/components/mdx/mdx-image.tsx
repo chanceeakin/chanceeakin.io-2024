@@ -1,4 +1,4 @@
-// app/(subpages)/blog/[slug]/components/mdx-image.tsx
+"use client";
 import NextImage from "next/image";
 
 export function MDXImage({
@@ -13,7 +13,7 @@ export function MDXImage({
 }) {
   let widthFromSrc, heightFromSrc;
   console.log({ src });
-  const url = new URL(src, "https://chanceeakin.io");
+  const url = new URL(src, process.env.NEXT_PUBLIC_URL);
   const widthParam = url.searchParams.get("w") || url.searchParams.get("width");
   const heightParam =
     url.searchParams.get("h") || url.searchParams.get("height");

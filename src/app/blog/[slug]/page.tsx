@@ -1,5 +1,5 @@
 import { getPosts, getPost } from "@/lib/posts";
-import { PostBody } from "@/components/mdx/post-body";
+import { PostBody } from "@/components/content/blog/post-body";
 import { notFound } from "next/navigation";
 
 export default async function PostPage({
