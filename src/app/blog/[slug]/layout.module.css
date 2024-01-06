@@ -1,0 +1,5 @@
+
+.blog :not(pre) > code {
+	background: #475569;
+	color: #a7f3d0;
+}

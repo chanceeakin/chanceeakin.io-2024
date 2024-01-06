@@ -26,7 +26,6 @@ export function MDXImage({
   const imageProps = {
     src,
     alt,
-    // tweak these to your liking
     height: heightFromSrc || 450,
     width: widthFromSrc || 550,
   };

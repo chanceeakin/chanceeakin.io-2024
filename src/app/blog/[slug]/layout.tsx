@@ -1,5 +1,6 @@
 import { getPosts } from "@/lib/posts";
 import { Metadata } from "next";
+import styles from "./layout.module.css";
 
 export async function generateStaticParams() {
   const posts = await getPosts();
@@ -63,5 +64,5 @@ export default async function PostLayout({
       })
     : null;
 
-  return <article>{children}</article>;
+  return <article className={styles.blog}>{children}</article>;
 }
