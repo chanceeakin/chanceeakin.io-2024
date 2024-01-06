@@ -61,10 +61,11 @@ const Burger = () => {
 
 const RadioContent = () => {
   return (
-    <div className="flex flex-col text-white">
+    <div className="flex flex-col text-white border border-gray-300 md:border-none bg-gray-900 md:bg-transparent p-4 md:p-0">
       <Link href="/">Home</Link>
       <Link href="/about">About</Link>
       <Link href="/links">Links</Link>
+      <Link href="/blog">Blog</Link>
     </div>
   );
 };

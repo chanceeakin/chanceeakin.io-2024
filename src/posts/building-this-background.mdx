@@ -1,0 +1,120 @@
+---
+title: "Building the background"
+slug: "building-the-background"
+date: "January 5th, 2024"
+description: How I built the 3D animation for this site
+---
+
+# Building the background, pt.1
+
+> _Ossia_: the subtle things are often the hardest.
+
+<br />
+
+## Intro
+
+Every so often, I rebuild my portfolio site to reflect current standards. With
+the 2024 iteration, I wanted to explore a number of new and mature features in
+the React ecosystem. Likewise, the purpose here is twofold. I've set a 2024 goal
+to complete 24 blog posts over the year. In doing so, I hope to encourage and
+foster my own writing skills. This also helps me accrue experience and building
+the writing muscle over time.
+
+Writing is enjoyable--both technical documentation and prose will make their way
+into this project by the end of 2024.
+
+For my first entry, I'll begin explaining:
+
+## How I built the background for [chanceeakin.io](https://chanceeakin.io)
+
+If you haven't made it to the homepage yet,
+[click this link](https://chanceeakin.io). On it, you _should_ see a nifty
+spatial background. Generative art and animation make me happy--I hope they make
+you happy too.
+
+Additionally, I had these objectives:
+
+- use Three.js + React Three Fiber.
+- provide an atmospheric feeling to the blog.
+- incorporate randomness.
+- deliever accessible 3D.
+- create a performant animation on my home page.
+
+Here's how it went.
+
+### Using [Three.js](https://threejs.org/)
+
+If the goal is making 3D web animations,`Three.js` is in use. Or you're ~a
+monster~ ~fanatic~ an enthusiast who's porting the original Roller Coaster
+Tycoon to WASM.
+
+For the rest of us mortals, we're building on top of someone else's work to do
+the fun stuff we want to do--I'm no exception. To build my animations, I used
+Three.js and React Three Fiber.
+
+#### What does Three.js do?
+
+Three.js creates scenes. Scenes consist of objects and lights. Objects have
+materials/meshes, which provide the "skin" of the object. Then Three.js hooks
+into WebGL to render scenes, and updates at 60 FPS via the
+`requestAnimationFrame` API.
+[Here's their example.](https://threejs.org/docs/index.html#manual/en/introduction/Creating-a-scene)
+
+Since I'm writing React, I need a translation layer.
+[React Three Fiber](https://docs.pmnd.rs/react-three-fiber/getting-started/introduction)
+fit the bill nicely. It does everything vanilla `Three.js` does, but with React
+component flair, abstracting the extra work away from the developer. It's pretty
+sweet and makes writing 2D/3D animations straightforward. The biggest problem:
+_translating Three.js examples from plain JS into React_.
+
+My solution? No magic. Just hammer it out until it works and rewrite the cool
+stuff by hand. I went line by line and translated from plain JS/TS into the
+React counterparts. It was tedious, but the labor bore fruit.
+
+### Providing that atmospheric feeling
+
+After some experimentation, I landed on a fixed camera + a collection of points.
+Three.js generates the points like so:
+
+```stars.tsx
+import { inSphere } from "maath/random";
+import { Points, PointMaterial } from "@react-three/drei";
+
+const sphereArr = new Float32Array(5001);
+
+export function Stars(props) {
+  const [sphere] = useState(() => inSphere(sphereArr, { radius: 1 }));
+  return (
+    <group rotation={[0, 0, Math.PI / 4]}>
+      <Points
+        {...props}
+        ref={ref}
+        positions={sphere}
+        stride={3}
+        frustumCulled={false}
+      >
+        <PointMaterial
+          transparent
+          color={values.color}
+          size={0.0035}
+          sizeAttenuation={true}
+          depthWrite={false}
+        />
+      </Points>
+    </group>
+  );
+}
+
+```
+
+Given an array of points, build out a sphere via `maath/random` and add them
+into the Points component provided by `@react-three/drei`. Flexibile and
+straightforward.
+
+Next time, we'll dive into how I introduced randomness, accessibility, and made
+the background performant.
+
+> Don't want to wait?
+> [Check out the full source code here](https://github.com/chanceeakin/chanceeakin.io-2024)
+
+See you in two weeks!

@@ -35,12 +35,3 @@ The easiest way to deploy your Next.js app is to use the [Vercel Platform](https
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
 
-
-## Todo
-* add blog and blog folders
-	* check next.js as an [example](https://github.com/timlrx/tailwind-nextjs-starter-blog)
-
-
-## Done
-* add animation for name for blog. [example](https://codepen.io/zadvorsky/pen/BKJQep)
-* add [3.js bas](https://github.com/zadvorsky/three.bas)

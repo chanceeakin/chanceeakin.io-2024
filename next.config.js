@@ -2,15 +2,22 @@
 const withBundleAnalyzer = require("@next/bundle-analyzer")({
   enabled: process.env.ANALYZE === "true",
 });
-const withMDX = require("@next/mdx")({
-  extension: /\.mdx?$/,
-});
+const withMDX = require("@next/mdx")();
 
+/** @type {import('next').NextConfig} */
 const nextConfig = withMDX(
   withBundleAnalyzer({
     reactStrictMode: false,
     pageExtensions: ["ts", "tsx", "js", "jsx", "md", "mdx"],
     productionBrowserSourceMaps: true,
+    images: {
+      remotePatterns: [
+        {
+          protocol: "https",
+          hostname: "via.placeholder.com",
+        },
+      ],
+    },
   })
 );
 

@@ -24,7 +24,7 @@ const updateValue = () => ({
   z: [randomOp(), randomValue()],
   color: randomColor(),
 });
-const sphereArr = new Float32Array(5000);
+const sphereArr = new Float32Array(5001);
 
 export function Stars(props) {
   const pathname = usePathname();
