@@ -31,7 +31,3 @@ export async function getPost(slug: string) {
   const posts = await getPosts();
   return posts.find((post) => post?.slug === slug);
 }
-
-// Usage:
-const posts = await getPosts();
-const post = await getPost("my-post");
