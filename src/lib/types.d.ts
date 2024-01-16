@@ -6,4 +6,6 @@ export type Post = {
   description: string;
   body: string;
   lastModified?: number;
+  publishDate: string;
+  published?: boolean;
 };

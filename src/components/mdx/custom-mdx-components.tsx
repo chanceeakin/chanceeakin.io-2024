@@ -2,6 +2,7 @@ import { Code } from "bright";
 import { MDXImage } from "./mdx-image";
 import { MDXComponents } from "mdx/types";
 import { MDXLink } from "./mdx-link";
+import dynamic from "next/dynamic";
 
 export const mdxComponents: MDXComponents = {
   a: ({ children, ...props }) => {
@@ -47,23 +48,20 @@ export const mdxComponents: MDXComponents = {
     </p>
   ),
   ul: ({ children, ...props }) => (
-    <ul className="mb-8 bg-gray-900 border border-gray-400" {...props}>
+    <ul className="mb-8" {...props}>
       {children}
     </ul>
   ),
   blockquote: ({ children, ...props }) => (
     <blockquote
-      className="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-transparent bg-clip-text overflow-hidden border border-gray-400 px-8 pt-8 pb-0 mb-4"
+      className="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-transparent bg-clip-text overflow-hidden border border-gray-400 px-8 pt-8 pb-0 mb-8"
       {...props}
     >
       {children}
     </blockquote>
   ),
   li: ({ children, ...props }) => (
-    <li
-      className="list-item list-disc ml-8 mr-4 first:mt-4 last:mb-4"
-      {...props}
-    >
+    <li className="list-item list-disc ml-8 mr-4" {...props}>
       {children}
     </li>
   ),

@@ -30,5 +30,12 @@ export function MDXImage({
     width: widthFromSrc || 550,
   };
 
-  return <NextImage {...imageProps} />;
+  return (
+    <figure className="mb-8" key={src}>
+      <NextImage {...imageProps} />
+      <figcaption className="z-10 mt-4 text-sm italic text-center">
+        {alt}
+      </figcaption>
+    </figure>
+  );
 }
