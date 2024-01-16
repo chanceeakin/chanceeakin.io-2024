@@ -9,9 +9,13 @@ published: true
 
 # Building the background, pt.1
 
+January 5th, 2024
+
 > _Ossia_: the subtle things are often the hardest.
 
 <br />
+
+## Contents
 
 ## Intro
 
@@ -44,7 +48,7 @@ Additionally, I had these objectives:
 
 Here's how it went.
 
-### Using [Three.js](https://threejs.org/)
+## Using [Three.js](https://threejs.org/)
 
 If the goal is making 3D web animations,`Three.js` is in use. Or you're ~a
 monster~ ~fanatic~ an enthusiast who's porting the original Roller Coaster
@@ -53,8 +57,6 @@ Tycoon to WASM.
 For the rest of us mortals, we're building on top of someone else's work to do
 the fun stuff we want to do--I'm no exception. To build my animations, I used
 Three.js and React Three Fiber.
-
-#### What does Three.js do?
 
 Three.js creates scenes. Scenes consist of objects and lights. Objects have
 materials/meshes, which provide the "skin" of the object. Then Three.js hooks
@@ -73,7 +75,7 @@ My solution? No magic. Just hammer it out until it works and rewrite the cool
 stuff by hand. I went line by line and translated from plain JS/TS into the
 React counterparts. It was tedious, but the labor bore fruit.
 
-### Providing that atmospheric feeling
+## Providing that atmospheric feeling
 
 After some experimentation, I landed on a fixed camera + a collection of points.
 Three.js generates the points like so:

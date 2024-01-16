@@ -7,33 +7,30 @@ import { inSphere } from "maath/random";
 import { STAR_COLOR } from "@/utils/constants";
 import { usePathname } from "next/navigation";
 
-const randomValue = () => (Math.random() < 0.5 ? 25 : 30);
+const pointsArray = new Float32Array(5001);
+const add = (a: number, b: number) => a + b;
+const subtract = (a: number, b: number) => a - b;
 
-const plus = function (a: number, b: number) {
-  return a + b;
-};
-const subtract = function (a: number, b: number) {
-  return a - b;
-};
-const randomOp = () => (Math.random() < 0.5 ? plus : subtract);
-const randomColor = () =>
+const spinSpeed = () => (Math.random() < 0.5 ? 25 : 30);
+const spinDirection = (): Function => (Math.random() < 0.5 ? add : subtract);
+const randomColor = (): string =>
   STAR_COLOR[Math.floor(Math.random() * STAR_COLOR.length)];
-const updateValue = () => ({
-  x: [randomOp(), randomValue()],
-  y: [randomOp(), randomValue()],
-  z: [randomOp(), randomValue()],
+
+const starSpinAndColor = () => ({
+  x: [spinDirection(), spinSpeed()],
+  y: [spinDirection(), spinSpeed()],
+  z: [spinDirection(), spinSpeed()],
   color: randomColor(),
 });
-const sphereArr = new Float32Array(5001);
 
 export function Stars(props) {
   const pathname = usePathname();
   const ref = useRef();
-  const [values, setValues] = useState(updateValue());
-  const [sphere] = useState(() => inSphere(sphereArr, { radius: 1 }));
+  const [values, setValues] = useState(starSpinAndColor());
+  const [sphere] = useState(() => inSphere(pointsArray, { radius: 1 }));
 
   useEffect(() => {
-    setValues(updateValue());
+    setValues(starSpinAndColor());
   }, [pathname]);
 
   useFrame((_, delta) => {

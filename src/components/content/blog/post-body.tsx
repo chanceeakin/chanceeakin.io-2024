@@ -4,6 +4,8 @@ import { MDXRemote } from "next-mdx-remote/rsc";
 import remarkGfm from "remark-gfm";
 import rehypeSlug from "rehype-slug";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
+import remarkUnwrapImages from "remark-unwrap-images";
+
 //@ts-ignore
 import remarkA11yEmoji from "@fec/remark-a11y-emoji";
 import remarkToc from "remark-toc";
@@ -22,6 +24,7 @@ export function PostBody({ children }: { children: string }) {
             remarkA11yEmoji,
             // generates a table of contents based on headings
             remarkToc,
+            remarkUnwrapImages,
           ],
           // These work together to add IDs and linkify headings
           rehypePlugins: [rehypeSlug, rehypeAutolinkHeadings],

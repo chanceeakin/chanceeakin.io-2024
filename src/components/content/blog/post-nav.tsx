@@ -33,7 +33,7 @@ export const PostNavigation = ({
 
 const Container = `flex justify-between w-100`;
 
-const PostNavBefore = `flex mr-2`;
-const PostNavAfter = `flex ml-2`;
+const PostNavBefore = `flex mr-2 text-left`;
+const PostNavAfter = `flex ml-2 text-right`;
 
-const PostNavLink = `border border-gray-400 hover:border-amber-300 hover:text-amber-300 px-8 py-4 mb-4`;
+const PostNavLink = `border border-gray-400 hover:border-amber-300 hover:underline hover:text-amber-300 px-8 py-4 mb-4`;
