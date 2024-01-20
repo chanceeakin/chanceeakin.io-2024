@@ -1,16 +1,21 @@
 import { Code } from "bright";
-import { MDXImage } from "./mdx-image";
+import Image from "next/image";
 import { MDXComponents } from "mdx/types";
 import { MDXLink } from "./mdx-link";
-import dynamic from "next/dynamic";
 
 export const mdxComponents: MDXComponents = {
   a: ({ children, ...props }) => {
     return <MDXLink {...props}>{children}</MDXLink>;
   },
-  img: ({ src, alt }) => {
-    if (!src || !alt) return null;
-    return <MDXImage src={src} alt={alt} />;
+  img: (props) => {
+    return (
+      <figure className="flex flex-col items-center mb-8" key={props.src}>
+        <Image width={600} height={400} {...props} />
+        <figcaption className="z-10 mt-4 text-sm italic text-center">
+          {props.alt}
+        </figcaption>
+      </figure>
+    );
   },
   h1: ({ children, ...props }) => (
     <h1 className="text-4xl mb-12 text-emerald-200" {...props}>
