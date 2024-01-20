@@ -7,12 +7,15 @@ export const mdxComponents: MDXComponents = {
   a: ({ children, ...props }) => {
     return <MDXLink {...props}>{children}</MDXLink>;
   },
-  img: (props) => {
+  img: ({ src, alt, ...props }) => {
+    if (!src || !alt) return null;
+    const width: number = 600;
+    const height: number = 400;
     return (
-      <figure className="flex flex-col items-center mb-8" key={props.src}>
-        <Image width={600} height={400} {...props} />
+      <figure className="flex flex-col items-center mb-8" key={src}>
+        <Image width={width} height={height} alt={alt} src={src} />
         <figcaption className="z-10 mt-4 text-sm italic text-center">
-          {props.alt}
+          {alt}
         </figcaption>
       </figure>
     );
