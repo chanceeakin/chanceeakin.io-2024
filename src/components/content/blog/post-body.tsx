@@ -5,6 +5,7 @@ import remarkGfm from "remark-gfm";
 import rehypeSlug from "rehype-slug";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import remarkUnwrapImages from "remark-unwrap-images";
+import remarkMdxImages from "remark-mdx-images";
 
 //@ts-ignore
 import remarkA11yEmoji from "@fec/remark-a11y-emoji";
@@ -25,6 +26,7 @@ export function PostBody({ children }: { children: string }) {
             // generates a table of contents based on headings
             remarkToc,
             remarkUnwrapImages,
+            remarkMdxImages,
           ],
           // These work together to add IDs and linkify headings
           rehypePlugins: [rehypeSlug, rehypeAutolinkHeadings],
