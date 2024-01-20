@@ -11,6 +11,7 @@ const nextConfig = withMDX(
     pageExtensions: ["ts", "tsx", "js", "jsx", "md", "mdx"],
     productionBrowserSourceMaps: true,
     images: {
+      path: "/public/",
       remotePatterns: [
         {
           protocol: "https",
