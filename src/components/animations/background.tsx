@@ -6,7 +6,7 @@ import { Stars } from "./stars";
 import { Environment } from "@react-three/drei";
 import { usePrefersReducedMotion } from "./usePrefersReducedMotion";
 
-export function BackgroundAnimation() {
+export default function BackgroundAnimation() {
   const prefersReducedMotion = usePrefersReducedMotion();
   const pathname = usePathname();
 

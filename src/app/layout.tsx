@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
 import { lazy, Suspense } from "react";
-import { BackgroundAnimation } from "@/components/animations/background";
 import "./globals.css";
 import "./styles.css";
 
 const Nav = lazy(() => import("@/components/nav"));
 const Analytics = lazy(() => import("@/components/gtm"));
+const BackgroundAnimation = lazy(
+  () => import("@/components/animations/background")
+);
 
 export const metadata: Metadata = {
   title: {
@@ -27,11 +29,11 @@ export default function RootLayout({
           <Analytics />
         </Suspense>
         <Suspense fallback={<div></div>}>
-          <BackgroundAnimation />
-        </Suspense>
-        <Suspense fallback={<div></div>}>
           <Nav />
           {children}
+        </Suspense>
+        <Suspense fallback={<div></div>}>
+          <BackgroundAnimation />
         </Suspense>
       </body>
     </html>

@@ -38,6 +38,7 @@ export function Boxes() {
         () => set((i) => ({ ...random(i), delay: i * 30 })),
         4000
       ),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     []
   );
   useFrame((state, delta) => {

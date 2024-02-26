@@ -1,10 +1,9 @@
 "use client";
 import Link from "next/link";
-import { useState, useCallback, useRef, Suspense, lazy } from "react";
+import { useState, useCallback, useRef } from "react";
 import { Parallax, ParallaxLayer, IParallax } from "@react-spring/parallax";
 import { FiArrowDown } from "react-icons/fi";
 import { Boop } from "@/components/animations/boop";
-import { HomeFallback } from "../suspense/home-fallback";
 
 const HomeContent = () => {
   const parallax = useRef<IParallax>(null);

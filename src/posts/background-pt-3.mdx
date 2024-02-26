@@ -1,0 +1,117 @@
+---
+title: "Building the background Pt. 3"
+slug: "building-the-background-pt-3"
+date: "02-24-2024"
+description: Now make it go fast
+publishDate: "02-24-2024"
+published: true
+---
+
+# Building the background, pt.3
+
+February 24th, 2024
+
+## Contents
+
+## Recap
+
+Last time, we dug into randomness and accessibility. _(Need to catch up?
+[Check out the previous post](/blog/building-the-background-pt-2))._
+
+## Performance
+
+This time, we're digging into web performance. Let's break down how it went:
+
+## React Server Components
+
+This site, along with many others, is a [Next.js + React](https://nextjs.org/)
+webpage, built and served via AWS Amplify. Most of the site is statically
+generated, but some sections of the site utilize
+[React Server Components](https://nextjs.org/docs/app/building-your-application/rendering/server-components).
+Server components fall under the isomorphism umbrella. They make web site more
+complicated, but they also make them faster. For instance, a server doesn't have
+access to certain client side APIs, while the client has limited access to
+protected server resources.
+
+Luckily, Next.js takes most of the guess work out of isomorphic rendering with
+their latest updates. So, we're using that for page speed increases.
+
+The blog pages are all RSC. They're all fast. But if we're discussing the
+background, why am I mentioning the blog? The blog has nothing to do with the
+background! But it could.
+
+## Webpack and the bundle
+
+When we talk about frontend performance, the clearest culprit for slow
+performance is often the easiest to solve: the size of the webpack bundle. In
+older versions of React + Webpack (or Turbo, or whatever you use), code that
+wasn't rendered on the server was loaded into one big file--called the bundle.
+Bundles got big without proper pruning.
+
+Webpack introduced [code
+splitting(https://webpack.js.org/guides/code-splitting/), and React introduced
+[lazy components](https://react.dev/reference/react/lazy). Used together, these
+two technologies make it easy to control how and when a bundle is split and
+loaded. Instead of loading _all_ of the pages with the bundle (like loading the
+blog with the home page), we only load the code we need for a given page.
+
+Next.js makes code splitting a breeze. They split the bundle at every page, so
+we gain common performance benefits with almost no effort. Here's what my bundle
+looks like:
+
+![Bundle view with chunks](/images/bg-pt3-bundle.png)
+
+The first load for the `/` is 110kb. The largest TCP packet size is 64kb. The
+first paint ships in 2 TCP packets. That's not too bad. Prior to code splitting,
+some webpages would load 4+ mb of data and chuck up a loading spinner until it
+was finished. Websites with that configuration load slow. Very slow.
+
+If I did nothing else, this solves most of my perceived page speed issues. But
+we're not done.
+
+## React Suspense and gradual loading
+
+> We also need to load a 3D animation, parallax animations, and the content of
+> the webpage.
+
+### Suspense to the rescue
+
+Suspense allows us to ship fallbacks, or loading/initial states for our
+components. In my case, I ship a barebones title and a little bit of css
+attached to it. This loads in around 380ms on desktop, and fills in while I
+download the big ol' three.js bundle.
+
+### LCP and Three.js
+
+Because I'm utilizing React Suspense, my largest contentful paint doesn't occur
+until my three.js bundle is completely loaded. In a nutshell, _I'm judged on the
+complete load for SEO purposes, even though my FCP (first contentful paint)
+occurs in half the time._ Kind of a bummer, but at least my users get some level
+of feedback. And hey, I want a cool background on my site, so here we are.
+
+My Largest Contentful Paint (LCP) occurs around 500ms on desktop, and full load
+on 780ms. All in all, pretty solid for loading 5000 particles and animating them
+via WebGL @ 60 frames per second.
+
+## Rendering Performance
+
+![Webpage performance & LCP](/images/bg3-lcp.png)
+
+The page loads in two main chunks:
+
+- My code (Next.js + content)
+- Three.js code
+
+In the above image, there are two main scripts being called: the Next.js code (+
+my tiny additions), and the Three.js code. The FCP occurs around the time the
+Three.js code processes, and the LCP occurs when the Three.js code processes.
+The last bit is the Google Tag Manager, a non blocking script for page
+performance. This screen cap shows the page taking 650ms for Largest Contentful
+Paint of the background + page content.
+
+## Conclusion
+
+All in all, the site does quite a bit of work for a subtle effect. I like it,
+and I hope you do too.
+
+Next time, we'll cover something a bit different! Stay tuned.
