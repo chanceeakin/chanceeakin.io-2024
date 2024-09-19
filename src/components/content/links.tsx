@@ -24,7 +24,7 @@ export const LinksContent = () => {
       >
         Links
       </h1>
-      <div className="w-full flex justify-center">
+      <div className="z-20 w-full flex justify-center">
         <EntryTrailAnimation
           items={[
             <Boop key={1} className="p-5">
