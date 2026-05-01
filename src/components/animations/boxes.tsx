@@ -1,4 +1,3 @@
-// @ts-nocheck
 "use client";
 import * as THREE from "three";
 import React, { useRef, useEffect } from "react";
@@ -8,10 +7,10 @@ import { ANIMATION_COLORS } from "@/utils/constants";
 
 const length = 35;
 const colors = ANIMATION_COLORS;
-const data = Array.from({ length }, () => ({
+const data: { args: [number, number, number] }[] = Array.from({ length }, () => ({
   args: [0.1 + Math.random() * 4, 0.1 + Math.random() * 4, 10],
 }));
-const random = () => {
+const random = (i: number) => {
   const r = Math.random();
   return {
     position: [100 - Math.random() * 200, 100 - Math.random() * 200, i * 1.5],
@@ -26,22 +25,23 @@ const random = () => {
 };
 
 export function Boxes() {
-  const group = useRef();
+  const group = useRef<THREE.Group>(null);
   const [springs, set] = useSprings(length, (i) => ({
     from: random(i),
     ...random(i),
     config: { mass: 20, tension: 150, friction: 50 },
   }));
-  useEffect(
-    () =>
-      void setInterval(
-        () => set((i) => ({ ...random(i), delay: i * 30 })),
-        4000
-      ),
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    []
-  );
+  useEffect(() => {
+    const intervalId = window.setInterval(
+      () => set((i) => ({ ...random(i), delay: i * 30 })),
+      4000
+    );
+    return () => window.clearInterval(intervalId);
+  }, [set]);
   useFrame((state, delta) => {
+    if (!group.current) {
+      return;
+    }
     group.current.rotation.x -= delta / 10;
     group.current.rotation.y -= delta / 15;
     group.current.rotation.z -= delta / 10;

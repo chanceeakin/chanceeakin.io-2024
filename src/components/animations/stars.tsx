@@ -1,5 +1,5 @@
-// @ts-nocheck
 "use client";
+import * as THREE from "three";
 import React, { useEffect, useRef, useState } from "react";
 import { useFrame } from "@react-three/fiber";
 import { Points, PointMaterial } from "@react-three/drei";
@@ -7,26 +7,37 @@ import { inSphere } from "maath/random";
 import { STAR_COLOR } from "@/utils/constants";
 import { usePathname } from "next/navigation";
 
+type SpinOperator = (a: number, b: number) => number;
+type SpinAxis = [SpinOperator, number];
+type StarSpin = {
+  x: SpinAxis;
+  y: SpinAxis;
+  z: SpinAxis;
+  color: string;
+};
+
 const pointsArray = new Float32Array(5001);
 const add = (a: number, b: number) => a + b;
 const subtract = (a: number, b: number) => a - b;
 
 const spinSpeed = () => (Math.random() < 0.5 ? 25 : 30);
-const spinDirection = (): Function => (Math.random() < 0.5 ? add : subtract);
+const spinDirection = (): SpinOperator => (Math.random() < 0.5 ? add : subtract);
 const randomColor = (): string =>
   STAR_COLOR[Math.floor(Math.random() * STAR_COLOR.length)];
 
-const starSpinAndColor = () => ({
+const starSpinAndColor = (): StarSpin => ({
   x: [spinDirection(), spinSpeed()],
   y: [spinDirection(), spinSpeed()],
   z: [spinDirection(), spinSpeed()],
   color: randomColor(),
 });
 
-export function Stars(props) {
+type StarsProps = React.ComponentProps<typeof Points>;
+
+export function Stars(props: StarsProps) {
   const pathname = usePathname();
-  const ref = useRef();
-  const [values, setValues] = useState(starSpinAndColor());
+  const ref = useRef<THREE.Points>(null);
+  const [values, setValues] = useState<StarSpin>(starSpinAndColor());
   const [sphere] = useState(() => inSphere(pointsArray, { radius: 1 }));
 
   useEffect(() => {
@@ -34,6 +45,9 @@ export function Stars(props) {
   }, [pathname]);
 
   useFrame((_, delta) => {
+    if (!ref.current) {
+      return;
+    }
     ref.current.rotation.x = values.x[0](
       ref.current.rotation.x,
       delta / values.x[1]

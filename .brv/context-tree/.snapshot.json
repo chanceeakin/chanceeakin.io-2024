@@ -1,0 +1,50 @@
+{
+  "createdAt": "2025-12-30T15:41:52.086Z",
+  "files": {
+    "bug_fixes/context.md": {
+      "hash": "3c9457addd1103ae67997b14eddf437bda6d4a7a411f058afd70b035c4aca590",
+      "size": 45
+    },
+    "code_style/context.md": {
+      "hash": "579c53d1d3f24f63319def89ad56b10bd72d252619b3b0a66f88f88df1710afa",
+      "size": 77
+    },
+    "compliance/context.md": {
+      "hash": "175bfdda33fedb9baf8532f7f041ccea9f958d96cc29395feb83d8770f4ea47a",
+      "size": 50
+    },
+    "structure/context.md": {
+      "hash": "8609e406f606376a0da555bc0d3b29b6a4a3e826281771dd2455413cffd8379c",
+      "size": 64
+    },
+    "testing/context.md": {
+      "hash": "7d29f58cf887df06802b0f11887e4c0b437eb2ac59e81711c82c6e5e83f04915",
+      "size": 42
+    },
+    "design/context.md": {
+      "hash": "69f1cfcef6cddfa551abd7f12ded2923973424c607aefbef7752ef645873ff58",
+      "size": 54
+    },
+    "authentication/jwt/jwt_authentication.md": {
+      "hash": "00cc61f0c5f4edbeb23e39391f5d992b437cd93a8785a0a46476e3c1f08edb82",
+      "size": 135
+    },
+    "project/dependencies/project_dependencies.md": {
+      "hash": "8c32e0cc3e8267ed4964d8c3cc5eb9205ec7e47a0a8c58459d7a8a7f3e4cd1ac",
+      "size": 767
+    },
+    "project/overview/project_overview.md": {
+      "hash": "7da2fac6a488529ecf081638326cc4ce4dfdff4998d15a6cc4354d33f91820cc",
+      "size": 297
+    },
+    "design/3d_animations/3d_animations.md": {
+      "hash": "70ee96241dee62154a6b31c1cc51db4ce8c7656f0a9ed07117919cf1a3672051",
+      "size": 1303
+    },
+    "design/standards/design_standards.md": {
+      "hash": "d92c08a7ce3ae60d61b939f1bd802d411db916d8b02452059b58f04c7b064e85",
+      "size": 724
+    }
+  },
+  "version": 1
+}
