@@ -38,7 +38,7 @@ export function Stars(props: StarsProps) {
   const pathname = usePathname();
   const ref = useRef<THREE.Points>(null);
   const [values, setValues] = useState<StarSpin>(starSpinAndColor());
-  const [sphere] = useState(() => inSphere(pointsArray, { radius: 1 }));
+  const [sphere] = useState(() => inSphere(pointsArray, { radius: 1 }) as Float32Array);
 
   useEffect(() => {
     setValues(starSpinAndColor());

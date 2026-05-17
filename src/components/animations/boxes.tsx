@@ -50,8 +50,9 @@ export function Boxes() {
   return (
     <group ref={group} dispose={null} rotation={[0, 0, Math.PI / 4]}>
       {data.map((d, index) => (
-        <a.mesh key={index} {...springs[index]} castShadow receiveShadow>
+        <a.mesh key={index} {...(springs[index] as any)} castShadow receiveShadow>
           <boxGeometry args={d.args} />
+          {/* @ts-ignore — @react-spring/three types exceed TS depth limit */}
           <a.meshStandardMaterial
             color={springs[index].color}
             roughness={0.5}
