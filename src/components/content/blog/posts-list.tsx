@@ -13,17 +13,20 @@ export async function PostListRSC({ paginate }: { paginate?: boolean }) {
   });
   return (
     <>
-      <h1 className="text-4xl mb-10">Blog</h1>
-      <ul>
+      <h1 className="text-4xl mb-10 font-light tracking-wide">Blog</h1>
+      <ul className="space-y-4">
         {sorted.map((post) => (
-          <li key={post?.slug} className="my=4">
-            <Link href={`/blog/${post?.slug}`}>
-              <h3>
-                <span>{post?.date}</span>&nbsp;&mdash;&nbsp;
-                <span className="text-xl text-amber-200 hover:text-amber-300">
-                  {post?.title}
-                </span>
-              </h3>
+          <li key={post?.slug}>
+            <Link
+              href={`/blog/${post?.slug}`}
+              className="group flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-3 py-3 border-b border-white/10 hover:border-white/30 transition-colors duration-200"
+            >
+              <span className="text-sm text-slate-400 shrink-0 tabular-nums">
+                {post?.date}
+              </span>
+              <span className="text-lg text-amber-200 group-hover:text-amber-100 transition-colors duration-200">
+                {post?.title}
+              </span>
             </Link>
           </li>
         ))}

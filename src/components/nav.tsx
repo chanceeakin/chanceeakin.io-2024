@@ -4,70 +4,115 @@ import { useSpring, animated } from "react-spring";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-const Burger = () => {
+const NAV_LINKS = [
+  { href: "/", label: "Home" },
+  { href: "/about", label: "About" },
+  { href: "/links", label: "Links" },
+  { href: "/blog", label: "Blog" },
+];
+
+export default function Nav() {
   const pathname = usePathname();
   const [isOpen, toggle] = useState(false);
 
-  const first = useSpring({
+  const hamburgerFirst = useSpring({
     transform: isOpen
       ? "translate(5px, 32px) rotate(-45deg)"
       : "translate(2px, 7px) rotate(0deg)",
   });
-  const second = useSpring({
+  const hamburgerSecond = useSpring({
     transform: isOpen
       ? "translate(10px, 4px) rotate(45deg)"
       : "translate(2px, 19px) rotate(0deg)",
   });
-  const third = useSpring({
+  const hamburgerThird = useSpring({
     transform: isOpen
       ? "translate(5px, 32px) rotate(-45deg)"
       : "translate(2px, 31px) rotate(0deg)",
   });
-  const menuAppear = useSpring({
-    transform: isOpen ? "translate3D(0,0,0)" : "translate3D(0,-40px,0)",
+
+  const menuSpring = useSpring({
     opacity: isOpen ? 1 : 0,
+    transform: isOpen ? "translateY(0px)" : "translateY(-8px)",
+    config: { tension: 300, friction: 22 },
   });
 
   useEffect(() => {
     toggle(false);
   }, [pathname]);
 
+  const isActive = (href: string) =>
+    href === "/" ? pathname === "/" : pathname.startsWith(href);
+
   return (
-    <div className="m-5 z-50 absolute top-0 left-0">
-      <button
-        aria-label="nav-dropdown"
-        onClick={() => toggle(!isOpen)}
-        tabIndex={0}
-        className="hover:cursor-pointer"
+    <header className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 py-3">
+      {/* Logo */}
+      <Link
+        href="/"
+        className="text-white/90 font-semibold text-xl tracking-wider hover:text-purple-400 transition-colors duration-200"
       >
-        <svg
-          width="40"
-          height="32"
-          viewBox="0 0 44 44"
-          fill="#fafafa"
-          xmlns="http://www.w3.org/2000/svg"
+        CE
+      </Link>
+
+      {/* Desktop nav */}
+      <nav className="hidden md:flex items-center gap-8">
+        {NAV_LINKS.map(({ href, label }) => (
+          <Link
+            key={href}
+            href={href}
+            className={`text-sm font-medium tracking-wide transition-colors duration-200 ${
+              isActive(href)
+                ? "text-purple-400"
+                : "text-white/60 hover:text-white"
+            }`}
+          >
+            {label}
+          </Link>
+        ))}
+      </nav>
+
+      {/* Mobile burger */}
+      <div className="md:hidden relative">
+        <button
+          aria-label="toggle navigation menu"
+          onClick={() => toggle(!isOpen)}
+          className="hover:cursor-pointer focus:outline-none"
         >
-          <animated.rect width="40" height="4" rx="2" style={first} />
-          <animated.rect width="40" height="4" rx="2" style={second} />
-          <animated.rect width="40" height="4" rx="2" style={third} />
-        </svg>
-      </button>
-      <animated.div style={menuAppear}>
-        {isOpen ? <RadioContent /> : null}
-      </animated.div>
-    </div>
-  );
-};
+          <svg
+            width="32"
+            height="28"
+            viewBox="0 0 44 44"
+            fill="#fafafa"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <animated.rect width="40" height="4" rx="2" style={hamburgerFirst} />
+            <animated.rect
+              width="40"
+              height="4"
+              rx="2"
+              style={hamburgerSecond}
+            />
+            <animated.rect width="40" height="4" rx="2" style={hamburgerThird} />
+          </svg>
+        </button>
 
-const RadioContent = () => {
-  return (
-    <div className="flex flex-col text-white border border-gray-300 md:border-none bg-gray-900 md:bg-transparent p-4 md:p-0">
-      <Link href="/">Home</Link>
-      <Link href="/about">About</Link>
-      <Link href="/links">Links</Link>
-      <Link href="/blog">Blog</Link>
-    </div>
+        <animated.div
+          style={{ ...menuSpring, pointerEvents: isOpen ? "auto" : "none" }}
+          className="absolute right-0 top-11 w-44 bg-slate-900/95 backdrop-blur-md border border-white/10 rounded-xl overflow-hidden shadow-2xl"
+        >
+          {NAV_LINKS.map(({ href, label }) => (
+            <Link
+              key={href}
+              href={href}
+              className={`block px-5 py-3 text-sm font-medium transition-colors duration-150 hover:bg-white/10 ${
+                isActive(href) ? "text-purple-400" : "text-white/80"
+              }`}
+            >
+              {label}
+            </Link>
+          ))}
+        </animated.div>
+      </div>
+    </header>
   );
-};
-
-export default Burger;
+}
