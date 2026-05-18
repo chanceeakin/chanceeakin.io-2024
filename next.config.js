@@ -9,7 +9,6 @@ const nextConfig = withMDX(
   withBundleAnalyzer({
     reactStrictMode: false,
     pageExtensions: ["ts", "tsx", "js", "jsx", "md", "mdx"],
-    productionBrowserSourceMaps: true,
     images: {
       remotePatterns: [
         {

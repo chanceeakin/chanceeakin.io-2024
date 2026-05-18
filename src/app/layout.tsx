@@ -1,13 +1,16 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { lazy, Suspense } from "react";
 import "./globals.css";
 import "./styles.css";
+import ConditionalBackground from "@/components/animations/conditional-background";
 
 const Nav = lazy(() => import("@/components/nav"));
 const Analytics = lazy(() => import("@/components/gtm"));
-const BackgroundAnimation = lazy(
-  () => import("@/components/animations/background")
-);
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+};
 
 export const metadata: Metadata = {
   title: {
@@ -32,9 +35,7 @@ export default function RootLayout({
           <Nav />
           {children}
         </Suspense>
-        <Suspense fallback={<div></div>}>
-          <BackgroundAnimation />
-        </Suspense>
+        <ConditionalBackground />
       </body>
     </html>
   );
