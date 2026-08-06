@@ -12,7 +12,11 @@ export default function BackgroundAnimation() {
   if (pathname.includes("blog") || prefersReducedMotion) return null;
 
   return (
-    <Canvas flat camera={{ position: [0, 0, 1] }}>
+    <Canvas
+      flat
+      camera={{ position: [0, 0, 1] }}
+      style={{ pointerEvents: "none" }}
+    >
       <Suspense fallback={null}>
         <Stars />
       </Suspense>
