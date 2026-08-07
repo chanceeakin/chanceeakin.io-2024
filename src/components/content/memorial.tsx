@@ -115,7 +115,7 @@ export const MemorialContent = () => {
           Find me here.
         </p>
       </div>
-      <div className="relative z-20 w-full flex justify-center mt-6">
+      <div className="relative z-20 w-full flex justify-center items-center mt-6">
         <EntryTrailAnimation
           items={[
             <Boop key={1} className="p-5">
