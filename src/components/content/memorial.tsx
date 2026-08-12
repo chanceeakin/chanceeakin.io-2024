@@ -87,7 +87,10 @@ export const MemorialContent = () => {
   }, []);
 
   return (
-    <div className="relative flex justify-center flex-col !touch-auto overflow-y-auto pb-6 px-4">
+    <div
+      className="relative flex justify-center flex-col !touch-auto overflow-y-auto pb-24 px-4"
+      style={{ WebkitOverflowScrolling: "touch" }}
+    >
       <h1
         className="place-self-center text-4xl sm:text-5xl lg:text-7xl text-center leading-[1.2] pb-4 mt-[200px]
 				bg-gradient-to-r from-pink-500 via-red-500 to-orange-500 inline-block text-transparent bg-clip-text background-animate"
