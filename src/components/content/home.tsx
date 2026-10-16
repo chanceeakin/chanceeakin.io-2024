@@ -1,27 +1,30 @@
 import Link from "next/link";
 import { Arc, Lamp, Shelf, Starburst } from "@/components/glyphs";
 
-const CELLS = [
+const CELLS: {
+  title: string;
+  note: string;
+  glyph: React.ReactNode;
+  span: string;
+  href?: string;
+}[] = [
   {
     title: "Software",
     note: "Robotics, payments, animation, skyscrapers",
     glyph: <Shelf className="h-24 w-24" />,
     span: "sm:col-span-2",
-    href: "/about",
   },
   {
     title: "Austin",
     note: "Home base",
     glyph: <Lamp className="h-24 w-24" />,
     span: "",
-    href: "/about",
   },
   {
     title: "Music",
     note: "DMA, vocal performance",
     glyph: <Arc className="h-24 w-24" />,
     span: "",
-    href: "/about",
   },
   {
     title: "Writing",
@@ -35,7 +38,6 @@ const CELLS = [
     note: "Colorado, ideally",
     glyph: <Arc className="h-24 w-24 -scale-y-100" />,
     span: "sm:col-span-2",
-    href: "/about",
   },
 ];
 
@@ -54,28 +56,40 @@ const HomeContent = () => (
           and still loving the building and the learning.
         </p>
         <span className="font-hand text-2xl text-teak -rotate-3">
-          hover a drawing — it opens up ↓
+          a few things I care about ↓
         </span>
       </div>
     </section>
 
     <section className="mx-auto max-w-6xl px-6">
       <div className="grid grid-cols-1 border-t border-l border-sand sm:grid-cols-4">
-        {CELLS.map((cell) => (
-          <Link
-            key={cell.title}
-            href={cell.href}
-            className={`group flex min-h-56 flex-col justify-between border-r border-b border-sand p-6 transition-colors hover:bg-cream-deep ${cell.span}`}
-          >
-            <div className="flex justify-center text-rosewood transition-transform duration-500 group-hover:scale-105 group-hover:text-teak">
-              {cell.glyph}
+        {CELLS.map((cell) => {
+          const body = (
+            <>
+              <div className="flex justify-center text-rosewood transition-transform duration-500 group-hover:scale-105 group-hover:text-teak">
+                {cell.glyph}
+              </div>
+              <div className="flex items-baseline justify-between gap-4 text-sm">
+                <span className="font-medium">{cell.title}</span>
+                <span className="text-right text-oak">{cell.note}</span>
+              </div>
+            </>
+          );
+          const classes = `group flex min-h-56 flex-col justify-between border-r border-b border-sand p-6 ${cell.span}`;
+          return cell.href ? (
+            <Link
+              key={cell.title}
+              href={cell.href}
+              className={`${classes} transition-colors hover:bg-cream-deep`}
+            >
+              {body}
+            </Link>
+          ) : (
+            <div key={cell.title} className={classes}>
+              {body}
             </div>
-            <div className="flex items-baseline justify-between gap-4 text-sm">
-              <span className="font-medium">{cell.title}</span>
-              <span className="text-right text-oak">{cell.note}</span>
-            </div>
-          </Link>
-        ))}
+          );
+        })}
       </div>
     </section>
 
@@ -96,7 +110,7 @@ const HomeContent = () => (
             href="/about"
             className="w-fit rounded-full border border-taupe px-6 py-2 text-sm text-cream transition-colors hover:bg-cream hover:text-rosewood"
           >
-            Find out more →
+            Find the link →
           </Link>
         </div>
       </div>
