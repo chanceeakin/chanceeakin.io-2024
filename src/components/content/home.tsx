@@ -7,12 +7,15 @@ const CELLS: {
   glyph: React.ReactNode;
   span: string;
   href?: string;
+  cta?: string;
 }[] = [
   {
     title: "Software",
     note: "Robotics, payments, animation, skyscrapers",
     glyph: <Shelf className="h-24 w-24" />,
     span: "sm:col-span-2",
+    href: "/about",
+    cta: "Find the link →",
   },
   {
     title: "Austin",
@@ -73,6 +76,11 @@ const HomeContent = () => (
                 <span className="font-medium">{cell.title}</span>
                 <span className="text-right text-oak">{cell.note}</span>
               </div>
+              {cell.cta && (
+                <span className="mt-4 w-fit rounded-full border border-taupe px-5 py-1.5 text-sm text-teak transition-colors group-hover:bg-rosewood group-hover:text-cream">
+                  {cell.cta}
+                </span>
+              )}
             </>
           );
           const classes = `group flex min-h-56 flex-col justify-between border-r border-b border-sand p-6 ${cell.span}`;
@@ -106,12 +114,6 @@ const HomeContent = () => (
             doctorate in music — a background that still shapes how I think
             about craft, practice, and performance.
           </p>
-          <Link
-            href="/about"
-            className="w-fit rounded-full border border-taupe px-6 py-2 text-sm text-cream transition-colors hover:bg-cream hover:text-rosewood"
-          >
-            Find the link →
-          </Link>
         </div>
       </div>
     </section>
