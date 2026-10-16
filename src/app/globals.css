@@ -1,27 +1,69 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
-/* :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+/* Palette sampled from the Tenon modular-furniture shot (Dribbble, Odama). */
+@theme {
+  --color-cream: #fdf1dc;
+  --color-cream-deep: #f3e2c4;
+  --color-sand: #e3d1b4;
+  --color-taupe: #c3b19a;
+  --color-oak: #a38b73;
+  --color-teak: #905d38;
+  --color-walnut: #6d4d35;
+  --color-rosewood: #5f3117;
+  --color-espresso: #2d210f;
+  --color-olive: #7d8057;
+
+  --font-sans: var(--font-instrument), ui-sans-serif, system-ui, sans-serif;
+  --font-hand: var(--font-caveat), cursive;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+@layer base {
+  html {
+    background: var(--color-cream);
+    color: var(--color-rosewood);
+    scroll-behavior: smooth;
+  }
+  body {
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+  ::selection {
+    background: var(--color-teak);
+    color: var(--color-cream);
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-teak);
+    outline-offset: 3px;
   }
 }
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
-} */
+@utility display {
+  font-weight: 300;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+}
+
+@utility eyebrow {
+  font-size: 0.7rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-oak);
+}
+
+@keyframes rise {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.page-enter {
+  animation: rise 0.45s ease-out both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page-enter { animation: none; }
+  html { scroll-behavior: auto; }
+}

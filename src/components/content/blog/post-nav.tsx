@@ -31,9 +31,9 @@ export const PostNavigation = ({
   );
 };
 
-const Container = `flex justify-between w-100`;
+const Container = `flex justify-between gap-4 w-full mt-16`;
 
 const PostNavBefore = `flex mr-2 text-left`;
 const PostNavAfter = `flex ml-2 text-right`;
 
-const PostNavLink = `border border-gray-400 hover:border-amber-300 hover:underline hover:text-amber-300 px-8 py-4 mb-4`;
+const PostNavLink = `border border-taupe hover:border-teak hover:text-teak px-6 py-4 mb-4 text-sm`;

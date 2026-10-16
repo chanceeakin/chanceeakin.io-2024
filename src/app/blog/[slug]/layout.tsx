@@ -11,16 +11,17 @@ export async function generateStaticParams() {
 export const generateMetadata = async ({
   params,
 }: {
-  params: {
+  params: Promise<{
     slug: string;
-  };
+  }>;
 }): Promise<Metadata> => {
-  const post = (await getPosts()).find((p) => p?.slug === params.slug);
+  const { slug } = await params;
+  const post = (await getPosts()).find((p) => p?.slug === slug);
   return {
     title: post?.title,
     description: post?.description,
     alternates: {
-      canonical: `https://chanceeakin.io/blog/${params.slug}`,
+      canonical: `https://chanceeakin.io/blog/${slug}`,
     },
   };
 };
@@ -57,20 +58,12 @@ export default async function PostLayout({
   children,
   params,
 }: {
-  children: JSX.Element;
-  params: {
+  children: React.ReactNode;
+  params: Promise<{
     slug: string;
-  };
+  }>;
 }) {
-  const { previous, next, title, date, lastModified } = await getData(params);
-
-  const lastModifiedDate = lastModified
-    ? new Date(lastModified).toLocaleDateString("en-US", {
-        month: "long",
-        day: "numeric",
-        year: "numeric",
-      })
-    : null;
+  const { previous, next } = await getData(await params);
 
   return (
     <>

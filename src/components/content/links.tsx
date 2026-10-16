@@ -1,77 +1,29 @@
-"use client";
-import { useEffect, useState } from "react";
 import { FaInstagram, FaLinkedin, FaGithub } from "react-icons/fa";
-import { Boop } from "@/components/animations/boop";
-import { EntryTrailAnimation } from "@/components/animations/entry";
-import Link from "next/link";
 
-export const LinksContent = () => {
-  const [visible, setVisible] = useState(false);
+const LINKS = [
+  { label: "Instagram", handle: "@chanceeakin", href: "https://www.instagram.com/chanceeakin/", icon: FaInstagram },
+  { label: "LinkedIn", handle: "in/chanceeakin", href: "https://www.linkedin.com/in/chanceeakin/", icon: FaLinkedin },
+  { label: "GitHub", handle: "chanceeakin", href: "https://github.com/chanceeakin/", icon: FaGithub },
+];
 
-  useEffect(() => {
-    setVisible(true);
-  }, []);
-
-  const INSTAGRAM_LINK = `https://www.instagram.com/chanceeakin/`;
-  const LINKEDIN_LINK = `https://www.linkedin.com/in/chanceeakin/`;
-  const GITHUB_LINK = `https://github.com/chanceeakin/`;
-
-  return (
-    <div className="flex justify-center flex-col !touch-auto">
-      <h1
-        className="place-self-center text-6xl lg:text-9xl
-				bg-gradient-to-r from-pink-500 via-red-500 to-orange-500 inline-block text-transparent bg-clip-text background-animate"
-      >
-        Links
-      </h1>
-      <div className="z-20 w-full flex justify-center">
-        <EntryTrailAnimation
-          items={[
-            <Boop key={1} className="p-5">
-              <svg width="0" height="0">
-                <linearGradient
-                  id="orange-gradient"
-                  x1="100%"
-                  y1="100%"
-                  x2="0%"
-                  y2="0%"
-                >
-                  <stop stopColor="#ec4899" offset="0%" />
-                  <stop stopColor="#f97316" offset="100%" />
-                </linearGradient>
-              </svg>
-              <Link href={INSTAGRAM_LINK}>
-                <FaInstagram
-                  size="3em"
-                  style={{
-                    fill: "url(#orange-gradient)",
-                  }}
-                />
-              </Link>
-            </Boop>,
-            <Boop key={2} className="p-5">
-              <Link href={LINKEDIN_LINK}>
-                <FaLinkedin
-                  size="3em"
-                  style={{
-                    fill: "url(#orange-gradient)",
-                  }}
-                />
-              </Link>
-            </Boop>,
-            <Boop key={3} className="p-5">
-              <Link href={GITHUB_LINK}>
-                <FaGithub
-                  size="3em"
-                  style={{
-                    fill: "url(#orange-gradient)",
-                  }}
-                />
-              </Link>
-            </Boop>,
-          ]}
-        />
-      </div>
+export const LinksContent = () => (
+  <div className="mx-auto max-w-6xl px-6 pt-16 md:pt-24">
+    <p className="eyebrow mb-6">Elsewhere</p>
+    <h1 className="display text-4xl sm:text-6xl">Links</h1>
+    <div className="mt-12 grid border-t border-l border-sand sm:grid-cols-3">
+      {LINKS.map(({ label, handle, href, icon: Icon }) => (
+        <a
+          key={label}
+          href={href}
+          className="group flex min-h-56 flex-col justify-between border-r border-b border-sand p-6 transition-colors hover:bg-rosewood hover:text-cream"
+        >
+          <Icon size="3em" aria-hidden />
+          <div className="flex items-baseline justify-between text-sm">
+            <span className="font-medium">{label}</span>
+            <span className="text-oak group-hover:text-taupe">{handle}</span>
+          </div>
+        </a>
+      ))}
     </div>
-  );
-};
+  </div>
+);

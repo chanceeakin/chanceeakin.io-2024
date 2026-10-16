@@ -1,11 +1,22 @@
 import type { Metadata, Viewport } from "next";
+import { Instrument_Sans, Caveat } from "next/font/google";
 import { lazy, Suspense } from "react";
 import "./globals.css";
-import "./styles.css";
-import ConditionalBackground from "@/components/animations/conditional-background";
+import Nav from "@/components/nav";
+import Footer from "@/components/footer";
 
-const Nav = lazy(() => import("@/components/nav"));
 const Analytics = lazy(() => import("@/components/gtm"));
+
+const instrument = Instrument_Sans({
+  subsets: ["latin"],
+  variable: "--font-instrument",
+  display: "swap",
+});
+const caveat = Caveat({
+  subsets: ["latin"],
+  variable: "--font-caveat",
+  display: "swap",
+});
 
 export const viewport: Viewport = {
   width: "device-width",
@@ -26,16 +37,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="en" className={`${instrument.variable} ${caveat.variable}`}>
       <body>
         <Suspense fallback={null}>
           <Analytics />
         </Suspense>
-        <Suspense fallback={<div></div>}>
-          <Nav />
-          {children}
-        </Suspense>
-        <ConditionalBackground />
+        <Nav />
+        <main className="flex-1">{children}</main>
+        <Footer />
       </body>
     </html>
   );

@@ -5,11 +5,12 @@ import { notFound } from "next/navigation";
 export default async function PostPage({
   params,
 }: {
-  params: {
+  params: Promise<{
     slug: string;
-  };
+  }>;
 }) {
-  const post = await getPost(params.slug);
+  const { slug } = await params;
+  const post = await getPost(slug);
   // notFound is a Next.js utility
   if (!post) return notFound();
   // Pass the post contents to MDX

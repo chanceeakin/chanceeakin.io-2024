@@ -1,6 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
-import { useSpring, animated } from "react-spring";
+import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
@@ -13,106 +12,71 @@ const NAV_LINKS = [
 
 export default function Nav() {
   const pathname = usePathname();
-  const [isOpen, toggle] = useState(false);
-
-  const hamburgerFirst = useSpring({
-    transform: isOpen
-      ? "translate(5px, 32px) rotate(-45deg)"
-      : "translate(2px, 7px) rotate(0deg)",
-  });
-  const hamburgerSecond = useSpring({
-    transform: isOpen
-      ? "translate(10px, 4px) rotate(45deg)"
-      : "translate(2px, 19px) rotate(0deg)",
-  });
-  const hamburgerThird = useSpring({
-    transform: isOpen
-      ? "translate(5px, 32px) rotate(-45deg)"
-      : "translate(2px, 31px) rotate(0deg)",
-  });
-
-  const menuSpring = useSpring({
-    opacity: isOpen ? 1 : 0,
-    transform: isOpen ? "translateY(0px)" : "translateY(-8px)",
-    config: { tension: 300, friction: 22 },
-  });
-
-  useEffect(() => {
-    toggle(false);
-  }, [pathname]);
+  const [openAt, setOpenAt] = useState<string | null>(null);
+  // Menu closes itself when the route changes.
+  const isOpen = openAt === pathname;
 
   const isActive = (href: string) =>
     href === "/" ? pathname === "/" : pathname.startsWith(href);
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 py-3">
-      {/* Logo */}
-      <Link
-        href="/"
-        className="text-white/90 font-semibold text-xl tracking-wider hover:text-purple-400 transition-colors duration-200"
-      >
-        CE
-      </Link>
+    <header className="sticky top-0 z-50 border-b border-sand bg-cream/90 backdrop-blur">
+      <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
+        <Link href="/" className="flex items-center gap-3" aria-label="Home">
+          <span className="grid h-8 w-8 place-items-center rounded-[4px] bg-rosewood text-[0.7rem] font-medium tracking-wider text-cream">
+            CE
+          </span>
+          <span className="text-sm uppercase tracking-[0.18em]">
+            Chance Eakin
+          </span>
+        </Link>
 
-      {/* Desktop nav */}
-      <nav className="hidden md:flex items-center gap-8">
-        {NAV_LINKS.map(({ href, label }) => (
-          <Link
-            key={href}
-            href={href}
-            className={`text-sm font-medium tracking-wide transition-colors duration-200 ${
-              isActive(href)
-                ? "text-purple-400"
-                : "text-white/60 hover:text-white"
-            }`}
-          >
-            {label}
-          </Link>
-        ))}
-      </nav>
-
-      {/* Mobile burger */}
-      <div className="md:hidden relative">
-        <button
-          aria-label="toggle navigation menu"
-          onClick={() => toggle(!isOpen)}
-          className="hover:cursor-pointer focus:outline-none"
-        >
-          <svg
-            width="32"
-            height="28"
-            viewBox="0 0 44 44"
-            fill="#fafafa"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <animated.rect width="40" height="4" rx="2" style={hamburgerFirst} />
-            <animated.rect
-              width="40"
-              height="4"
-              rx="2"
-              style={hamburgerSecond}
-            />
-            <animated.rect width="40" height="4" rx="2" style={hamburgerThird} />
-          </svg>
-        </button>
-
-        <animated.div
-          style={{ ...menuSpring, pointerEvents: isOpen ? "auto" : "none" }}
-          className="absolute right-0 top-11 w-44 bg-slate-900/95 backdrop-blur-md border border-white/10 rounded-xl overflow-hidden shadow-2xl"
-        >
+        <nav className="hidden items-center gap-8 md:flex" aria-label="Primary">
           {NAV_LINKS.map(({ href, label }) => (
             <Link
               key={href}
               href={href}
-              className={`block px-5 py-3 text-sm font-medium transition-colors duration-150 hover:bg-white/10 ${
-                isActive(href) ? "text-purple-400" : "text-white/80"
+              aria-current={isActive(href) ? "page" : undefined}
+              className={`text-sm transition-colors hover:text-teak ${
+                isActive(href)
+                  ? "text-espresso underline decoration-teak decoration-2 underline-offset-8"
+                  : "text-walnut"
               }`}
             >
               {label}
             </Link>
           ))}
-        </animated.div>
+        </nav>
+
+        <button
+          type="button"
+          aria-label="toggle navigation menu"
+          aria-expanded={isOpen}
+          onClick={() => setOpenAt(isOpen ? null : pathname)}
+          className="rounded-full border border-taupe px-4 py-1.5 text-sm md:hidden"
+        >
+          {isOpen ? "Close" : "Menu"}
+        </button>
       </div>
+
+      {isOpen && (
+        <nav
+          className="border-t border-sand bg-cream px-6 py-2 md:hidden"
+          aria-label="Mobile"
+        >
+          {NAV_LINKS.map(({ href, label }) => (
+            <Link
+              key={href}
+              href={href}
+              className={`block border-b border-sand py-3 text-lg last:border-0 ${
+                isActive(href) ? "text-teak" : "text-rosewood"
+              }`}
+            >
+              {label}
+            </Link>
+          ))}
+        </nav>
+      )}
     </header>
   );
 }

@@ -1,8 +1,6 @@
 "use client";
 import { useEffect, useRef } from "react";
 import { FaInstagram, FaLinkedin } from "react-icons/fa";
-import { Boop } from "@/components/animations/boop";
-import { EntryTrailAnimation } from "@/components/animations/entry";
 import Link from "next/link";
 import Image from "next/image";
 
@@ -86,18 +84,15 @@ export const MemorialContent = () => {
     };
   }, []);
 
+  const socials = [
+    { href: INSTAGRAM_LINK, label: "Instagram", Icon: FaInstagram },
+    { href: LINKEDIN_LINK, label: "LinkedIn", Icon: FaLinkedin },
+  ];
   return (
-    <div
-      className="relative flex justify-center flex-col !touch-auto overflow-y-auto pb-24 px-4"
-      style={{ WebkitOverflowScrolling: "touch" }}
-    >
-      <h1
-        className="place-self-center text-4xl sm:text-5xl lg:text-7xl text-center leading-[1.2] pb-4 mt-[200px]
-				bg-gradient-to-r from-pink-500 via-red-500 to-orange-500 inline-block text-transparent bg-clip-text background-animate"
-      >
-        In Loving Memory
-      </h1>
-      <p className="place-self-center text-center text-white/60 italic mt-2 max-w-md">
+    <div className="mx-auto flex max-w-xl flex-col items-center px-6 pt-16 pb-12 text-center md:pt-24">
+      <p className="eyebrow mb-6">Remembered</p>
+      <h1 className="display text-4xl sm:text-6xl">In Loving Memory</h1>
+      <p className="mt-4 font-hand text-2xl text-teak">
         Your favorite former coworker.
       </p>
 
@@ -106,63 +101,27 @@ export const MemorialContent = () => {
         alt="Chance Eakin"
         width={1280}
         height={859}
-        className="place-self-center mt-6 w-full max-w-md rounded-lg"
+        className="mt-8 w-full rounded-[4px] border border-sand"
       />
 
-      <div className="place-self-center mt-6 w-full max-w-md">
+      <div className="mt-8 w-full">
         <div ref={embedRef} />
       </div>
 
-      <div className="place-self-center mt-6 w-full max-w-md">
-        <p className="place-self-center text-center text-white/60 italic mt-2 max-w-md">
-          Find me here.
-        </p>
-      </div>
-      <div className="relative z-20 w-full flex justify-center items-center mt-6">
-        <EntryTrailAnimation
-          items={[
-            <Boop key={1} className="p-5">
-              <svg width="0" height="0">
-                <linearGradient
-                  id="orange-gradient-memorial"
-                  x1="100%"
-                  y1="100%"
-                  x2="0%"
-                  y2="0%"
-                >
-                  <stop stopColor="#ec4899" offset="0%" />
-                  <stop stopColor="#f97316" offset="100%" />
-                </linearGradient>
-              </svg>
-              <Link
-                href={INSTAGRAM_LINK}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <FaInstagram
-                  size="3em"
-                  style={{
-                    fill: "url(#orange-gradient-memorial)",
-                  }}
-                />
-              </Link>
-            </Boop>,
-            <Boop key={2} className="p-5">
-              <Link
-                href={LINKEDIN_LINK}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <FaLinkedin
-                  size="3em"
-                  style={{
-                    fill: "url(#orange-gradient-memorial)",
-                  }}
-                />
-              </Link>
-            </Boop>,
-          ]}
-        />
+      <p className="mt-10 text-sm text-oak">Find me here.</p>
+      <div className="mt-4 flex gap-4">
+        {socials.map(({ href, label, Icon }) => (
+          <Link
+            key={label}
+            href={href}
+            aria-label={label}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="grid h-14 w-14 place-items-center rounded-full border border-taupe transition-colors hover:bg-rosewood hover:text-cream"
+          >
+            <Icon size="1.5em" />
+          </Link>
+        ))}
       </div>
     </div>
   );

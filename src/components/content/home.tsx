@@ -1,116 +1,107 @@
-"use client";
 import Link from "next/link";
-import { useState, useCallback, useRef } from "react";
-import { Parallax, ParallaxLayer, IParallax } from "@react-spring/parallax";
-import { FiArrowDown } from "react-icons/fi";
-import { Boop } from "@/components/animations/boop";
+import { Arc, Lamp, Shelf, Starburst } from "@/components/glyphs";
 
-const HomeContent = () => {
-  const parallax = useRef<IParallax>(null);
-  const [scrollPosition, setPosition] = useState(0);
+const CELLS = [
+  {
+    title: "Software",
+    note: "Robotics, payments, animation, skyscrapers",
+    glyph: <Shelf className="h-24 w-24" />,
+    span: "sm:col-span-2",
+    href: "/about",
+  },
+  {
+    title: "Austin",
+    note: "Home base",
+    glyph: <Lamp className="h-24 w-24" />,
+    span: "",
+    href: "/about",
+  },
+  {
+    title: "Music",
+    note: "DMA, vocal performance",
+    glyph: <Arc className="h-24 w-24" />,
+    span: "",
+    href: "/about",
+  },
+  {
+    title: "Writing",
+    note: "Notes from the workshop",
+    glyph: <Starburst className="h-24 w-24" />,
+    span: "sm:col-span-2",
+    href: "/blog",
+  },
+  {
+    title: "Fly fishing",
+    note: "Colorado, ideally",
+    glyph: <Arc className="h-24 w-24 -scale-y-100" />,
+    span: "sm:col-span-2",
+    href: "/about",
+  },
+];
 
-  const updateScrollPosition = useCallback(() => {
-    if (scrollPosition < 4) {
-      return setPosition((state) => state + 1);
-    }
-    return setPosition(0);
-  }, [scrollPosition]);
-
-  const scroll = useCallback(() => {
-    if (parallax.current) {
-      parallax.current.scrollTo(scrollPosition + 1);
-      updateScrollPosition();
-    }
-  }, [scrollPosition, updateScrollPosition]);
-  return (
-    <Parallax pages={5} ref={parallax} className="!touch-auto">
-      <ParallaxLayer
-        offset={0}
-        speed={0.5}
-        className="flex justify-center flex-col"
-      >
-        <p
-          className="place-self-center text-5xl
-      bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 block text-transparent bg-clip-text background-animate"
-        >
-          Hi, I&apos;m
+const HomeContent = () => (
+  <div className="page-enter">
+    <section className="mx-auto max-w-6xl px-6 pt-16 pb-12 md:pt-24">
+      <p className="eyebrow mb-6">Software engineer — Austin, Texas</p>
+      <h1 className="display max-w-4xl text-4xl sm:text-6xl lg:text-7xl">
+        Hi, I&apos;m Chance Eakin.
+        <br />
+        <span className="text-teak">I write software, built to last.</span>
+      </h1>
+      <div className="mt-10 flex max-w-2xl flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+        <p className="max-w-sm text-walnut">
+          Close to a decade of building across industries and architectures —
+          and still loving the building and the learning.
         </p>
-        <h1
-          className="place-self-center text-center text-6xl lg:text-9xl
-      bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 inline-block text-transparent bg-clip-text background-animate"
-        >
-          Chance Eakin
-        </h1>
-        <div className="place-self-center">
-          <Boop>
-            <button aria-label="scroll-down-page" onClick={scroll}>
-              <svg width="0" height="0">
-                <linearGradient
-                  id="blue-gradient"
-                  x1="100%"
-                  y1="100%"
-                  x2="0%"
-                  y2="0%"
-                >
-                  <stop stopColor="#7a6ded" offset="0%" />
-                  <stop stopColor="#591885" offset="100%" />
-                </linearGradient>
-              </svg>
-              <FiArrowDown
-                size="3em"
-                style={{
-                  stroke: "url(#blue-gradient)",
-                }}
-              />
-            </button>
-          </Boop>
-        </div>
-      </ParallaxLayer>
+        <span className="font-hand text-2xl text-teak -rotate-3">
+          hover a drawing — it opens up ↓
+        </span>
+      </div>
+    </section>
 
-      <ParallaxLayer
-        offset={1}
-        className="flex justify-center"
-        onClick={scroll}
-      >
-        {/* <ParallaxLayer sticky={{ start: 1, end: 3 }}> */}
-        <h2
-          className="place-self-center text-5xl
-      bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 inline-block text-transparent bg-clip-text"
-        >
-          I write software,
+    <section className="mx-auto max-w-6xl px-6">
+      <div className="grid grid-cols-1 border-t border-l border-sand sm:grid-cols-4">
+        {CELLS.map((cell) => (
+          <Link
+            key={cell.title}
+            href={cell.href}
+            className={`group flex min-h-56 flex-col justify-between border-r border-b border-sand p-6 transition-colors hover:bg-cream-deep ${cell.span}`}
+          >
+            <div className="flex justify-center text-rosewood transition-transform duration-500 group-hover:scale-105 group-hover:text-teak">
+              {cell.glyph}
+            </div>
+            <div className="flex items-baseline justify-between gap-4 text-sm">
+              <span className="font-medium">{cell.title}</span>
+              <span className="text-right text-oak">{cell.note}</span>
+            </div>
+          </Link>
+        ))}
+      </div>
+    </section>
+
+    <section className="mt-24 bg-rosewood text-cream">
+      <div className="mx-auto grid max-w-6xl gap-10 px-6 py-20 md:grid-cols-2">
+        <h2 className="display text-3xl sm:text-5xl">
+          Made with intent,
+          <br />
+          <span className="text-taupe">from the ground up.</span>
         </h2>
-      </ParallaxLayer>
-
-      <ParallaxLayer
-        offset={2}
-        speed={1.5}
-        className="flex justify-center"
-        onClick={scroll}
-      >
-        <p className={PARAGRAPH_CLASSES}>live in Austin,</p>
-      </ParallaxLayer>
-
-      <ParallaxLayer
-        offset={3}
-        speed={1.5}
-        className="flex justify-center"
-        onClick={scroll}
-      >
-        <p className={PARAGRAPH_CLASSES}>and love building and learning.</p>
-      </ParallaxLayer>
-      <ParallaxLayer offset={4} speed={1.5} className="flex justify-center">
-        <h3 className={ABOUT_LINK_CLASSES}>
-          <Link href="/about">Find out more.</Link>
-        </h3>
-      </ParallaxLayer>
-    </Parallax>
-  );
-};
-
-const PARAGRAPH_CLASSES = `place-self-center text-5xl text-center
-      bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 inline-block text-transparent bg-clip-text leading-relaxed`;
-
-const ABOUT_LINK_CLASSES = `place-self-center text-5xl
-      bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 inline-block text-transparent bg-clip-text hover:from-pink-500 hover:to-yellow-500`;
+        <div className="flex flex-col gap-6 text-sand">
+          <p>
+            I live in Austin, build things for the web and beyond, and hold a
+            doctorate in music — a background that still shapes how I think
+            about craft, practice, and performance.
+          </p>
+          <Link
+            href="/about"
+            className="w-fit rounded-full border border-taupe px-6 py-2 text-sm text-cream transition-colors hover:bg-cream hover:text-rosewood"
+          >
+            Find out more →
+          </Link>
+        </div>
+      </div>
+    </section>
+  </div>
+);
 
 export default HomeContent;

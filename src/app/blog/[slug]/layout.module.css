@@ -1,5 +1,11 @@
-
+.blog {
+  color: var(--color-walnut);
+  line-height: 1.75;
+}
 .blog :not(pre) > code {
-	background: #475569;
-	color: #a7f3d0;
+  background: var(--color-cream-deep);
+  color: var(--color-rosewood);
+  padding: 0.1em 0.35em;
+  border-radius: 3px;
+  font-size: 0.9em;
 }
