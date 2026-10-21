@@ -3,6 +3,7 @@ import { useEffect, useRef } from "react";
 import { FaInstagram, FaLinkedin } from "react-icons/fa";
 import Link from "next/link";
 import Image from "next/image";
+import { useTranslations } from "next-intl";
 
 const INSTAGRAM_LINK = `https://www.instagram.com/chanceeakin/`;
 const LINKEDIN_LINK = `https://www.linkedin.com/in/chanceeakin/`;
@@ -46,6 +47,7 @@ function loadSpotifyIframeApi(): Promise<SpotifyIFrameAPI> {
 }
 
 export const MemorialContent = () => {
+  const t = useTranslations("Memorial");
   const embedRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -90,25 +92,25 @@ export const MemorialContent = () => {
   ];
   return (
     <div className="mx-auto flex max-w-xl flex-col items-center px-6 pt-16 pb-12 text-center md:pt-24">
-      <p className="eyebrow mb-6">Remembered</p>
-      <h1 className="display text-4xl sm:text-6xl">In Loving Memory</h1>
-      <p className="mt-4 font-hand text-2xl text-teak">
-        Your favorite former coworker.
+      <p className="eyebrow mb-6">{t("eyebrow")}</p>
+      <h1 className="display text-4xl sm:text-6xl">{t("title")}</h1>
+      <p className="mt-4 font-hand text-2xl text-accent">
+        {t("subtitle")}
       </p>
 
       <Image
         src="/images/chance_memorial_larger.jpeg"
-        alt="Chance Eakin"
+        alt={t("photoAlt")}
         width={1280}
         height={859}
-        className="mt-8 w-full rounded-[4px] border border-sand"
+        className="mt-8 w-full rounded-[4px] border border-line"
       />
 
       <div className="mt-8 w-full">
         <div ref={embedRef} />
       </div>
 
-      <p className="mt-10 text-sm text-oak">Find me here.</p>
+      <p className="mt-10 text-sm text-muted">{t("findMe")}</p>
       <div className="mt-4 flex gap-4">
         {socials.map(({ href, label, Icon }) => (
           <Link
@@ -117,7 +119,7 @@ export const MemorialContent = () => {
             aria-label={label}
             target="_blank"
             rel="noopener noreferrer"
-            className="grid h-14 w-14 place-items-center rounded-full border border-taupe transition-colors hover:bg-rosewood hover:text-cream"
+            className="grid h-14 w-14 place-items-center rounded-full border border-line-strong transition-colors hover:bg-mustard hover:text-on-mustard"
           >
             <Icon size="1.5em" />
           </Link>

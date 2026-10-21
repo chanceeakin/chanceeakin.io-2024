@@ -1,0 +1,81 @@
+{
+  "Meta": {
+    "description": "Software Engineer."
+  },
+  "A11y": {
+    "skipToContent": "Skip to main content"
+  },
+  "Nav": {
+    "home": "Home",
+    "about": "About",
+    "links": "Links",
+    "blog": "Blog",
+    "primary": "Primary",
+    "mobile": "Mobile",
+    "menu": "Menu",
+    "close": "Close",
+    "toggleMenu": "Toggle navigation menu",
+    "homeLabel": "Chance Eakin, home"
+  },
+  "Settings": {
+    "theme": "Theme",
+    "light": "Light",
+    "dark": "Dark",
+    "system": "System",
+    "language": "Language"
+  },
+  "Footer": {
+    "made": "© {year} Chance Eakin — made in Austin.",
+    "elsewhere": "Find me elsewhere →"
+  },
+  "Home": {
+    "eyebrow": "Software engineer — Austin, Texas",
+    "hello": "Hi, I'm Chance Eakin.",
+    "tagline": "I write software, built to last.",
+    "intro": "Close to a decade of building across industries and architectures — and still loving the building and the learning.",
+    "note": "a few things I care about ↓",
+    "gridLabel": "Things I care about",
+    "cells": {
+      "software": { "title": "Software", "note": "Robotics, payments, animation, skyscrapers", "cta": "Find the link →" },
+      "austin": { "title": "Austin", "note": "Home base" },
+      "music": { "title": "Music", "note": "DMA, vocal performance" },
+      "writing": { "title": "Writing", "note": "Notes from the workshop" },
+      "fishing": { "title": "Fly fishing", "note": "Colorado, ideally" }
+    },
+    "bandTitle": "Made with intent,",
+    "bandTitleSoft": "from the ground up.",
+    "bandBody": "I live in Austin, build things for the web and beyond, and hold a doctorate in music — a background that still shapes how I think about craft, practice, and performance."
+  },
+  "About": {
+    "eyebrow": "About",
+    "title": "Engineer, musician,",
+    "titleAccent": "maker.",
+    "work": { "title": "Work", "body": "I'm a software engineer with close to a decade of experience across a wide variety of industries and architectural concerns. My software supports robotics, financial transactions, animations across the internet, and skyscrapers." },
+    "life": { "title": "Life", "body": "In addition to software, I stay active with my hobbies and my family. Krav maga, fly fishing, cloud architecture, and wine are my current pursuits. My wife and I love to travel--Colorado holds a special place in our hearts." },
+    "study": { "title": "Study", "body": "My formal education is in music: I hold a doctorate (DMA) from UT Austin, where my research was in performance psychology as it applied to vocal pedagogy, Schubert, and Mozart. Other degrees: MM Voice - University of Cincinnati, and BM Voice, cum laude, Baylor University." },
+    "cta": "Pertinent links →"
+  },
+  "Links": {
+    "eyebrow": "Elsewhere",
+    "title": "Links"
+  },
+  "Memorial": {
+    "eyebrow": "Remembered",
+    "title": "In Loving Memory",
+    "subtitle": "Your favorite former coworker.",
+    "photoAlt": "Chance Eakin",
+    "findMe": "Find me here."
+  },
+  "Blog": {
+    "eyebrow": "Journal",
+    "title": "Blog",
+    "englishOnly": "Blog posts are available in English only.",
+    "olderLabel": "Older",
+    "newerLabel": "Newer",
+    "postNav": "Post navigation"
+  },
+  "NotFound": {
+    "title": "Page not found",
+    "home": "Back to home"
+  }
+}

@@ -1,10 +1,10 @@
 .blog {
-  color: var(--color-walnut);
+  color: var(--ink-soft);
   line-height: 1.75;
 }
 .blog :not(pre) > code {
-  background: var(--color-cream-deep);
-  color: var(--color-rosewood);
+  background: var(--paper-deep);
+  color: var(--ink);
   padding: 0.1em 0.35em;
   border-radius: 3px;
   font-size: 0.9em;

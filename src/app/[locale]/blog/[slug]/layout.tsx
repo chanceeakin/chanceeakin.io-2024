@@ -1,17 +1,14 @@
 import { getPosts } from "@/lib/posts";
 import { Metadata } from "next";
+import { setRequestLocale } from "next-intl/server";
 import styles from "./layout.module.css";
 import { PostNavigation } from "@/components/content/blog/post-nav";
-
-export async function generateStaticParams() {
-  const posts = await getPosts();
-  return posts.map((post) => ({ slug: post?.slug }));
-}
 
 export const generateMetadata = async ({
   params,
 }: {
   params: Promise<{
+    locale: string;
     slug: string;
   }>;
 }): Promise<Metadata> => {
@@ -60,10 +57,13 @@ export default async function PostLayout({
 }: {
   children: React.ReactNode;
   params: Promise<{
+    locale: string;
     slug: string;
   }>;
 }) {
-  const { previous, next } = await getData(await params);
+  const { locale, slug } = await params;
+  setRequestLocale(locale);
+  const { previous, next } = await getData({ slug });
 
   return (
     <>

@@ -1,7 +1,9 @@
 import { getPosts } from "@/lib/posts";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
+import { getTranslations } from "next-intl/server";
 
 export async function PostListRSC({ paginate }: { paginate?: boolean }) {
+  const t = await getTranslations("Blog");
   const posts = await getPosts();
   const sorted = posts.sort((a, b) => {
     if (a?.publishDate && b?.publishDate) {
@@ -13,19 +15,19 @@ export async function PostListRSC({ paginate }: { paginate?: boolean }) {
   });
   return (
     <>
-      <p className="eyebrow mb-6">Journal</p>
-      <h1 className="display mb-12 text-4xl sm:text-6xl">Blog</h1>
-      <ul className="border-t border-sand">
+      <p className="eyebrow mb-6">{t("eyebrow")}</p>
+      <h1 className="display mb-12 text-4xl sm:text-6xl">{t("title")}</h1>
+      <ul className="border-t border-line">
         {sorted.map((post) => (
           <li key={post?.slug}>
             <Link
               href={`/blog/${post?.slug}`}
-              className="group flex flex-col gap-1 border-b border-sand py-5 transition-colors hover:bg-cream-deep sm:flex-row sm:items-baseline sm:gap-6 sm:px-3"
+              className="group flex flex-col gap-1 border-b border-line py-5 transition-colors hover:bg-paper-deep sm:flex-row sm:items-baseline sm:gap-6 sm:px-3"
             >
-              <span className="shrink-0 text-sm tabular-nums text-oak">
+              <span className="shrink-0 text-sm tabular-nums text-muted">
                 {post?.date}
               </span>
-              <span className="text-lg text-rosewood group-hover:text-teak">
+              <span className="text-lg text-ink group-hover:text-accent">
                 {post?.title}
               </span>
             </Link>

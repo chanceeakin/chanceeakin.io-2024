@@ -1,0 +1,81 @@
+{
+  "Meta": {
+    "description": "Ingeniero de software."
+  },
+  "A11y": {
+    "skipToContent": "Saltar al contenido principal"
+  },
+  "Nav": {
+    "home": "Inicio",
+    "about": "Acerca de",
+    "links": "Enlaces",
+    "blog": "Blog",
+    "primary": "Principal",
+    "mobile": "Móvil",
+    "menu": "Menú",
+    "close": "Cerrar",
+    "toggleMenu": "Abrir o cerrar el menú de navegación",
+    "homeLabel": "Chance Eakin, inicio"
+  },
+  "Settings": {
+    "theme": "Tema",
+    "light": "Claro",
+    "dark": "Oscuro",
+    "system": "Sistema",
+    "language": "Idioma"
+  },
+  "Footer": {
+    "made": "© {year} Chance Eakin — hecho en Austin.",
+    "elsewhere": "Encuéntrame en otros sitios →"
+  },
+  "Home": {
+    "eyebrow": "Ingeniero de software — Austin, Texas",
+    "hello": "Hola, soy Chance Eakin.",
+    "tagline": "Escribo software hecho para durar.",
+    "intro": "Casi una década construyendo en distintas industrias y arquitecturas, y todavía disfrutando de construir y aprender.",
+    "note": "algunas cosas que me importan ↓",
+    "gridLabel": "Cosas que me importan",
+    "cells": {
+      "software": { "title": "Software", "note": "Robótica, pagos, animación, rascacielos", "cta": "Encuentra el enlace →" },
+      "austin": { "title": "Austin", "note": "Mi hogar" },
+      "music": { "title": "Música", "note": "DMA, canto y performance" },
+      "writing": { "title": "Escritura", "note": "Notas desde el taller" },
+      "fishing": { "title": "Pesca con mosca", "note": "Colorado, idealmente" }
+    },
+    "bandTitle": "Hecho con intención,",
+    "bandTitleSoft": "desde cero.",
+    "bandBody": "Vivo en Austin, construyo cosas para la web y más allá, y tengo un doctorado en música: una formación que aún moldea cómo pienso sobre el oficio, la práctica y la interpretación."
+  },
+  "About": {
+    "eyebrow": "Acerca de",
+    "title": "Ingeniero, músico,",
+    "titleAccent": "artesano.",
+    "work": { "title": "Trabajo", "body": "Soy ingeniero de software con casi una década de experiencia en una gran variedad de industrias y retos de arquitectura. Mi software da soporte a robots, transacciones financieras, animaciones por todo internet y rascacielos." },
+    "life": { "title": "Vida", "body": "Además del software, me mantengo activo con mis pasatiempos y mi familia. Krav maga, pesca con mosca, arquitectura en la nube y vino son mis pasiones actuales. A mi esposa y a mí nos encanta viajar; Colorado ocupa un lugar especial en nuestro corazón." },
+    "study": { "title": "Estudios", "body": "Mi formación académica es en música: tengo un doctorado (DMA) de la Universidad de Texas en Austin, donde investigué la psicología del rendimiento aplicada a la pedagogía vocal, Schubert y Mozart. Otros títulos: MM en canto, Universidad de Cincinnati, y BM en canto, cum laude, Universidad de Baylor." },
+    "cta": "Enlaces relevantes →"
+  },
+  "Links": {
+    "eyebrow": "En otros sitios",
+    "title": "Enlaces"
+  },
+  "Memorial": {
+    "eyebrow": "En el recuerdo",
+    "title": "En memoria",
+    "subtitle": "Tu excompañero de trabajo favorito.",
+    "photoAlt": "Chance Eakin",
+    "findMe": "Encuéntrame aquí."
+  },
+  "Blog": {
+    "eyebrow": "Diario",
+    "title": "Blog",
+    "englishOnly": "Las entradas del blog solo están disponibles en inglés.",
+    "olderLabel": "Anterior",
+    "newerLabel": "Siguiente",
+    "postNav": "Navegación de entradas"
+  },
+  "NotFound": {
+    "title": "Página no encontrada",
+    "home": "Volver al inicio"
+  }
+}

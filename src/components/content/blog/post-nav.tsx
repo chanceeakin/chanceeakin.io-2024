@@ -1,4 +1,5 @@
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
+import { useTranslations } from "next-intl";
 import { Post } from "@/lib/types";
 
 export const PostNavigation = ({
@@ -8,12 +9,13 @@ export const PostNavigation = ({
   previous?: Post;
   next?: Post;
 }) => {
+  const t = useTranslations("Blog");
   return (
-    <div className={Container}>
+    <nav aria-label={t("postNav")} className={Container}>
       <div className={PostNavBefore}>
         {previous ? (
-          <Link className={PostNavLink} href={`/blog/${previous.slug}`}>
-            <div>← Older</div>
+          <Link className={PostNavLink} lang="en" href={`/blog/${previous.slug}`}>
+            <div>← {t("olderLabel")}</div>
             {previous.title}
           </Link>
         ) : null}
@@ -21,13 +23,13 @@ export const PostNavigation = ({
 
       <div className={PostNavAfter}>
         {next ? (
-          <Link className={PostNavLink} href={`/blog/${next.slug}`}>
-            <div>Newer →</div>
+          <Link className={PostNavLink} lang="en" href={`/blog/${next.slug}`}>
+            <div>{t("newerLabel")} →</div>
             {next.title}
           </Link>
         ) : null}
       </div>
-    </div>
+    </nav>
   );
 };
 
@@ -36,4 +38,4 @@ const Container = `flex justify-between gap-4 w-full mt-16`;
 const PostNavBefore = `flex mr-2 text-left`;
 const PostNavAfter = `flex ml-2 text-right`;
 
-const PostNavLink = `border border-taupe hover:border-teak hover:text-teak px-6 py-4 mb-4 text-sm`;
+const PostNavLink = `border border-line-strong hover:border-accent hover:text-accent px-6 py-4 mb-4 text-sm`;

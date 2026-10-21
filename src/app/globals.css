@@ -1,26 +1,99 @@
 @import "tailwindcss";
 
-/* Palette sampled from the Tenon modular-furniture shot (Dribbble, Odama). */
-@theme {
-  --color-cream: #fdf1dc;
-  --color-cream-deep: #f3e2c4;
-  --color-sand: #e3d1b4;
-  --color-taupe: #c3b19a;
-  --color-oak: #a38b73;
-  --color-teak: #905d38;
-  --color-walnut: #6d4d35;
-  --color-rosewood: #5f3117;
-  --color-espresso: #2d210f;
-  --color-olive: #7d8057;
+/*
+ * Mid-century palette, sampled from the Tenon Dribbble shot (Odama) and
+ * extended with moss greens and mustards. Components use the semantic
+ * tokens below; light/dark values live in the blocks further down.
+ */
+@theme inline {
+  --color-paper: var(--paper);
+  --color-paper-deep: var(--paper-deep);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-muted: var(--muted);
+  --color-accent: var(--accent);
+  --color-inverse: var(--inverse);
+  --color-inverse-ink: var(--inverse-ink);
+  --color-inverse-soft: var(--inverse-soft);
+  --color-mustard: var(--mustard);
+  --color-on-mustard: var(--on-mustard);
+  --color-moss: var(--moss);
+  --color-on-moss: var(--on-moss);
+  --color-sage: var(--sage);
+  --color-on-sage: var(--on-sage);
 
   --font-sans: var(--font-instrument), ui-sans-serif, system-ui, sans-serif;
   --font-hand: var(--font-caveat), cursive;
 }
 
+/* Dark mode is driven by [data-theme] (set by the theme selector), falling
+   back to the OS preference when the visitor chose "System". */
+
+:root {
+  color-scheme: light;
+  --paper: #fdf1dc;
+  --paper-deep: #f3e2c4;
+  --line: #e3d1b4;
+  --line-strong: #8f775e;
+  --ink: #4a2511;
+  --ink-soft: #5e4130;
+  --muted: #7a5f45;
+  --accent: #7e4e2a;
+  --inverse: #34401f;
+  --inverse-ink: #fdf1dc;
+  --inverse-soft: #e3d1b4;
+  --mustard: #d9a521;
+  --on-mustard: #2d210f;
+  --moss: #4f5d2a;
+  --on-moss: #fdf1dc;
+  --sage: #c9cfa3;
+  --on-sage: #2f3a17;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --paper: #1c1710;
+    --paper-deep: #272014;
+    --line: #3d3425;
+    --line-strong: #7d6c52;
+    --ink: #f6e6c8;
+    --ink-soft: #dccaa8;
+    --muted: #b5a283;
+    --accent: #e3b23c;
+    --inverse: #2b3519;
+    --inverse-ink: #f6e6c8;
+    --inverse-soft: #cdbd9a;
+    --moss: #5b6a31;
+    --sage: #3a4423;
+    --on-sage: #e9edcc;
+  }
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --paper: #1c1710;
+  --paper-deep: #272014;
+  --line: #3d3425;
+  --line-strong: #7d6c52;
+  --ink: #f6e6c8;
+  --ink-soft: #dccaa8;
+  --muted: #b5a283;
+  --accent: #e3b23c;
+  --inverse: #2b3519;
+  --inverse-ink: #f6e6c8;
+  --inverse-soft: #cdbd9a;
+  --moss: #5b6a31;
+  --sage: #3a4423;
+  --on-sage: #e9edcc;
+}
+
 @layer base {
   html {
-    background: var(--color-cream);
-    color: var(--color-rosewood);
+    background: var(--paper);
+    color: var(--ink);
     scroll-behavior: smooth;
   }
   body {
@@ -31,12 +104,18 @@
     flex-direction: column;
   }
   ::selection {
-    background: var(--color-teak);
-    color: var(--color-cream);
+    background: var(--mustard);
+    color: var(--on-mustard);
   }
   :focus-visible {
-    outline: 2px solid var(--color-teak);
+    outline: 3px solid var(--accent);
     outline-offset: 3px;
+    border-radius: 2px;
+  }
+  /* Focus ring that stays visible on filled (moss / inverse) surfaces. */
+  .on-dark :focus-visible,
+  .on-fill:focus-visible {
+    outline-color: var(--mustard);
   }
 }
 
@@ -48,10 +127,26 @@
 }
 
 @utility eyebrow {
-  font-size: 0.7rem;
+  font-size: 0.75rem;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--color-oak);
+  color: var(--muted);
+}
+
+.skip-link {
+  position: absolute;
+  left: 1rem;
+  top: -4rem;
+  z-index: 100;
+  background: var(--mustard);
+  color: var(--on-mustard);
+  padding: 0.75rem 1.25rem;
+  border-radius: 999px;
+  font-weight: 500;
+  transition: top 0.15s;
+}
+.skip-link:focus {
+  top: 1rem;
 }
 
 @keyframes rise {
@@ -66,4 +161,8 @@
 @media (prefers-reduced-motion: reduce) {
   .page-enter { animation: none; }
   html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
 }

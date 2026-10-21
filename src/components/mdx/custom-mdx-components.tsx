@@ -21,32 +21,32 @@ export const mdxComponents: MDXComponents = {
     );
   },
   h1: ({ children, ...props }) => (
-    <h1 className="text-4xl mb-12 display text-rosewood" {...props}>
+    <h1 className="text-4xl mb-12 display text-ink" {...props}>
       {children}
     </h1>
   ),
   h2: ({ children, ...props }) => (
-    <h2 className="text-3xl mb-12 display text-rosewood" {...props}>
+    <h2 className="text-3xl mb-12 display text-ink" {...props}>
       {children}
     </h2>
   ),
   h3: ({ children, ...props }) => (
-    <h3 className="text-2xl mb-12 display text-rosewood" {...props}>
+    <h3 className="text-2xl mb-12 display text-ink" {...props}>
       {children}
     </h3>
   ),
   h4: ({ children, ...props }) => (
-    <h4 className="text-xl mb-10 display text-rosewood" {...props}>
+    <h4 className="text-xl mb-10 display text-ink" {...props}>
       {children}
     </h4>
   ),
   h5: ({ children, ...props }) => (
-    <h5 className="text-lg mb-8 display text-rosewood" {...props}>
+    <h5 className="text-lg mb-8 display text-ink" {...props}>
       {children}
     </h5>
   ),
   h6: ({ children, ...props }) => (
-    <h6 className="text-md mb-8 display text-rosewood" {...props}>
+    <h6 className="text-md mb-8 display text-ink" {...props}>
       {children}
     </h6>
   ),
@@ -62,7 +62,7 @@ export const mdxComponents: MDXComponents = {
   ),
   blockquote: ({ children, ...props }) => (
     <blockquote
-      className="border-l-4 border-teak bg-cream-deep text-walnut italic px-8 pt-8 pb-0 mb-8"
+      className="border-l-4 border-mustard bg-paper-deep text-ink-soft italic px-8 pt-8 pb-0 mb-8"
       {...props}
     >
       {children}
@@ -81,7 +81,7 @@ export const mdxComponents: MDXComponents = {
     HTMLPreElement
   >) => {
     return (
-      <Code {...props} theme="github-light">
+      <Code {...props} theme="github-dark">
         {children as any}
       </Code>
     );
