@@ -6,6 +6,7 @@ import { getLocale, getTranslations } from "next-intl/server";
 import "./globals.css";
 import Nav from "@/components/nav";
 import Footer from "@/components/footer";
+import SettingsFab from "@/components/settings-fab";
 import { themeInitScript } from "@/lib/theme";
 
 const Analytics = lazy(() => import("@/components/gtm"));
@@ -48,6 +49,7 @@ export default async function LocaleLayout({
   return (
     <html
       lang={locale}
+      data-scroll-behavior="smooth"
       suppressHydrationWarning
       className={`${instrument.variable} ${caveat.variable}`}
     >
@@ -67,6 +69,7 @@ export default async function LocaleLayout({
             {children}
           </main>
           <Footer />
+          <SettingsFab />
         </NextIntlClientProvider>
       </body>
     </html>

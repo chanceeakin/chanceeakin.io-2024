@@ -10,6 +10,8 @@ const nextConfig = withNextIntl(
   withMDX(
   withBundleAnalyzer({
     reactStrictMode: false,
+    // Keep the dev-only indicator clear of the settings button.
+    devIndicators: { position: "bottom-right" },
     pageExtensions: ["ts", "tsx", "js", "jsx", "md", "mdx"],
     images: {
       remotePatterns: [

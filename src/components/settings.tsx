@@ -43,7 +43,7 @@ function applyTheme(theme: Theme) {
   window.dispatchEvent(new Event(EVENT));
 }
 
-function ThemeSelector() {
+export function ThemeSelector() {
   const t = useTranslations("Settings");
   const name = useId();
   const theme = useSyncExternalStore(subscribe, readTheme, () => "system" as Theme);
@@ -74,7 +74,7 @@ function ThemeSelector() {
   );
 }
 
-function LanguageSelector() {
+export function LanguageSelector() {
   const t = useTranslations("Settings");
   const locale = useLocale();
   const [pending, startTransition] = useTransition();
@@ -105,15 +105,6 @@ function LanguageSelector() {
           </li>
         ))}
       </ul>
-    </div>
-  );
-}
-
-export default function Settings({ className = "" }: { className?: string }) {
-  return (
-    <div className={`flex flex-wrap items-center gap-3 ${className}`}>
-      <LanguageSelector />
-      <ThemeSelector />
     </div>
   );
 }

@@ -3,7 +3,6 @@ import { useEffect, useId, useRef, useState } from "react";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import Settings from "@/components/settings";
 
 const NAV_LINKS = [
   { href: "/", key: "home" },
@@ -73,8 +72,6 @@ export default function Nav() {
           ))}
         </nav>
 
-        <Settings className="hidden md:flex" />
-
         <button
           ref={buttonRef}
           type="button"
@@ -107,7 +104,6 @@ export default function Nav() {
             </Link>
           ))}
         </nav>
-        <Settings className="mt-4" />
       </div>
     </header>
   );

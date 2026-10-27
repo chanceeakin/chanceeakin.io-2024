@@ -22,7 +22,10 @@
     "light": "Light",
     "dark": "Dark",
     "system": "System",
-    "language": "Language"
+    "language": "Language",
+    "title": "Settings",
+    "open": "Open settings",
+    "closeLabel": "Close settings"
   },
   "Footer": {
     "made": "© {year} Chance Eakin — made in Austin.",
