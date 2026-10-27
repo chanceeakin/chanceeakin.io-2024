@@ -53,7 +53,7 @@ export function ThemeSelector() {
   useEffect(() => syncDom(theme), [theme]);
 
   return (
-    <fieldset className="flex items-center gap-1 rounded-full border border-line-strong p-0.5">
+    <fieldset className="flex w-fit items-center gap-1 rounded-full border border-line-strong p-0.5">
       <legend className="sr-only">{t("theme")}</legend>
       {THEMES.map((value) => (
         <label key={value} className="relative">
@@ -85,7 +85,7 @@ export function LanguageSelector() {
   };
 
   return (
-    <div role="group" aria-label={t("language")} aria-busy={pending}>
+    <div role="group" aria-label={t("language")} aria-busy={pending} className="w-fit">
       <ul className="flex items-center gap-1 rounded-full border border-line-strong p-0.5">
         {locales.map((code) => (
           <li key={code}>
