@@ -1,5 +1,5 @@
 import { useTranslations } from "next-intl";
-import { Link } from "@/i18n/navigation";
+import Link from "next/link";
 import { Arc, Lamp, Shelf, Starburst } from "@/components/glyphs";
 
 type Cell = {

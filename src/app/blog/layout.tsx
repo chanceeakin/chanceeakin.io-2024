@@ -1,14 +1,10 @@
-import { getTranslations, setRequestLocale } from "next-intl/server";
+import { getTranslations } from "next-intl/server";
 
 export default async function BlogLayout({
   children,
-  params,
 }: {
   children: React.ReactNode;
-  params: Promise<{ locale: string }>;
 }) {
-  const { locale } = await params;
-  setRequestLocale(locale);
   const t = await getTranslations("Blog");
   return (
     <div className="page-enter mx-auto w-full max-w-2xl px-6 pt-16 md:pt-24">

@@ -1,6 +1,5 @@
 import { getPosts } from "@/lib/posts";
 import { Metadata } from "next";
-import { setRequestLocale } from "next-intl/server";
 import styles from "./layout.module.css";
 import { PostNavigation } from "@/components/content/blog/post-nav";
 
@@ -8,7 +7,6 @@ export const generateMetadata = async ({
   params,
 }: {
   params: Promise<{
-    locale: string;
     slug: string;
   }>;
 }): Promise<Metadata> => {
@@ -57,12 +55,10 @@ export default async function PostLayout({
 }: {
   children: React.ReactNode;
   params: Promise<{
-    locale: string;
     slug: string;
   }>;
 }) {
-  const { locale, slug } = await params;
-  setRequestLocale(locale);
+  const { slug } = await params;
   const { previous, next } = await getData({ slug });
 
   return (

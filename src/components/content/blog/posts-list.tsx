@@ -1,5 +1,5 @@
 import { getPosts } from "@/lib/posts";
-import { Link } from "@/i18n/navigation";
+import Link from "next/link";
 import { getTranslations } from "next-intl/server";
 
 export async function PostListRSC({ paginate }: { paginate?: boolean }) {

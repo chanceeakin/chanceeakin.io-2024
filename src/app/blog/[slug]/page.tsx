@@ -1,19 +1,15 @@
 import { getPosts, getPost } from "@/lib/posts";
 import { PostBody } from "@/components/content/blog/post-body";
 import { notFound } from "next/navigation";
-import { setRequestLocale } from "next-intl/server";
-import { routing } from "@/i18n/routing";
 
 export default async function PostPage({
   params,
 }: {
   params: Promise<{
-    locale: string;
     slug: string;
   }>;
 }) {
-  const { locale, slug } = await params;
-  setRequestLocale(locale);
+  const { slug } = await params;
   const post = await getPost(slug);
   // notFound is a Next.js utility
   if (!post) return notFound();
@@ -25,7 +21,5 @@ export async function generateStaticParams() {
   const posts = await getPosts();
   // The params to pre-render the page with.
   // Without this, the page will be rendered at runtime
-  return routing.locales.flatMap((locale) =>
-    posts.map((post) => ({ locale, slug: post.slug })),
-  );
+  return posts.map((post) => ({ slug: post.slug }));
 }

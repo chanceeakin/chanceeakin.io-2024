@@ -1,8 +1,8 @@
 "use client";
-import { useEffect, useId, useSyncExternalStore } from "react";
+import { useEffect, useId, useSyncExternalStore, useTransition } from "react";
 import { useLocale, useTranslations } from "next-intl";
-import { Link, usePathname } from "@/i18n/navigation";
-import { routing } from "@/i18n/routing";
+import { locales } from "@/i18n/config";
+import { setLocale } from "@/i18n/actions";
 import { THEME_KEY, type Theme } from "@/lib/theme";
 
 const THEMES: Theme[] = ["light", "dark", "system"];
@@ -77,19 +77,23 @@ function ThemeSelector() {
 function LanguageSelector() {
   const t = useTranslations("Settings");
   const locale = useLocale();
-  const pathname = usePathname();
+  const [pending, startTransition] = useTransition();
+
+  const choose = (code: string) => {
+    if (code === locale) return;
+    startTransition(() => setLocale(code));
+  };
 
   return (
-    <nav aria-label={t("language")}>
+    <div role="group" aria-label={t("language")} aria-busy={pending}>
       <ul className="flex items-center gap-1 rounded-full border border-line-strong p-0.5">
-        {routing.locales.map((code) => (
+        {locales.map((code) => (
           <li key={code}>
-            <Link
-              href={pathname}
-              locale={code}
-              hrefLang={code}
+            <button
+              type="button"
               lang={code}
-              aria-current={code === locale ? "true" : undefined}
+              aria-pressed={code === locale}
+              onClick={() => choose(code)}
               className={`block rounded-full px-3 py-1 text-xs uppercase transition-colors ${
                 code === locale
                   ? "bg-moss text-on-moss"
@@ -97,11 +101,11 @@ function LanguageSelector() {
               }`}
             >
               {code}
-            </Link>
+            </button>
           </li>
         ))}
       </ul>
-    </nav>
+    </div>
   );
 }
 
