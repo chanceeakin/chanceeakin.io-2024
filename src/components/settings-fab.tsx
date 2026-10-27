@@ -20,14 +20,17 @@ export default function SettingsFab() {
         buttonRef.current?.focus();
       }
     };
-    const onPointer = (e: PointerEvent) => {
+    const onOutside = (e: Event) => {
       if (!rootRef.current?.contains(e.target as Node)) setOpen(false);
     };
     document.addEventListener("keydown", onKey);
-    document.addEventListener("pointerdown", onPointer);
+    document.addEventListener("pointerdown", onOutside);
+    // Keyboard users tabbing past the panel close it.
+    document.addEventListener("focusin", onOutside);
     return () => {
       document.removeEventListener("keydown", onKey);
-      document.removeEventListener("pointerdown", onPointer);
+      document.removeEventListener("pointerdown", onOutside);
+      document.removeEventListener("focusin", onOutside);
     };
   }, [open]);
 
@@ -35,12 +38,6 @@ export default function SettingsFab() {
     <div
       ref={rootRef}
       className="fixed bottom-4 left-4 z-50 sm:bottom-6 sm:left-6"
-      onBlur={(e) => {
-        // Tabbing out of the widget closes the panel.
-        if (open && !e.currentTarget.contains(e.relatedTarget as Node | null)) {
-          setOpen(false);
-        }
-      }}
     >
       <div
         id={panelId}
