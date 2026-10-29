@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Instrument_Sans, Caveat } from "next/font/google";
+import { Caveat } from "next/font/google";
 import Script from "next/script";
 import { lazy, Suspense } from "react";
 import { NextIntlClientProvider } from "next-intl";
@@ -12,11 +12,6 @@ import { themeInitScript } from "@/lib/theme";
 
 const Analytics = lazy(() => import("@/components/gtm"));
 
-const instrument = Instrument_Sans({
-  subsets: ["latin"],
-  variable: "--font-instrument",
-  display: "swap",
-});
 const caveat = Caveat({
   subsets: ["latin"],
   variable: "--font-caveat",
@@ -52,7 +47,7 @@ export default async function LocaleLayout({
       lang={locale}
       data-scroll-behavior="smooth"
       suppressHydrationWarning
-      className={`${instrument.variable} ${caveat.variable}`}
+      className={caveat.variable}
     >
       <body>
         {/* Applies the saved theme before first paint. */}
