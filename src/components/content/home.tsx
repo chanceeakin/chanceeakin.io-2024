@@ -52,7 +52,7 @@ const HomeContent = () => {
                 </div>
                 <div className="flex flex-wrap items-end justify-between gap-x-4 gap-y-3">
                   <div className="text-sm">
-                    <div className="font-medium">{title}</div>
+                    <div className="font-bold">{title}</div>
                     <div className="opacity-90">{note}</div>
                   </div>
                   {cell.key === "software" && (

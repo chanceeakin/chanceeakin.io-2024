@@ -59,6 +59,13 @@ export default async function LocaleLayout({
         <Script id="theme-init" strategy="beforeInteractive">
           {themeInitScript}
         </Script>
+        {/* Adobe Fonts web project (Futura PT). React hoists these into <head>. */}
+        <link rel="preconnect" href="https://use.typekit.net" crossOrigin="" />
+        <link
+          rel="stylesheet"
+          href="https://use.typekit.net/iyi4qzl.css"
+          precedence="default"
+        />
         <NextIntlClientProvider>
           <a href="#main" className="skip-link">
             {t("skipToContent")}

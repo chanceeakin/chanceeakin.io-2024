@@ -22,7 +22,7 @@ export const LinksContent = () => {
             >
               <Icon size="3em" aria-hidden />
               <div className="flex items-baseline justify-between text-sm">
-                <span className="font-medium">{label}</span>
+                <span className="font-bold">{label}</span>
                 <span>{handle}</span>
               </div>
             </a>

@@ -24,7 +24,8 @@
   --color-sage: var(--sage);
   --color-on-sage: var(--on-sage);
 
-  --font-sans: var(--font-instrument), ui-sans-serif, system-ui, sans-serif;
+  /* Futura PT from Adobe Fonts; Instrument Sans is the fallback while it loads. */
+  --font-sans: "futura-pt", var(--font-instrument), ui-sans-serif, system-ui, sans-serif;
   --font-hand: var(--font-caveat), cursive;
 }
 

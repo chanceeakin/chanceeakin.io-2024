@@ -46,7 +46,7 @@ export default function Nav() {
         >
           <span
             aria-hidden
-            className="grid h-8 w-8 place-items-center rounded-[4px] bg-moss text-[0.7rem] font-medium tracking-wider text-on-moss"
+            className="grid h-8 w-8 place-items-center rounded-[4px] bg-moss text-[0.7rem] font-bold tracking-wider text-on-moss"
           >
             CE
           </span>
