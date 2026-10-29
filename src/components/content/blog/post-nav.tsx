@@ -38,4 +38,4 @@ const Container = `flex justify-between gap-4 w-full mt-16`;
 const PostNavBefore = `flex mr-2 text-left`;
 const PostNavAfter = `flex ml-2 text-right`;
 
-const PostNavLink = `border border-line-strong hover:border-accent hover:text-accent px-6 py-4 mb-4 text-sm`;
+const PostNavLink = `border border-line-strong hover:border-accent hover:text-accent px-6 py-4 mb-4 text-base`;

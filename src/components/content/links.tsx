@@ -21,7 +21,7 @@ export const LinksContent = () => {
               className={`on-fill flex min-h-56 w-full flex-col justify-between border-r border-b border-line p-6 transition-colors hover:brightness-95 ${tone}`}
             >
               <Icon size="3em" aria-hidden />
-              <div className="flex items-baseline justify-between text-sm">
+              <div className="flex items-baseline justify-between text-base">
                 <span className="font-bold">{label}</span>
                 <span>{handle}</span>
               </div>

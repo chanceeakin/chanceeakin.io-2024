@@ -103,14 +103,14 @@ export const MemorialContent = () => {
         alt={t("photoAlt")}
         width={1280}
         height={859}
-        className="mt-8 w-full rounded-[4px] border border-line"
+        className="mt-8 w-full rounded-sm border border-line"
       />
 
       <div className="mt-8 w-full">
         <div ref={embedRef} />
       </div>
 
-      <p className="mt-10 text-sm text-muted">{t("findMe")}</p>
+      <p className="mt-10 text-base text-muted">{t("findMe")}</p>
       <div className="mt-4 flex gap-4">
         {socials.map(({ href, label, Icon }) => (
           <Link

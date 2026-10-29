@@ -46,11 +46,11 @@ export default function Nav() {
         >
           <span
             aria-hidden
-            className="grid h-8 w-8 place-items-center rounded-[4px] bg-moss text-[0.7rem] font-bold tracking-wider text-on-moss"
+            className="grid h-9 w-9 place-items-center rounded-sm bg-moss text-xs font-bold tracking-wider text-on-moss"
           >
             CE
           </span>
-          <span aria-hidden className="hidden text-sm uppercase tracking-[0.18em] sm:inline">
+          <span aria-hidden className="hidden text-base uppercase tracking-[0.18em] sm:inline">
             Chance Eakin
           </span>
         </Link>
@@ -61,7 +61,7 @@ export default function Nav() {
               key={href}
               href={href}
               aria-current={isActive(href) ? "page" : undefined}
-              className={`py-1 text-sm transition-colors hover:text-accent ${
+              className={`py-1 text-base transition-colors hover:text-accent ${
                 isActive(href)
                   ? "text-ink underline decoration-mustard decoration-2 underline-offset-8"
                   : "text-ink-soft"
@@ -79,7 +79,7 @@ export default function Nav() {
           aria-expanded={isOpen}
           aria-controls={menuId}
           onClick={() => setOpenAt(isOpen ? null : pathname)}
-          className="rounded-full border border-line-strong px-4 py-1.5 text-sm md:hidden"
+          className="rounded-full border border-line-strong px-4 py-1.5 text-base md:hidden"
         >
           {isOpen ? t("close") : t("menu")}
         </button>

@@ -14,7 +14,7 @@ export const mdxComponents: MDXComponents = {
     return (
       <figure className="flex flex-col items-center mb-8" key={src}>
         <Image width={width} height={height} alt={alt} src={src} />
-        <figcaption className="z-10 mt-4 text-sm italic text-center">
+        <figcaption className="z-10 mt-4 text-base italic text-center">
           {alt}
         </figcaption>
       </figure>

@@ -1,11 +1,12 @@
 .blog {
   color: var(--ink-soft);
   line-height: 1.75;
+  font-size: 1.125rem;
 }
 .blog :not(pre) > code {
   background: var(--paper-deep);
   color: var(--ink);
   padding: 0.1em 0.35em;
-  border-radius: 3px;
+  border-radius: 0.1875rem;
   font-size: 0.9em;
 }

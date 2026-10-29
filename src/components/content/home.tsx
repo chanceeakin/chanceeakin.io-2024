@@ -33,8 +33,8 @@ const HomeContent = () => {
           <span className="text-accent">{t("tagline")}</span>
         </h1>
         <div className="mt-10 flex max-w-2xl flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
-          <p className="max-w-sm text-ink-soft">{t("intro")}</p>
-          <span aria-hidden className="font-hand text-2xl text-accent -rotate-3">
+          <p className="max-w-md text-lg text-ink-soft sm:text-xl">{t("intro")}</p>
+          <span aria-hidden className="font-hand text-3xl text-accent -rotate-3">
             {t("note")}
           </span>
         </div>
@@ -51,12 +51,12 @@ const HomeContent = () => {
                   {cell.glyph}
                 </div>
                 <div className="flex flex-wrap items-end justify-between gap-x-4 gap-y-3">
-                  <div className="text-sm">
+                  <div className="text-base">
                     <div className="font-bold">{title}</div>
                     <div className="opacity-90">{note}</div>
                   </div>
                   {cell.key === "software" && (
-                    <span className="inline-block rounded-full border border-current px-5 py-1.5 text-sm transition-colors group-hover:bg-on-mustard group-hover:text-mustard">
+                    <span className="inline-block rounded-full border border-current px-5 py-1.5 text-base transition-colors group-hover:bg-on-mustard group-hover:text-mustard">
                       {t("cells.software.cta")}
                     </span>
                   )}
@@ -86,7 +86,7 @@ const HomeContent = () => {
             <br />
             <span className="text-mustard">{t("bandTitleSoft")}</span>
           </h2>
-          <p className="self-end text-inverse-soft">{t("bandBody")}</p>
+          <p className="self-end text-lg text-inverse-soft sm:text-xl">{t("bandBody")}</p>
         </div>
       </section>
     </div>

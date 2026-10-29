@@ -65,7 +65,7 @@ export function ThemeSelector() {
             onChange={() => applyTheme(value)}
             className="peer sr-only"
           />
-          <span className="block cursor-pointer rounded-full px-3 py-1 text-xs text-ink-soft transition-colors hover:text-ink peer-checked:bg-mustard peer-checked:text-on-mustard peer-focus-visible:outline-3 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-accent">
+          <span className="block cursor-pointer rounded-full px-3 py-1 text-sm text-ink-soft transition-colors hover:text-ink peer-checked:bg-mustard peer-checked:text-on-mustard peer-focus-visible:outline-3 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-accent">
             {t(value)}
           </span>
         </label>
@@ -94,7 +94,7 @@ export function LanguageSelector() {
               lang={code}
               aria-pressed={code === locale}
               onClick={() => choose(code)}
-              className={`block rounded-full px-3 py-1 text-xs uppercase transition-colors ${
+              className={`block rounded-full px-3 py-1 text-sm uppercase transition-colors ${
                 code === locale
                   ? "bg-moss text-on-moss"
                   : "text-ink-soft hover:text-ink"

@@ -18,20 +18,20 @@ export const AboutContent = () => {
               aria-labelledby={`about-${key}`}
               className="grid gap-4 border-b border-line py-10 md:grid-cols-[8rem_12rem_1fr]"
             >
-              <span aria-hidden className="font-hand text-3xl text-accent">
+              <span aria-hidden className="font-hand text-4xl text-accent">
                 {String(i + 1).padStart(2, "0")}
               </span>
               <h2 id={`about-${key}`} className="display text-2xl">
                 {t(`${key}.title`)}
               </h2>
-              <p className="max-w-xl text-ink-soft">{t(`${key}.body`)}</p>
+              <p className="max-w-xl text-lg text-ink-soft sm:text-xl">{t(`${key}.body`)}</p>
             </section>
           </li>
         ))}
       </ol>
       <Link
         href="/links"
-        className="mt-10 inline-block rounded-full bg-moss px-6 py-2 text-sm text-on-moss transition-colors hover:bg-mustard hover:text-on-mustard"
+        className="mt-10 inline-block rounded-full bg-moss px-6 py-2 text-base text-on-moss transition-colors hover:bg-mustard hover:text-on-mustard"
       >
         {t("cta")}
       </Link>

@@ -67,7 +67,7 @@ export default function SettingsFab() {
         onClick={() => setOpen((v) => !v)}
         className="on-fill grid h-12 w-12 place-items-center rounded-full bg-mustard text-on-mustard ring-2 ring-paper shadow-lg transition-transform hover:scale-105 focus-visible:outline-offset-4"
       >
-        {open ? <FiX size={22} aria-hidden /> : <FiSettings size={22} aria-hidden />}
+        {open ? <FiX size="1.4rem" aria-hidden /> : <FiSettings size="1.4rem" aria-hidden />}
       </button>
     </div>
   );

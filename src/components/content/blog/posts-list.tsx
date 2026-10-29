@@ -24,10 +24,10 @@ export async function PostListRSC({ paginate }: { paginate?: boolean }) {
               href={`/blog/${post?.slug}`}
               className="group flex flex-col gap-1 border-b border-line py-5 transition-colors hover:bg-paper-deep sm:flex-row sm:items-baseline sm:gap-6 sm:px-3"
             >
-              <span className="shrink-0 text-sm tabular-nums text-muted">
+              <span className="shrink-0 text-base tabular-nums text-muted">
                 {post?.date}
               </span>
-              <span className="text-lg text-ink group-hover:text-accent">
+              <span className="text-xl text-ink group-hover:text-accent">
                 {post?.title}
               </span>
             </Link>
