@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Instrument_Sans, Caveat } from "next/font/google";
+import Script from "next/script";
 import { lazy, Suspense } from "react";
 import { NextIntlClientProvider } from "next-intl";
 import { getLocale, getTranslations } from "next-intl/server";
@@ -53,10 +54,11 @@ export default async function LocaleLayout({
       suppressHydrationWarning
       className={`${instrument.variable} ${caveat.variable}`}
     >
-      <head>
-        <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
-      </head>
       <body>
+        {/* Applies the saved theme before first paint. */}
+        <Script id="theme-init" strategy="beforeInteractive">
+          {themeInitScript}
+        </Script>
         <NextIntlClientProvider>
           <a href="#main" className="skip-link">
             {t("skipToContent")}
