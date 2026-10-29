@@ -50,13 +50,13 @@ const HomeContent = () => {
                 <div aria-hidden className="flex justify-center transition-transform duration-500 group-hover:scale-105">
                   {cell.glyph}
                 </div>
-                <div>
-                  <div className="flex items-baseline justify-between gap-4 text-sm">
-                    <span className="font-medium">{title}</span>
-                    <span className="text-right opacity-90">{note}</span>
+                <div className="flex flex-wrap items-end justify-between gap-x-4 gap-y-3">
+                  <div className="text-sm">
+                    <div className="font-medium">{title}</div>
+                    <div className="opacity-90">{note}</div>
                   </div>
                   {cell.key === "software" && (
-                    <span className="mt-4 inline-block rounded-full border border-current px-5 py-1.5 text-sm transition-colors group-hover:bg-on-mustard group-hover:text-mustard">
+                    <span className="inline-block rounded-full border border-current px-5 py-1.5 text-sm transition-colors group-hover:bg-on-mustard group-hover:text-mustard">
                       {t("cells.software.cta")}
                     </span>
                   )}
