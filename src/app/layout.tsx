@@ -51,6 +51,11 @@ export default async function LocaleLayout({
       className={caveat.variable}
     >
       <head>
+        <link
+          rel="ai-catalog"
+          href="/.well-known/ai-catalog.json"
+          type="application/ai-catalog+json"
+        />
         <AdobeFonts />
       </head>
       <body>
