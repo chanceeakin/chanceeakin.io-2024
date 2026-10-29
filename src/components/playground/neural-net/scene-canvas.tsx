@@ -1,5 +1,5 @@
 "use client";
-import { useId, type RefObject } from "react";
+import { useId, type ReactNode, type RefObject } from "react";
 import { useTranslations } from "next-intl";
 import { SIZE, type Cursor } from "@/lib/playground/neural-net/renderer";
 import type { Label } from "@/lib/playground/neural-net/types";
@@ -12,6 +12,8 @@ type Props = {
   brush: Label;
   onAdd: (x: number, y: number) => void;
   onRedraw: () => void;
+  active: boolean;
+  overlay?: ReactNode;
 };
 
 // Pointer and keyboard input for placing points; it draws nothing itself.
@@ -21,6 +23,8 @@ export const SceneCanvas = ({
   brush,
   onAdd,
   onRedraw,
+  active,
+  overlay,
 }: Props) => {
   const t = useTranslations("NeuralNet");
   const hintId = useId();
@@ -57,24 +61,27 @@ export const SceneCanvas = ({
 
   return (
     <>
-      <canvas
-        ref={canvasRef}
-        width={SIZE}
-        height={SIZE}
-        tabIndex={0}
-        role="application"
-        aria-label={t("canvasLabel", {
-          brush: brush === 1 ? t("red") : t("blue"),
-        })}
-        aria-describedby={hintId}
-        onPointerDown={onPointer}
-        onKeyDown={onKey}
-        onBlur={() => {
-          cursorRef.current.show = false;
-          onRedraw();
-        }}
-        className="aspect-square w-full touch-manipulation rounded-sm border border-line-strong bg-paper-deep focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
-      />
+      <div className="relative">
+        <canvas
+          ref={canvasRef}
+          width={SIZE}
+          height={SIZE}
+          tabIndex={active ? 0 : -1}
+          role="application"
+          aria-label={t("canvasLabel", {
+            brush: brush === 1 ? t("red") : t("blue"),
+          })}
+          aria-describedby={hintId}
+          onPointerDown={onPointer}
+          onKeyDown={onKey}
+          onBlur={() => {
+            cursorRef.current.show = false;
+            onRedraw();
+          }}
+          className="aspect-square w-full touch-manipulation rounded-sm border border-line-strong bg-paper-deep focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+        />
+        {overlay}
+      </div>
       <p id={hintId} className="mt-3 text-base text-muted">
         {t("canvasHint")}
       </p>

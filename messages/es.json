@@ -109,6 +109,11 @@
     "home": "Volver al inicio"
   },
   "NeuralNet": {
+    "start": "Cargar la demo",
+    "startNote": "Esto descarga TensorFlow.js y entrena una red en tu dispositivo, lo que puede ser pesado en equipos lentos.",
+    "loadingDemo": "Cargando TensorFlow.js…",
+    "retry": "Reintentar",
+    "createdOn": "Creado en {date}",
     "back": "Parque de juegos",
     "eyebrow": "Laboratorio",
     "title": "Parque de redes neuronales",
@@ -144,6 +149,7 @@
     "memoryNote": "Ojo en el navegador: los tensores viven en la memoria de la GPU y no los recoge el recolector de basura. El trabajo de cada fotograma va dentro de tf.tidy(), y los modelos se liberan con dispose() al reiniciar o al salir de la página. Observa cómo “Tensores activos” se mantiene estable mientras entrena."
   },
   "Playground": {
+    "createdOn": "Creado en {date}",
     "eyebrow": "Laboratorio",
     "title": "Parque de juegos",
     "intro": "Pequeños experimentos que se ejecutan por completo en tu navegador.",

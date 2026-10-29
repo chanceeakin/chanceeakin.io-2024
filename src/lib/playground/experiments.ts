@@ -8,6 +8,7 @@ export type Experiment = {
   messageKey: string; // key under Playground.experiments in messages/*.json
   icon: IconType;
   tone: string;
+  created: string; // YYYY-MM, shown as month and year
 };
 
 export const EXPERIMENTS: readonly Experiment[] = [
@@ -16,5 +17,9 @@ export const EXPERIMENTS: readonly Experiment[] = [
     messageKey: "neuralNet",
     icon: FaBrain,
     tone: "bg-moss text-on-moss",
+    created: "2026-10",
   },
 ];
+
+export const getExperiment = (slug: string) =>
+  EXPERIMENTS.find((e) => e.slug === slug);

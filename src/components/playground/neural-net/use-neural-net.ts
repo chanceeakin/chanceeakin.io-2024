@@ -21,6 +21,8 @@ import type {
 } from "@/lib/playground/neural-net/types";
 import type * as TF from "@tensorflow/tfjs";
 
+export type LoadStatus = "idle" | "loading" | "ready" | "error";
+
 const STEPS_PER_FRAME = 2;
 const MANUAL_STEP = 10;
 const INITIAL_DATASET: DatasetName = "moons";
@@ -32,7 +34,8 @@ const clamp = (v: number) => Math.max(-1, Math.min(1, v));
 // lib/playground/neural-net; components only see this hook's return value.
 export const useNeuralNet = () => {
   const [trainer, setTrainer] = useState<Trainer | null>(null);
-  const [loadError, setLoadError] = useState(false);
+  // tf.js is heavy, so nothing loads until the visitor asks for it.
+  const [status, setStatus] = useState<LoadStatus>("idle");
 
   const [dataset, setDataset] = useState<DatasetName>(INITIAL_DATASET);
   const [config, setConfig] = useState<ModelConfig>({
@@ -77,8 +80,9 @@ export const useNeuralNet = () => {
     });
   }, [trainer]);
 
-  // Load tf.js lazily.
+  // Load tf.js on demand.
   useEffect(() => {
+    if (status !== "loading") return;
     let cancelled = false;
     loadTf().then(
       (tf) => {
@@ -89,13 +93,14 @@ export const useNeuralNet = () => {
           setPlaying(true);
         }
         setTrainer(new Trainer(tf));
+        setStatus("ready");
       },
-      () => !cancelled && setLoadError(true),
+      () => !cancelled && setStatus("error"),
     );
     return () => {
       cancelled = true;
     };
-  }, []);
+  }, [status]);
 
   // Free every tensor the trainer holds when the page goes away.
   useEffect(() => () => trainer?.release(), [trainer]);
@@ -178,8 +183,10 @@ export const useNeuralNet = () => {
     setPoints((prev) => [...prev, { x: clamp(x), y: clamp(y), label: brush }]);
 
   return {
+    status,
     ready: trainer !== null,
-    loadError,
+    start: () =>
+      setStatus((s) => (s === "idle" || s === "error" ? "loading" : s)),
     backend: trainer?.backend ?? "",
     stats,
     pointCount: points.length,

@@ -100,6 +100,11 @@
     "home": "Back to home"
   },
   "NeuralNet": {
+    "start": "Load the demo",
+    "startNote": "This downloads TensorFlow.js and trains a network on your device, which can be heavy on slower machines.",
+    "loadingDemo": "Loading TensorFlow.js…",
+    "retry": "Try again",
+    "createdOn": "Created {date}",
     "back": "Playground",
     "eyebrow": "Lab",
     "title": "Neural Net Playground",
@@ -135,6 +140,7 @@
     "memoryNote": "Browser gotcha: tensors live in GPU memory and aren't garbage collected. Per-frame work is wrapped in tf.tidy(), and models are dispose()d on reset or when you leave the page. Watch “Live tensors” stay flat while it trains."
   },
   "Playground": {
+    "createdOn": "Created {date}",
     "eyebrow": "Lab",
     "title": "Playground",
     "intro": "Small experiments that run entirely in your browser.",
