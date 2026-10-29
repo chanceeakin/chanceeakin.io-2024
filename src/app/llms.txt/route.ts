@@ -26,6 +26,8 @@ The site is a small Next.js app: a handful of pages plus a blog of long-form pos
 - [Home](${SITE_URL}/): Introduction and the things Chance cares about
 - [About](${SITE_URL}/about): Work, life, and education
 - [Links](${SITE_URL}/links): Instagram, LinkedIn, and GitHub profiles
+- [Playground](${SITE_URL}/playground): Small interactive experiments that run in the browser
+- [Neural Net Playground](${SITE_URL}/playground/neural-net): A tiny neural network trained live with TensorFlow.js
 - [Blog](${SITE_URL}/blog): Index of all posts, newest first
 
 ## Blog posts

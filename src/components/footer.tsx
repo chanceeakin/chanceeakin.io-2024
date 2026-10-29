@@ -10,12 +10,19 @@ export default function Footer() {
     <footer className="mt-24 border-t border-line">
       <div className="mx-auto flex max-w-6xl flex-col justify-between gap-2 px-6 pt-8 pb-24 text-base sm:pl-24 text-muted sm:flex-row">
         <span>{t("made", { year: new Date().getFullYear() })}</span>
-        {/* Pointless to link to the page you're already on. */}
-        {pathname !== "/links" && (
-          <Link href="/links" className="hover:text-accent">
-            {t("elsewhere")}
-          </Link>
-        )}
+        <div className="flex flex-wrap items-baseline gap-x-6 gap-y-1">
+          {/* Pointless to link to the page you're already on. */}
+          {pathname !== "/memorial" && (
+            <Link href="/memorial" className="text-sm italic hover:text-accent">
+              {t("mischief")}
+            </Link>
+          )}
+          {pathname !== "/links" && (
+            <Link href="/links" className="hover:text-accent">
+              {t("elsewhere")}
+            </Link>
+          )}
+        </div>
       </div>
     </footer>
   );

@@ -18,6 +18,7 @@
     "@mdx-js/react": "^3.1.1",
     "@next/bundle-analyzer": "^16.4.2",
     "@next/mdx": "^16.4.2",
+    "@tensorflow/tfjs": "^4.22.0",
     "@types/mdx": "^2.0.14",
     "bright": "^1.0.0",
     "date-fns": "^4.4.0",

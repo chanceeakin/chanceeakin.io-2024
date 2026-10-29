@@ -15,7 +15,8 @@
     "menu": "Menú",
     "close": "Cerrar",
     "toggleMenu": "Abrir o cerrar el menú de navegación",
-    "homeLabel": "Chance Eakin, inicio"
+    "homeLabel": "Chance Eakin, inicio",
+    "playground": "Laboratorio"
   },
   "Settings": {
     "theme": "Tema",
@@ -29,6 +30,7 @@
   },
   "Footer": {
     "made": "© {year} Chance Eakin — hecho en Austin.",
+    "mischief": "Pase lo que pase, no hagas clic aquí.",
     "elsewhere": "Encuéntrame en otros sitios →"
   },
   "Home": {
@@ -105,5 +107,51 @@
   "NotFound": {
     "title": "Página no encontrada",
     "home": "Volver al inicio"
+  },
+  "NeuralNet": {
+    "back": "Parque de juegos",
+    "eyebrow": "Laboratorio",
+    "title": "Parque de redes neuronales",
+    "intro": "Una red neuronal diminuta aprende a separar rojo de azul, en vivo en tu navegador con TensorFlow.js. Mira cómo se curva la frontera de color mientras entrena.",
+    "canvasLabel": "Datos de entrenamiento y frontera de decisión. Usa las flechas para mover un cursor y Enter para añadir un punto {brush}.",
+    "canvasHint": "Haz clic o toca para añadir un punto de la clase elegida, o usa las flechas y Enter. El modelo sigue entrenando con tus puntos.",
+    "brush": "Añadir puntos",
+    "red": "Rojo",
+    "blue": "Azul",
+    "dataset": "Conjunto de datos",
+    "datasets": {
+      "blobs": "Dos manchas",
+      "moons": "Dos lunas",
+      "circles": "Círculos concéntricos",
+      "xor": "XOR"
+    },
+    "layers": "Capas ocultas",
+    "neurons": "Neuronas por capa",
+    "learningRate": "Tasa de aprendizaje",
+    "activation": "Activación",
+    "play": "Reproducir",
+    "pause": "Pausar",
+    "step": "Paso ×10",
+    "reset": "Reiniciar modelo",
+    "epoch": "Época",
+    "loss": "Pérdida",
+    "backend": "Motor",
+    "tensors": "Tensores activos",
+    "loading": "Cargando…",
+    "loadError": "No se pudo cargar TensorFlow.js en este navegador.",
+    "shapesTitle": "Formas de los tensores",
+    "whatIsTensor": "Un tensor es simplemente una cuadrícula de números con una forma. Aquí, los puntos son un tensor [N, 2] (una fila x, y por punto) y sus colores son un tensor [N, 1]. El fondo es una sola pasada de la red sobre un tensor [2500, 2] de coordenadas de la cuadrícula, todo a la vez. Los pesos de cada capa son variables, el único tipo de tensor que puede cambiar, y así es como se entrena.",
+    "memoryNote": "Ojo en el navegador: los tensores viven en la memoria de la GPU y no los recoge el recolector de basura. El trabajo de cada fotograma va dentro de tf.tidy(), y los modelos se liberan con dispose() al reiniciar o al salir de la página. Observa cómo “Tensores activos” se mantiene estable mientras entrena."
+  },
+  "Playground": {
+    "eyebrow": "Laboratorio",
+    "title": "Parque de juegos",
+    "intro": "Pequeños experimentos que se ejecutan por completo en tu navegador.",
+    "experiments": {
+      "neuralNet": {
+        "title": "Parque de redes neuronales",
+        "description": "Mira cómo una red diminuta aprende a separar rojo de azul, en vivo, con TensorFlow.js."
+      }
+    }
   }
 }

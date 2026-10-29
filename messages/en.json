@@ -15,7 +15,8 @@
     "menu": "Menu",
     "close": "Close",
     "toggleMenu": "Toggle navigation menu",
-    "homeLabel": "Chance Eakin, home"
+    "homeLabel": "Chance Eakin, home",
+    "playground": "Playground"
   },
   "Settings": {
     "theme": "Theme",
@@ -29,6 +30,7 @@
   },
   "Footer": {
     "made": "© {year} Chance Eakin — made in Austin.",
+    "mischief": "Whatever you do, don’t click this.",
     "elsewhere": "Find me elsewhere →"
   },
   "Home": {
@@ -96,5 +98,51 @@
   "NotFound": {
     "title": "Page not found",
     "home": "Back to home"
+  },
+  "NeuralNet": {
+    "back": "Playground",
+    "eyebrow": "Lab",
+    "title": "Neural Net Playground",
+    "intro": "A tiny neural network learning to separate red from blue, live in your browser with TensorFlow.js. Watch the colored boundary bend as it trains.",
+    "canvasLabel": "Training data and decision boundary. Press arrow keys to move a cursor and Enter to add a {brush} point.",
+    "canvasHint": "Click or tap to add a point of the selected class, or use the arrow keys and Enter. The model keeps training on your points.",
+    "brush": "Add points",
+    "red": "Red",
+    "blue": "Blue",
+    "dataset": "Dataset",
+    "datasets": {
+      "blobs": "Two blobs",
+      "moons": "Two moons",
+      "circles": "Concentric circles",
+      "xor": "XOR"
+    },
+    "layers": "Hidden layers",
+    "neurons": "Neurons per layer",
+    "learningRate": "Learning rate",
+    "activation": "Activation",
+    "play": "Play",
+    "pause": "Pause",
+    "step": "Step ×10",
+    "reset": "Reset model",
+    "epoch": "Epoch",
+    "loss": "Loss",
+    "backend": "Backend",
+    "tensors": "Live tensors",
+    "loading": "Loading…",
+    "loadError": "TensorFlow.js could not be loaded in this browser.",
+    "shapesTitle": "Tensor shapes",
+    "whatIsTensor": "A tensor is just a grid of numbers with a shape. Here, the points are a [N, 2] tensor (one row of x, y per point) and their colors are a [N, 1] tensor. The background is one pass of the network over a [2500, 2] tensor of grid coordinates, all at once. Each layer's weights are variables, the one kind of tensor that can change, which is how training happens.",
+    "memoryNote": "Browser gotcha: tensors live in GPU memory and aren't garbage collected. Per-frame work is wrapped in tf.tidy(), and models are dispose()d on reset or when you leave the page. Watch “Live tensors” stay flat while it trains."
+  },
+  "Playground": {
+    "eyebrow": "Lab",
+    "title": "Playground",
+    "intro": "Small experiments that run entirely in your browser.",
+    "experiments": {
+      "neuralNet": {
+        "title": "Neural Net Playground",
+        "description": "Watch a tiny network learn to separate red from blue, live, with TensorFlow.js."
+      }
+    }
   }
 }
