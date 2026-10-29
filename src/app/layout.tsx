@@ -7,6 +7,7 @@ import { getLocale, getTranslations } from "next-intl/server";
 import "./globals.css";
 import Nav from "@/components/nav";
 import Footer from "@/components/footer";
+import AdobeFonts from "@/components/adobe-fonts";
 import SettingsFab from "@/components/settings-fab";
 import { themeInitScript } from "@/lib/theme";
 
@@ -49,18 +50,14 @@ export default async function LocaleLayout({
       suppressHydrationWarning
       className={caveat.variable}
     >
+      <head>
+        <AdobeFonts />
+      </head>
       <body>
         {/* Applies the saved theme before first paint. */}
         <Script id="theme-init" strategy="beforeInteractive">
           {themeInitScript}
         </Script>
-        {/* Adobe Fonts web project (Futura PT). React hoists these into <head>. */}
-        <link rel="preconnect" href="https://use.typekit.net" crossOrigin="" />
-        <link
-          rel="stylesheet"
-          href="https://use.typekit.net/iyi4qzl.css"
-          precedence="default"
-        />
         <NextIntlClientProvider>
           <a href="#main" className="skip-link">
             {t("skipToContent")}
