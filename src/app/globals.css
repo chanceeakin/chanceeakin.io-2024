@@ -165,8 +165,12 @@
   to { opacity: 1; transform: translateY(0); }
 }
 
-.page-enter {
-  animation: rise 0.45s ease-out both;
+/* Entrance fade only on larger screens: on phones the opacity-0 start state
+   delays the first meaningful paint and hurts LCP. */
+@media (min-width: 48rem) {
+  .page-enter {
+    animation: rise 0.45s ease-out both;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
