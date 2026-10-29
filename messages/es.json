@@ -34,28 +34,53 @@
   "Home": {
     "eyebrow": "Ingeniero de software — Austin, Texas",
     "hello": "Hola, soy Chance Eakin.",
-    "tagline": "Escribo software hecho para durar.",
-    "intro": "Casi una década construyendo en distintas industrias y arquitecturas, y todavía disfrutando de construir y aprender.",
+    "tagline": "Construyo software.",
+    "intro": "Una década construyendo en distintas industrias y arquitecturas, y todavía disfrutando de construir y aprender.",
     "note": "algunas cosas que me importan ↓",
     "gridLabel": "Cosas que me importan",
     "cells": {
-      "software": { "title": "Software", "note": "Robótica, pagos, animación, rascacielos", "cta": "Encuentra el enlace →" },
-      "austin": { "title": "Austin", "note": "Mi hogar" },
-      "music": { "title": "Música", "note": "DMA, canto y performance" },
-      "writing": { "title": "Escritura", "note": "Notas desde el taller" },
-      "fishing": { "title": "Pesca con mosca", "note": "Colorado, idealmente" }
+      "software": {
+        "title": "Software",
+        "note": "Robótica, animaciones, rascacielos",
+        "cta": "Más sobre mí →"
+      },
+      "austin": {
+        "title": "Austin",
+        "note": "Mi hogar"
+      },
+      "music": {
+        "title": "Música",
+        "note": "Cantante de formación clásica"
+      },
+      "writing": {
+        "title": "Escritura",
+        "note": "Mi blog"
+      },
+      "fishing": {
+        "title": "Pesca con mosca",
+        "note": "Mi pasión, tanto en agua dulce como salada"
+      }
     },
-    "bandTitle": "Hecho con intención,",
+    "bandTitle": "Hecho con amor,",
     "bandTitleSoft": "desde cero.",
-    "bandBody": "Vivo en Austin, construyo cosas para la web y más allá, y tengo un doctorado en música: una formación que aún moldea cómo pienso sobre el oficio, la práctica y la interpretación."
+    "bandBody": "Vivo en Austin, construyo cosas para la web y más allá, y vengo de una formación en música clásica: todavía moldea cómo pienso sobre el oficio, la práctica y la interpretación."
   },
   "About": {
     "eyebrow": "Acerca de",
     "title": "Ingeniero, músico,",
     "titleAccent": "artesano.",
-    "work": { "title": "Trabajo", "body": "Soy ingeniero de software con casi una década de experiencia en una gran variedad de industrias y retos de arquitectura. Mi software da soporte a robots, transacciones financieras, animaciones por todo internet y rascacielos." },
-    "life": { "title": "Vida", "body": "Además del software, me mantengo activo con mis pasatiempos y mi familia. Krav maga, pesca con mosca, arquitectura en la nube y vino son mis pasiones actuales. A mi esposa y a mí nos encanta viajar; Colorado ocupa un lugar especial en nuestro corazón." },
-    "study": { "title": "Estudios", "body": "Mi formación académica es en música: tengo un doctorado (DMA) de la Universidad de Texas en Austin, donde investigué la psicología del rendimiento aplicada a la pedagogía vocal, Schubert y Mozart. Otros títulos: MM en canto, Universidad de Cincinnati, y BM en canto, cum laude, Universidad de Baylor." },
+    "work": {
+      "title": "Trabajo",
+      "body": "Soy ingeniero de software con una década de experiencia en una gran variedad de industrias y retos de arquitectura. Mi software da soporte a robots, transacciones financieras, animaciones por todo internet y la construcción de rascacielos."
+    },
+    "life": {
+      "title": "Vida",
+      "body": "Además del software, me mantengo activo con mis pasatiempos y mi familia: pesca con mosca, arquitectura en la nube, vino y mis perros. A mi esposa y a mí nos encanta viajar; Colorado ocupa un lugar especial en nuestro corazón."
+    },
+    "study": {
+      "title": "Estudios",
+      "body": "Formación académica en música: recibí un doctorado (DMA) de la Universidad de Texas en Austin, donde mi investigación fue sobre psicología del rendimiento aplicada a la pedagogía vocal. También soy un orgulloso exalumno de la Universidad de Cincinnati y de la Universidad de Baylor."
+    },
     "cta": "Enlaces relevantes →"
   },
   "Links": {
