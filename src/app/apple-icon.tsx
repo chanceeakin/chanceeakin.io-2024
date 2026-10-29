@@ -3,7 +3,7 @@ import { ImageResponse } from "next/og";
 export const size = { width: 180, height: 180 };
 export const contentType = "image/png";
 
-// Same mark as icon.svg: a mustard "C" and cream dot on moss.
+// Same mark as icon.svg: a mustard "C" on moss.
 export default function AppleIcon() {
   return new ImageResponse(
     (
@@ -16,7 +16,6 @@ export default function AppleIcon() {
             strokeWidth="5"
             strokeLinecap="round"
           />
-          <circle cx="16" cy="16" r="2.9" fill="#fdf1dc" />
         </svg>
       </div>
     ),
