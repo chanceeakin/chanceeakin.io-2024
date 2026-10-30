@@ -1,0 +1,48 @@
+#!/usr/bin/env sh
+# Blocks a push if the Rust/WASM module doesn't build, or if the committed
+# public/wasm/boids.wasm is stale. Runs locally, so CI (Amplify) never needs
+# a Rust toolchain. Only does work when the push touches the wasm sources.
+set -eu
+
+zero=0000000000000000000000000000000000000000
+relevant='^(rust/|public/wasm/|scripts/build-wasm\.sh$)'
+needs_build=0
+
+while read -r _ local_sha _ remote_sha; do
+  [ "$local_sha" = "$zero" ] && continue # branch deletion
+  if [ "$remote_sha" = "$zero" ]; then
+    base=$(git merge-base "$local_sha" origin/main 2>/dev/null || true)
+  else
+    base=$remote_sha
+  fi
+  # No usable base (new repo, unfetched remote): be safe and build.
+  if [ -z "$base" ] || ! files=$(git diff --name-only "$base" "$local_sha" 2>/dev/null); then
+    needs_build=1
+    break
+  fi
+  if printf '%s\n' "$files" | grep -Eq "$relevant"; then
+    needs_build=1
+    break
+  fi
+done
+
+[ "$needs_build" = 1 ] || exit 0
+
+root=$(git rev-parse --show-toplevel)
+if ! command -v cargo >/dev/null 2>&1; then
+  echo "pre-push: cargo not found; install Rust (rustup) to push wasm changes." >&2
+  exit 1
+fi
+
+echo "pre-push: building Rust/WASM..."
+if ! "$root/scripts/build-wasm.sh" >/dev/null; then
+  echo "pre-push: Rust build failed; push aborted." >&2
+  exit 1
+fi
+
+if ! git diff --quiet -- "$root/public/wasm"; then
+  echo "pre-push: public/wasm/boids.wasm differs from what is committed." >&2
+  echo "          Commit the rebuilt file, then push again." >&2
+  exit 1
+fi
+echo "pre-push: wasm OK."

@@ -148,6 +148,37 @@
     "whatIsTensor": "Un tensor es simplemente una cuadrícula de números con una forma. Aquí, los puntos son un tensor [N, 2] (una fila x, y por punto) y sus colores son un tensor [N, 1]. El fondo es una sola pasada de la red sobre un tensor [2500, 2] de coordenadas de la cuadrícula, todo a la vez. Los pesos de cada capa son variables, el único tipo de tensor que puede cambiar, y así es como se entrena.",
     "memoryNote": "Ojo en el navegador: los tensores viven en la memoria de la GPU y no los recoge el recolector de basura. El trabajo de cada fotograma va dentro de tf.tidy(), y los modelos se liberan con dispose() al reiniciar o al salir de la página. Observa cómo “Tensores activos” se mantiene estable mientras entrena."
   },
+  "Boids": {
+    "createdOn": "Creado en {date}",
+    "back": "Parque de juegos",
+    "title": "Boids en Rust",
+    "intro": "Una bandada simulada con Rust compilado a WebAssembly. Ajusta las tres reglas, arrastra para guiar a la bandada y cambia al port de JavaScript para ver cuánto vale la aceleración.",
+    "canvasLabel": "Una bandada de pequeños triángulos que se mueven y giran juntos.",
+    "canvasHint": "Mantén presionado sobre la bandada para atraerla y teñirla de verde, o mantén Shift mientras presionas para espantarla.",
+    "loading": "Cargando WebAssembly…",
+    "loadError": "No se pudo cargar WebAssembly en este navegador.",
+    "engine": "Motor",
+    "engines": {
+      "rust": "Rust (WebAssembly)",
+      "js": "JavaScript"
+    },
+    "count": "Boids",
+    "boids": "Boids",
+    "stepTime": "Tiempo por paso",
+    "fps": "Cuadros por segundo",
+    "params": {
+      "separation": "Separación",
+      "alignment": "Alineación",
+      "cohesion": "Cohesión",
+      "perception": "Radio de percepción",
+      "maxSpeed": "Velocidad máxima"
+    },
+    "play": "Reproducir",
+    "pause": "Pausar",
+    "reset": "Restablecer reglas",
+    "howItWorks": "Cada boid sigue tres reglas: alejarse de los vecinos cercanos (separación), igualar el rumbo de los cercanos (alineación) y acercarse a su centro (cohesión). La bandada surge solo de eso. Para no comparar cada boid con todos los demás, se ordenan en una cuadrícula en cada cuadro y solo se revisan las 3×3 celdas vecinas.",
+    "whyWasm": "La simulación son unas 250 líneas de Rust sin dependencias. JavaScript nunca copia los datos: lee x, y y la velocidad directamente de la memoria lineal de WebAssembly y los dibuja. El motor de JavaScript es un port línea por línea del mismo algoritmo, así que “Tiempo por paso” compara cosas equivalentes. Prueba 16.000 boids en cada uno."
+  },
   "Playground": {
     "createdOn": "Creado en {date}",
     "eyebrow": "Laboratorio",
@@ -157,6 +188,10 @@
       "neuralNet": {
         "title": "Parque de redes neuronales",
         "description": "Mira cómo una red diminuta aprende a separar rojo de azul, en vivo, con TensorFlow.js."
+      },
+      "boids": {
+        "title": "Boids en Rust",
+        "description": "Miles de boids simulados con Rust en WebAssembly, con un port de JavaScript para comparar."
       }
     }
   }

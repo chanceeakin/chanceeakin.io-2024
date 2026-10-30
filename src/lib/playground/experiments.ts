@@ -1,5 +1,5 @@
 import type { IconType } from "react-icons";
-import { FaBrain } from "react-icons/fa";
+import { FaBrain, FaFeatherAlt } from "react-icons/fa";
 
 // The playground menu, sitemap and llms.txt are all driven by this list:
 // adding an experiment is one entry here, a route, and its messages.
@@ -17,6 +17,13 @@ export const EXPERIMENTS: readonly Experiment[] = [
     messageKey: "neuralNet",
     icon: FaBrain,
     tone: "bg-moss text-on-moss",
+    created: "2026-10",
+  },
+  {
+    slug: "boids",
+    messageKey: "boids",
+    icon: FaFeatherAlt,
+    tone: "bg-mustard text-on-mustard",
     created: "2026-10",
   },
 ];

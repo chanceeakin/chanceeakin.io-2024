@@ -139,6 +139,37 @@
     "whatIsTensor": "A tensor is just a grid of numbers with a shape. Here, the points are a [N, 2] tensor (one row of x, y per point) and their colors are a [N, 1] tensor. The background is one pass of the network over a [2500, 2] tensor of grid coordinates, all at once. Each layer's weights are variables, the one kind of tensor that can change, which is how training happens.",
     "memoryNote": "Browser gotcha: tensors live in GPU memory and aren't garbage collected. Per-frame work is wrapped in tf.tidy(), and models are dispose()d on reset or when you leave the page. Watch “Live tensors” stay flat while it trains."
   },
+  "Boids": {
+    "createdOn": "Created {date}",
+    "back": "Playground",
+    "title": "Rust Boids",
+    "intro": "A flock simulated by Rust compiled to WebAssembly. Tune the three rules, drag to herd the flock, and switch to the JavaScript port to see what the speedup is worth.",
+    "canvasLabel": "A flock of small triangles moving and turning together.",
+    "canvasHint": "Press and hold on the flock to pull it toward you and turn it green, or hold Shift while pressing to scare it away.",
+    "loading": "Loading WebAssembly…",
+    "loadError": "WebAssembly could not be loaded in this browser.",
+    "engine": "Engine",
+    "engines": {
+      "rust": "Rust (WebAssembly)",
+      "js": "JavaScript"
+    },
+    "count": "Boids",
+    "boids": "Boids",
+    "stepTime": "Step time",
+    "fps": "Frames per second",
+    "params": {
+      "separation": "Separation",
+      "alignment": "Alignment",
+      "cohesion": "Cohesion",
+      "perception": "Perception radius",
+      "maxSpeed": "Max speed"
+    },
+    "play": "Play",
+    "pause": "Pause",
+    "reset": "Reset rules",
+    "howItWorks": "Each boid follows three rules: steer away from close neighbors (separation), match the heading of nearby ones (alignment), and drift toward their center (cohesion). Flocking emerges from nothing else. To avoid comparing every boid with every other, they are sorted into a grid each frame so only the 3×3 surrounding cells are checked.",
+    "whyWasm": "The simulation is about 250 lines of dependency-free Rust. JavaScript never copies boid data: it reads x, y and velocity straight out of WebAssembly's linear memory and draws them. The JavaScript engine is a line-for-line port of the same algorithm, so “Step time” compares like with like. Try 16,000 boids on each."
+  },
   "Playground": {
     "createdOn": "Created {date}",
     "eyebrow": "Lab",
@@ -148,6 +179,10 @@
       "neuralNet": {
         "title": "Neural Net Playground",
         "description": "Watch a tiny network learn to separate red from blue, live, with TensorFlow.js."
+      },
+      "boids": {
+        "title": "Rust Boids",
+        "description": "Thousands of flocking boids simulated by Rust in WebAssembly, with a JavaScript port to compare."
       }
     }
   }
