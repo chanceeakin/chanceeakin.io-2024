@@ -1,23 +1,43 @@
-import { WORLD_H, WORLD_W, type Params, type PointerMode, type Sim } from "./types";
+import { drawBoids, drawPredators } from "./renderer";
+import {
+  WORLD_H,
+  WORLD_W,
+  type Mode,
+  type Params,
+  type PointerMode,
+  type Sim,
+} from "./types";
 
 // A line-for-line port of rust/boids/src/lib.rs, so the Rust/JS toggle
 // compares the same algorithm rather than two different simulations.
 
 const MIN_SPEED_RATIO = 0.35;
 const POINTER_RADIUS = 160;
+const FEAR_RADIUS = 110;
+const CHASE_RADIUS = 320;
+const CATCH_RADIUS = 7;
 
 const wrapDelta = (d: number, size: number) =>
   d > size * 0.5 ? d - size : d < -size * 0.5 ? d + size : d;
 
 const mod = (a: number, n: number) => ((a % n) + n) % n;
 
-export const createJsSim = (count: number, initial: Params, seed: number): Sim => {
+export const createJsSim = (
+  mode: Mode,
+  count: number,
+  initial: Params,
+  seed: number,
+): Sim => {
   const w = WORLD_W;
   const h = WORLD_H;
   const state = new Float32Array(count * 4);
   const heat = new Float32Array(count);
   let p = initial;
   let pointer: [number, number, PointerMode] = [0, 0, 0];
+  // Predators: [x, y, vx, vy] each, plus a rest timer after a catch.
+  let pred = new Float32Array(0);
+  let predRest = new Float32Array(0);
+  let eaten = 0;
 
   let rng = Math.max(seed, 1) >>> 0;
   const rand = () => {
@@ -53,6 +73,93 @@ export const createJsSim = (count: number, initial: Params, seed: number): Sim =
     cellStart = new Uint32Array(cols * rows + 1);
   };
   resizeGrid();
+
+  const spawn = (i: number) => {
+    const angle = rand() * Math.PI * 2;
+    const speed = 40 + rand() * 60;
+    state[i * 4] = rand() * w;
+    state[i * 4 + 1] = rand() * h;
+    state[i * 4 + 2] = Math.cos(angle) * speed;
+    state[i * 4 + 3] = Math.sin(angle) * speed;
+    heat[i] = 0;
+  };
+
+  const setPredators = (n: number) => {
+    const next = new Float32Array(n * 4);
+    const rest = new Float32Array(n);
+    next.set(pred.subarray(0, Math.min(pred.length, n * 4)));
+    rest.set(predRest.subarray(0, Math.min(predRest.length, n)));
+    for (let k = predRest.length; k < n; k++) {
+      const angle = rand() * Math.PI * 2;
+      next[k * 4] = rand() * w;
+      next[k * 4 + 1] = rand() * h;
+      next[k * 4 + 2] = Math.cos(angle) * p.maxSpeed;
+      next[k * 4 + 3] = Math.sin(angle) * p.maxSpeed;
+    }
+    pred = next;
+    predRest = rest;
+  };
+
+  // Each predator chases the nearest boid in range, eats it on contact (the
+  // boid respawns elsewhere) and then rests briefly.
+  const stepPredators = (dt: number) => {
+    const top = p.maxSpeed * 1.5;
+    for (let k = 0; k < predRest.length; k++) {
+      const px = pred[k * 4];
+      const py = pred[k * 4 + 1];
+      let vx = pred[k * 4 + 2];
+      let vy = pred[k * 4 + 3];
+
+      if (predRest[k] > 0) {
+        predRest[k] -= dt;
+        const damp = Math.max(1 - 3 * dt, 0);
+        vx *= damp;
+        vy *= damp;
+      } else {
+        let best = CHASE_RADIUS * CHASE_RADIUS;
+        let target = -1;
+        let tdx = 0;
+        let tdy = 0;
+        for (let i = 0; i < count; i++) {
+          const dx = wrapDelta(state[i * 4] - px, w);
+          const dy = wrapDelta(state[i * 4 + 1] - py, h);
+          const d2 = dx * dx + dy * dy;
+          if (d2 < best) {
+            best = d2;
+            target = i;
+            tdx = dx;
+            tdy = dy;
+          }
+        }
+        if (target >= 0) {
+          const d = Math.max(Math.sqrt(best), 1e-3);
+          if (d < CATCH_RADIUS) {
+            spawn(target);
+            eaten++;
+            predRest[k] = 0.7;
+          } else {
+            const blend = Math.min(5 * dt, 1);
+            vx += ((tdx / d) * top - vx) * blend;
+            vy += ((tdy / d) * top - vy) * blend;
+          }
+        }
+        // Keep drifting when nothing is in range.
+        const speed = Math.hypot(vx, vy);
+        if (speed < top * 0.5 && speed > 1e-3) {
+          vx *= (top * 0.5) / speed;
+          vy *= (top * 0.5) / speed;
+        }
+      }
+
+      pred[k * 4] = mod(px + vx * dt, w);
+      pred[k * 4 + 1] = mod(py + vy * dt, h);
+      pred[k * 4 + 2] = vx;
+      pred[k * 4 + 3] = vy;
+    }
+  };
+
+  const applyParams = () => setPredators(mode === "predators" ? p.predators : 0);
+  applyParams();
 
   const cellIndex = (x: number, y: number) =>
     Math.min(Math.floor(y / cell), rows - 1) * cols +
@@ -132,6 +239,20 @@ export const createJsSim = (count: number, initial: Params, seed: number): Sim =
         }
       }
 
+      let fear = 0;
+      for (let k = 0; k < predRest.length; k++) {
+        const qx = wrapDelta(pred[k * 4] - x, w);
+        const qy = wrapDelta(pred[k * 4 + 1] - y, h);
+        const d = Math.hypot(qx, qy);
+        if (d < FEAR_RADIUS && d > 1e-3) {
+          const f = 1 - d / FEAR_RADIUS;
+          fear = Math.max(fear, f);
+          const k2 = (1800 * f) / d;
+          ax -= qx * k2;
+          ay -= qy * k2;
+        }
+      }
+
       let hi = heat[i];
       if (n > 0) hi += (hsum / n - hi) * Math.min(3 * dt, 1);
       hi += (1 - hi) * Math.min(8 * dt, 1) * touch;
@@ -141,9 +262,10 @@ export const createJsSim = (count: number, initial: Params, seed: number): Sim =
       let nvy = vy + ay * dt;
       const speed = Math.hypot(nvx, nvy);
       const min = p.maxSpeed * MIN_SPEED_RATIO;
-      if (speed > p.maxSpeed) {
-        nvx *= p.maxSpeed / speed;
-        nvy *= p.maxSpeed / speed;
+      const cap = p.maxSpeed * (1 + 0.35 * fear);
+      if (speed > cap) {
+        nvx *= cap / speed;
+        nvy *= cap / speed;
       } else if (speed < min && speed > 1e-4) {
         nvx *= min / speed;
         nvy *= min / speed;
@@ -156,16 +278,22 @@ export const createJsSim = (count: number, initial: Params, seed: number): Sim =
       state[i * 4] = mod(state[i * 4] + state[i * 4 + 2] * dt, w);
       state[i * 4 + 1] = mod(state[i * 4 + 1] + state[i * 4 + 3] * dt, h);
     }
+
+    stepPredators(dt);
   };
 
   return {
-    state: () => state,
-    heat: () => heat,
     step,
+    draw: (ctx, theme) => {
+      drawBoids(ctx, state, heat, theme.bg, theme.ramp);
+      if (predRest.length > 0) drawPredators(ctx, pred, theme);
+    },
+    eaten: () => eaten,
     setParams: (next) => {
       const rebuild = next.perception !== p.perception;
       p = next;
       if (rebuild) resizeGrid();
+      applyParams();
     },
     setPointer: (x, y, mode) => {
       pointer = [x, y, mode];

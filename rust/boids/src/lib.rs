@@ -4,8 +4,13 @@
 //! is O(n) instead of O(n²). JS reads boid state straight out of linear
 //! memory: `boids_state` returns a pointer to `[x, y, vx, vy]` per boid.
 
+mod slime;
+
 const MIN_SPEED_RATIO: f32 = 0.35;
 const POINTER_RADIUS: f32 = 160.0;
+const FEAR_RADIUS: f32 = 110.0;
+const CHASE_RADIUS: f32 = 320.0;
+const CATCH_RADIUS: f32 = 7.0;
 
 #[derive(Clone, Copy)]
 struct Params {
@@ -21,6 +26,11 @@ pub struct World {
     w: f32,
     h: f32,
     state: Vec<f32>,
+    // Predators: [x, y, vx, vy] each, plus a rest timer after a catch.
+    pred: Vec<f32>,
+    pred_rest: Vec<f32>,
+    eaten: u32,
+    rng: Rng,
     // 0..1 per boid: raised by the pointer, shared with neighbours, fades.
     heat: Vec<f32>,
     cols: usize,
@@ -32,10 +42,10 @@ pub struct World {
     pointer: (f32, f32, u32),
 }
 
-struct Rng(u32);
+pub(crate) struct Rng(pub(crate) u32);
 
 impl Rng {
-    fn next(&mut self) -> f32 {
+    pub(crate) fn next(&mut self) -> f32 {
         // xorshift32, mapped to [0, 1)
         self.0 ^= self.0 << 13;
         self.0 ^= self.0 >> 17;
@@ -63,6 +73,10 @@ impl World {
             w,
             h,
             state,
+            pred: Vec::new(),
+            pred_rest: Vec::new(),
+            eaten: 0,
+            rng,
             heat: vec![0.0; n],
             cols: 3,
             rows: 3,
@@ -201,6 +215,20 @@ impl World {
                 }
             }
 
+            let mut fear = 0.0f32;
+            for k in 0..self.pred_rest.len() {
+                let qx = self.wrap_delta(self.pred[k * 4] - x, self.w);
+                let qy = self.wrap_delta(self.pred[k * 4 + 1] - y, self.h);
+                let d = (qx * qx + qy * qy).sqrt();
+                if d < FEAR_RADIUS && d > 1e-3 {
+                    let f = 1.0 - d / FEAR_RADIUS;
+                    fear = fear.max(f);
+                    let k2 = 1800.0 * f / d;
+                    ax -= qx * k2;
+                    ay -= qy * k2;
+                }
+            }
+
             let mut heat = self.heat[i];
             if count > 0.0 {
                 heat += (hsum / count - heat) * (3.0 * dt).min(1.0);
@@ -211,8 +239,9 @@ impl World {
             let (mut nvx, mut nvy) = (vx + ax * dt, vy + ay * dt);
             let speed = (nvx * nvx + nvy * nvy).sqrt();
             let min = p.max_speed * MIN_SPEED_RATIO;
-            if speed > p.max_speed {
-                let s = p.max_speed / speed;
+            let cap = p.max_speed * (1.0 + 0.35 * fear);
+            if speed > cap {
+                let s = cap / speed;
                 nvx *= s;
                 nvy *= s;
             } else if speed < min && speed > 1e-4 {
@@ -228,6 +257,82 @@ impl World {
             let s = &mut self.state[i * 4..i * 4 + 4];
             s[0] = (s[0] + s[2] * dt).rem_euclid(self.w);
             s[1] = (s[1] + s[3] * dt).rem_euclid(self.h);
+        }
+
+        self.step_predators(dt);
+    }
+
+    fn spawn(&mut self, i: usize) {
+        let angle = self.rng.next() * std::f32::consts::TAU;
+        let speed = 40.0 + self.rng.next() * 60.0;
+        self.state[i * 4] = self.rng.next() * self.w;
+        self.state[i * 4 + 1] = self.rng.next() * self.h;
+        self.state[i * 4 + 2] = angle.cos() * speed;
+        self.state[i * 4 + 3] = angle.sin() * speed;
+        self.heat[i] = 0.0;
+    }
+
+    fn set_predators(&mut self, count: usize) {
+        while self.pred_rest.len() < count {
+            let angle = self.rng.next() * std::f32::consts::TAU;
+            let speed = self.params.max_speed;
+            let (x, y) = (self.rng.next() * self.w, self.rng.next() * self.h);
+            self.pred
+                .extend_from_slice(&[x, y, angle.cos() * speed, angle.sin() * speed]);
+            self.pred_rest.push(0.0);
+        }
+        self.pred.truncate(count * 4);
+        self.pred_rest.truncate(count);
+    }
+
+    // Each predator chases the nearest boid in range, eats it on contact
+    // (the boid respawns elsewhere) and then rests briefly.
+    fn step_predators(&mut self, dt: f32) {
+        let top = self.params.max_speed * 1.5;
+        for k in 0..self.pred_rest.len() {
+            let (px, py) = (self.pred[k * 4], self.pred[k * 4 + 1]);
+            let (mut vx, mut vy) = (self.pred[k * 4 + 2], self.pred[k * 4 + 3]);
+
+            if self.pred_rest[k] > 0.0 {
+                self.pred_rest[k] -= dt;
+                let damp = (1.0 - 3.0 * dt).max(0.0);
+                vx *= damp;
+                vy *= damp;
+            } else {
+                let (mut best, mut target) = (CHASE_RADIUS * CHASE_RADIUS, None);
+                for i in 0..self.n {
+                    let dx = self.wrap_delta(self.state[i * 4] - px, self.w);
+                    let dy = self.wrap_delta(self.state[i * 4 + 1] - py, self.h);
+                    let d2 = dx * dx + dy * dy;
+                    if d2 < best {
+                        best = d2;
+                        target = Some((i, dx, dy));
+                    }
+                }
+                if let Some((i, dx, dy)) = target {
+                    let d = best.sqrt().max(1e-3);
+                    if d < CATCH_RADIUS {
+                        self.spawn(i);
+                        self.eaten += 1;
+                        self.pred_rest[k] = 0.7;
+                    } else {
+                        let blend = (5.0 * dt).min(1.0);
+                        vx += (dx / d * top - vx) * blend;
+                        vy += (dy / d * top - vy) * blend;
+                    }
+                }
+                // Keep drifting when nothing is in range.
+                let speed = (vx * vx + vy * vy).sqrt();
+                if speed < top * 0.5 && speed > 1e-3 {
+                    vx *= top * 0.5 / speed;
+                    vy *= top * 0.5 / speed;
+                }
+            }
+
+            self.pred[k * 4] = (px + vx * dt).rem_euclid(self.w);
+            self.pred[k * 4 + 1] = (py + vy * dt).rem_euclid(self.h);
+            self.pred[k * 4 + 2] = vx;
+            self.pred[k * 4 + 3] = vy;
         }
     }
 }
@@ -264,6 +369,31 @@ pub unsafe extern "C" fn boids_state(world: *const World) -> *const f32 {
 #[no_mangle]
 pub unsafe extern "C" fn boids_heat(world: *const World) -> *const f32 {
     (*world).heat.as_ptr()
+}
+
+/// Pointer to `count * 4` floats (`[x, y, vx, vy]`) for the predators.
+///
+/// # Safety
+/// `world` must be a live pointer from `boids_new`.
+#[no_mangle]
+pub unsafe extern "C" fn boids_predators(world: *const World) -> *const f32 {
+    (*world).pred.as_ptr()
+}
+
+/// # Safety
+/// `world` must be a live pointer from `boids_new`.
+#[no_mangle]
+pub unsafe extern "C" fn boids_set_predators(world: *mut World, count: u32) {
+    (*world).set_predators(count as usize);
+}
+
+/// Boids caught since the world was created.
+///
+/// # Safety
+/// `world` must be a live pointer from `boids_new`.
+#[no_mangle]
+pub unsafe extern "C" fn boids_eaten(world: *const World) -> u32 {
+    (*world).eaten
 }
 
 /// # Safety

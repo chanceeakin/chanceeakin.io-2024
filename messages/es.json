@@ -152,9 +152,7 @@
     "createdOn": "Creado en {date}",
     "back": "Parque de juegos",
     "title": "Boids en Rust",
-    "intro": "Una bandada simulada con Rust compilado a WebAssembly. Ajusta las tres reglas, arrastra para guiar a la bandada y cambia al port de JavaScript para ver cuánto vale la aceleración.",
-    "canvasLabel": "Una bandada de pequeños triángulos que se mueven y giran juntos.",
-    "canvasHint": "Mantén presionado sobre la bandada para atraerla y teñirla de verde, o mantén Shift mientras presionas para espantarla.",
+    "intro": "Tres simulaciones impulsadas por Rust compilado a WebAssembly: una bandada, una bandada cazada por depredadores y rastros de moho. Elige una, ajusta sus reglas, presiona para interactuar y cambia al port de JavaScript para ver cuánto vale la aceleración.",
     "loading": "Cargando WebAssembly…",
     "loadError": "No se pudo cargar WebAssembly en este navegador.",
     "engine": "Motor",
@@ -171,13 +169,37 @@
       "alignment": "Alineación",
       "cohesion": "Cohesión",
       "perception": "Radio de percepción",
-      "maxSpeed": "Velocidad máxima"
+      "maxSpeed": "Velocidad máxima",
+      "predators": "Depredadores",
+      "sensorAngle": "Ángulo del sensor",
+      "sensorDist": "Distancia del sensor",
+      "decay": "Persistencia del rastro"
     },
     "play": "Reproducir",
     "pause": "Pausar",
     "reset": "Restablecer reglas",
     "howItWorks": "Cada boid sigue tres reglas: alejarse de los vecinos cercanos (separación), igualar el rumbo de los cercanos (alineación) y acercarse a su centro (cohesión). La bandada surge solo de eso. Para no comparar cada boid con todos los demás, se ordenan en una cuadrícula en cada cuadro y solo se revisan las 3×3 celdas vecinas.",
-    "whyWasm": "La simulación son unas 250 líneas de Rust sin dependencias. JavaScript nunca copia los datos: lee x, y y la velocidad directamente de la memoria lineal de WebAssembly y los dibuja. El motor de JavaScript es un port línea por línea del mismo algoritmo, así que “Tiempo por paso” compara cosas equivalentes. Prueba 16.000 boids en cada uno."
+    "whyWasm": "La simulación son unos cientos de líneas de Rust sin dependencias. JavaScript nunca copia los datos: lee x, y y la velocidad directamente de la memoria lineal de WebAssembly y los dibuja. El motor de JavaScript es un port línea por línea del mismo algoritmo, así que “Tiempo por paso” compara cosas equivalentes. Prueba 16.000 boids en cada uno.",
+    "mode": "Simulación",
+    "modes": {
+      "flock": "Bandada",
+      "predators": "Depredadores y presas",
+      "slime": "Rastros de moho mucilaginoso"
+    },
+    "agents": "Agentes",
+    "eaten": "Boids capturados",
+    "canvasLabels": {
+      "flock": "Una bandada de pequeños triángulos que se mueven y giran juntos.",
+      "predators": "Una bandada de pequeños triángulos que huye de unos triángulos depredadores más grandes que los persiguen y capturan.",
+      "slime": "Rastros luminosos dejados por miles de agentes, que forman una red ramificada."
+    },
+    "hints": {
+      "flock": "Mantén presionado sobre la bandada para atraerla y teñirla de verde, o mantén Shift mientras presionas para espantarla.",
+      "predators": "Los depredadores cazan al boid más cercano y la bandada se dispersa. Mantén presionado para atraer a la bandada, o Shift para espantarla.",
+      "slime": "Mantén presionado para dejar un aroma que el moho sigue, o mantén Shift mientras presionas para borrarlo."
+    },
+    "predatorNote": "En el modo Depredadores, cada cazador persigue al boid más cercano y descansa un momento tras una captura. Los boids cercanos entran en pánico: se alejan y pueden correr un tercio más rápido que su velocidad normal. Un boid capturado reaparece en otro lugar, así que la bandada nunca se acaba.",
+    "slimeNote": "El modo moho es otra simulación dentro del mismo módulo de Rust. Cada agente percibe el rastro adelante, a la izquierda y a la derecha, gira hacia el aroma más fuerte y deja aroma a su paso. El rastro se difumina y se desvanece en cada cuadro, y de esas pocas reglas surge una red ramificada, parecida al moho Physarum."
   },
   "Playground": {
     "createdOn": "Creado en {date}",
@@ -191,7 +213,7 @@
       },
       "boids": {
         "title": "Boids en Rust",
-        "description": "Miles de boids simulados con Rust en WebAssembly, con un port de JavaScript para comparar."
+        "description": "Miles de agentes simulados con Rust en WebAssembly: una bandada, una bandada cazada por depredadores o rastros de moho. Compara con un port de JavaScript."
       }
     }
   }

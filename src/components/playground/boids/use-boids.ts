@@ -7,12 +7,14 @@ import {
   useSyncExternalStore,
 } from "react";
 import { createJsSim } from "@/lib/playground/boids/js-sim";
-import { buildRamp, drawBoids } from "@/lib/playground/boids/renderer";
+import { createJsSlime } from "@/lib/playground/boids/js-slime";
+import { readTheme } from "@/lib/playground/boids/renderer";
 import {
   DEFAULT_PARAMS,
   WORLD_H,
   WORLD_W,
   type Engine,
+  type Mode,
   type Params,
   type PointerMode,
   type Sim,
@@ -20,21 +22,15 @@ import {
 import { createWasmSim, loadWasm } from "@/lib/playground/boids/wasm-sim";
 
 export type Status = "loading" | "ready" | "error";
-export type Stats = { fps: number; stepMs: number };
+export type Stats = { fps: number; stepMs: number; eaten: number };
 
 const SEED = 1337;
 
-// Calm boids use the ink color; excited ones blend to the site's dark green
-// (a lighter moss on dark themes, where the deep green would vanish).
-const readTheme = (el: HTMLElement) => {
-  const css = getComputedStyle(el);
-  const get = (name: string, fallback: string) =>
-    css.getPropertyValue(name).trim() || fallback;
-  const bg = get("--paper-deep", "#f3e2c4");
-  const ink = get("--ink", "#4a2511");
-  const dark = css.colorScheme.includes("dark");
-  const green = dark ? get("--moss", "#5b6a31") : get("--inverse", "#34401f");
-  return { bg, ramp: buildRamp(ink, green) };
+// Slime needs far more agents than a flock to show its network.
+const DEFAULT_COUNT: Record<Mode, number> = {
+  flock: 4000,
+  predators: 4000,
+  slime: 16000,
 };
 
 const REDUCED = "(prefers-reduced-motion: reduce)";
@@ -52,21 +48,22 @@ export const useBoids = () => {
   const playingRef = useRef(true);
 
   const [engine, setEngine] = useState<Engine>("rust");
-  const [count, setCount] = useState(4000);
+  const [mode, setMode] = useState<Mode>("flock");
+  const [count, setCount] = useState(DEFAULT_COUNT.flock);
   const [params, setParams] = useState<Params>(DEFAULT_PARAMS);
   // Until the user presses Play/Pause, reduced-motion visitors start paused.
   const reduced = useSyncExternalStore(subscribeReduced, reducedNow, () => false);
   const [chosen, setChosen] = useState<boolean | null>(null);
   const playing = chosen ?? !reduced;
   const [status, setStatus] = useState<Status>("loading");
-  const [stats, setStats] = useState<Stats>({ fps: 0, stepMs: 0 });
+  const [stats, setStats] = useState<Stats>({ fps: 0, stepMs: 0, eaten: 0 });
 
   useEffect(() => {
     paramsRef.current = params;
     playingRef.current = playing;
   });
 
-  // (Re)build the simulation whenever the engine or population changes, and
+  // (Re)build the simulation whenever the mode, engine or population changes, and
   // run the frame loop for its lifetime.
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -80,10 +77,13 @@ export const useBoids = () => {
 
     const start = async () => {
       try {
+        const p = paramsRef.current;
         sim =
           engine === "rust"
-            ? createWasmSim(await loadWasm(), count, paramsRef.current, SEED)
-            : createJsSim(count, paramsRef.current, SEED);
+            ? createWasmSim(await loadWasm(), mode, count, p, SEED)
+            : mode === "slime"
+              ? createJsSlime(count, p, SEED)
+              : createJsSim(mode, count, p, SEED);
       } catch {
         if (!cancelled) setStatus("error");
         return;
@@ -114,12 +114,12 @@ export const useBoids = () => {
           const took = performance.now() - t0;
           stepMs = stepMs === 0 ? took : stepMs * 0.9 + took * 0.1;
         }
-        drawBoids(ctx, sim!.state(), sim!.heat(), theme.bg, theme.ramp);
+        sim!.draw(ctx, theme);
 
         frames++;
         sinceReport += dt;
         if (sinceReport >= 0.5) {
-          setStats({ fps: frames / sinceReport, stepMs });
+          setStats({ fps: frames / sinceReport, stepMs, eaten: sim!.eaten() });
           frames = 0;
           sinceReport = 0;
         }
@@ -134,7 +134,7 @@ export const useBoids = () => {
       simRef.current = null;
       sim?.dispose();
     };
-  }, [engine, count]);
+  }, [engine, count, mode]);
 
   useEffect(() => {
     simRef.current?.setParams(params);
@@ -153,11 +153,18 @@ export const useBoids = () => {
     [],
   );
 
+  const pickMode = (next: Mode) => {
+    setMode(next);
+    setCount(DEFAULT_COUNT[next]);
+  };
+
   const updateParam = (key: keyof Params, value: number) =>
     setParams((p) => ({ ...p, [key]: value }));
 
   return {
     canvasRef,
+    mode,
+    pickMode,
     engine,
     setEngine,
     count,

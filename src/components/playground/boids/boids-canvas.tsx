@@ -2,10 +2,11 @@
 import { useRef, type RefObject } from "react";
 import { useTranslations } from "next-intl";
 import { WORLD_H, WORLD_W } from "@/lib/playground/boids/types";
-import type { PointerMode } from "@/lib/playground/boids/types";
+import type { Mode, PointerMode } from "@/lib/playground/boids/types";
 import type { Status } from "./use-boids";
 
 type Props = {
+  mode: Mode;
   canvasRef: RefObject<HTMLCanvasElement | null>;
   status: Status;
   onPointer: (
@@ -14,8 +15,9 @@ type Props = {
   ) => void;
 };
 
-// Hold a click or touch to pull the flock in; hold Shift to scare it away.
-export const BoidsCanvas = ({ canvasRef, status, onPointer }: Props) => {
+// Hold a click or touch to pull the flock in (or paint scent for slime); hold
+// Shift to scare the flock away (or wipe the scent).
+export const BoidsCanvas = ({ mode, canvasRef, status, onPointer }: Props) => {
   const t = useTranslations("Boids");
   const pressed = useRef(false);
 
@@ -27,7 +29,7 @@ export const BoidsCanvas = ({ canvasRef, status, onPointer }: Props) => {
           width={WORLD_W}
           height={WORLD_H}
           role="img"
-          aria-label={t("canvasLabel")}
+          aria-label={t(`canvasLabels.${mode}`)}
           onPointerDown={(ev) => {
             pressed.current = true;
             ev.currentTarget.setPointerCapture(ev.pointerId);
@@ -55,7 +57,7 @@ export const BoidsCanvas = ({ canvasRef, status, onPointer }: Props) => {
           </div>
         ) : null}
       </div>
-      <p className="mt-3 text-base text-muted">{t("canvasHint")}</p>
+      <p className="mt-3 text-base text-muted">{t(`hints.${mode}`)}</p>
     </div>
   );
 };

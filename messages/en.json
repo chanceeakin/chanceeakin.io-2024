@@ -143,9 +143,7 @@
     "createdOn": "Created {date}",
     "back": "Playground",
     "title": "Rust Boids",
-    "intro": "A flock simulated by Rust compiled to WebAssembly. Tune the three rules, drag to herd the flock, and switch to the JavaScript port to see what the speedup is worth.",
-    "canvasLabel": "A flock of small triangles moving and turning together.",
-    "canvasHint": "Press and hold on the flock to pull it toward you and turn it green, or hold Shift while pressing to scare it away.",
+    "intro": "Three simulations powered by Rust compiled to WebAssembly: a flock, a flock hunted by predators, and slime-mold trails. Pick one, tune its rules, press to interact, and switch to the JavaScript port to see what the speedup is worth.",
     "loading": "Loading WebAssembly…",
     "loadError": "WebAssembly could not be loaded in this browser.",
     "engine": "Engine",
@@ -162,13 +160,37 @@
       "alignment": "Alignment",
       "cohesion": "Cohesion",
       "perception": "Perception radius",
-      "maxSpeed": "Max speed"
+      "maxSpeed": "Max speed",
+      "predators": "Predators",
+      "sensorAngle": "Sensor angle",
+      "sensorDist": "Sensor distance",
+      "decay": "Trail persistence"
     },
     "play": "Play",
     "pause": "Pause",
     "reset": "Reset rules",
     "howItWorks": "Each boid follows three rules: steer away from close neighbors (separation), match the heading of nearby ones (alignment), and drift toward their center (cohesion). Flocking emerges from nothing else. To avoid comparing every boid with every other, they are sorted into a grid each frame so only the 3×3 surrounding cells are checked.",
-    "whyWasm": "The simulation is about 250 lines of dependency-free Rust. JavaScript never copies boid data: it reads x, y and velocity straight out of WebAssembly's linear memory and draws them. The JavaScript engine is a line-for-line port of the same algorithm, so “Step time” compares like with like. Try 16,000 boids on each."
+    "whyWasm": "The simulation is a few hundred lines of dependency-free Rust. JavaScript never copies boid data: it reads x, y and velocity straight out of WebAssembly's linear memory and draws them. The JavaScript engine is a line-for-line port of the same algorithm, so “Step time” compares like with like. Try 16,000 boids on each.",
+    "mode": "Simulation",
+    "modes": {
+      "flock": "Flocking",
+      "predators": "Predators and prey",
+      "slime": "Slime-mold trails"
+    },
+    "agents": "Agents",
+    "eaten": "Boids caught",
+    "canvasLabels": {
+      "flock": "A flock of small triangles moving and turning together.",
+      "predators": "A flock of small triangles fleeing from a few larger predator triangles that chase and catch them.",
+      "slime": "Glowing trails left by thousands of agents, forming a branching network."
+    },
+    "hints": {
+      "flock": "Press and hold on the flock to pull it toward you and turn it green, or hold Shift while pressing to scare it away.",
+      "predators": "Predators hunt the nearest boid, and the flock scatters from them. Press and hold to pull the flock in, or hold Shift to scare it.",
+      "slime": "Press and hold to lay down scent that the slime follows, or hold Shift while pressing to wipe it away."
+    },
+    "predatorNote": "In Predators mode each hunter chases the nearest boid and rests for a moment after a catch. Boids nearby panic: they steer away and can sprint a third faster than their normal top speed. A caught boid respawns somewhere else, so the flock never runs out.",
+    "slimeNote": "Slime mode is a different simulation in the same Rust module. Each agent senses the trail ahead, to the left and to the right, turns toward the strongest scent, and leaves scent behind. The trail is blurred and fades every frame, and from those few rules a branching network emerges, much like the slime mold Physarum."
   },
   "Playground": {
     "createdOn": "Created {date}",
@@ -182,7 +204,7 @@
       },
       "boids": {
         "title": "Rust Boids",
-        "description": "Thousands of flocking boids simulated by Rust in WebAssembly, with a JavaScript port to compare."
+        "description": "Thousands of agents simulated by Rust in WebAssembly: a flock, a flock hunted by predators, or slime-mold trails. Compare it with a JavaScript port."
       }
     }
   }

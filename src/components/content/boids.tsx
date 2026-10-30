@@ -39,18 +39,26 @@ export const BoidsContent = () => {
 
       <div className="mt-10 grid gap-8 lg:grid-cols-[minmax(0,1fr)_22rem]">
         <BoidsCanvas
+          mode={boids.mode}
           canvasRef={boids.canvasRef}
           status={boids.status}
           onPointer={boids.setPointer}
         />
         <div className="flex flex-col gap-6">
           <BoidsControls boids={boids} />
-          <BoidsReadout stats={boids.stats} engine={boids.engine} count={boids.count} />
+          <BoidsReadout
+            stats={boids.stats}
+            engine={boids.engine}
+            count={boids.count}
+            mode={boids.mode}
+          />
         </div>
       </div>
 
       <div className="mt-12 grid max-w-3xl gap-4 text-lg text-ink-soft">
         <p>{t("howItWorks")}</p>
+        <p>{t("predatorNote")}</p>
+        <p>{t("slimeNote")}</p>
         <p>{t("whyWasm")}</p>
       </div>
     </div>
