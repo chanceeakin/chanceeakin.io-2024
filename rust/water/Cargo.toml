@@ -1,0 +1,17 @@
+[package]
+name = "water"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+crate-type = ["cdylib"]
+
+# No dependencies on purpose: the module exposes a plain C ABI, so the site
+# needs neither wasm-bindgen nor wasm-pack to build or load it.
+
+[profile.release]
+opt-level = 3
+lto = true
+codegen-units = 1
+panic = "abort"
+strip = true

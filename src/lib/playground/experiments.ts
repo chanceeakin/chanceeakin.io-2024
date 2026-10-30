@@ -1,5 +1,5 @@
 import type { IconType } from "react-icons";
-import { FaBrain, FaFeatherAlt, FaSignature } from "react-icons/fa";
+import { FaBrain, FaFeatherAlt, FaSignature, FaTint } from "react-icons/fa";
 
 // The playground menu, sitemap and llms.txt are all driven by this list:
 // adding an experiment is one entry here, a route, and its messages.
@@ -31,6 +31,13 @@ export const EXPERIMENTS: readonly Experiment[] = [
     messageKey: "signature",
     icon: FaSignature,
     tone: "bg-sage text-on-sage",
+    created: "2026-10",
+  },
+  {
+    slug: "water",
+    messageKey: "water",
+    icon: FaTint,
+    tone: "bg-moss text-on-moss",
     created: "2026-10",
   },
 ];

@@ -208,6 +208,32 @@
     "engine": "Engine",
     "engines": {"rust": "Rust (WebAssembly)", "lottie": "Lottie (lottie-react)"}
   },
+  "Water": {
+    "createdOn": "Created {date}",
+    "back": "Playground",
+    "title": "Water Sphere",
+    "intro": "A swirling ball of water made of thousands of droplets, simulated and projected in 3D by Rust compiled to WebAssembly. Click it and it sprays apart, then pours back together. Drag to look around it.",
+    "loading": "Loading WebAssembly…",
+    "loadError": "WebAssembly could not be loaded in this browser.",
+    "canvasLabel": "A glassy green-and-mustard sphere of water droplets swirling in ribbons. Clicking it sprays the droplets apart, and they then flow back together.",
+    "hint": "Click the water to splash it apart. Drag to turn the camera around the sphere.",
+    "count": "Droplets",
+    "assembled": "Back in the sphere",
+    "stepTime": "Step time",
+    "fps": "Frames per second",
+    "params": {
+      "swirl": "Swirl",
+      "burst": "Splash strength",
+      "recovery": "Time to reform"
+    },
+    "splash": "Splash",
+    "play": "Play",
+    "pause": "Pause",
+    "reset": "Reset",
+    "howItWorks": "Every droplet has a home on a sphere: most sit in six helical ribbons, the rest fill the body. A spring pulls each droplet toward its home while the whole sphere turns and the ribbons wind and unwind, and that is all the swirling is. Light from the upper left shades each droplet by which way its patch of water faces.",
+    "splashNote": "A click casts a ray through the sphere and kicks every droplet outward, hardest near where you hit it, with a twist added. The springs switch off, so the droplets fly free under light drag and gravity, and the fastest stretch into streaks. Then each one's spring eases back in at its own moment, with a sideways sweep so they spiral home instead of falling straight back.",
+    "whyWasm": "Rust does all of it: the physics, the orbit camera, the perspective projection and a counting sort that orders every droplet from far to near. JavaScript only reads the finished draw list out of WebAssembly's memory and paints glass-bubble sprites onto a 2D canvas, so there is no WebGL and no copying of droplet data. The module is about 300 lines with no dependencies."
+  },
   "Playground": {
     "createdOn": "Created {date}",
     "eyebrow": "Lab",
@@ -225,6 +251,10 @@
       "signature": {
         "title": "Cursive Signature",
         "description": "My name written out in cursive, stroke by stroke, by Rust compiled to WebAssembly or a Lottie animation."
+      },
+      "water": {
+        "title": "Water Sphere",
+        "description": "A swirling 3D ball of water droplets, simulated by Rust in WebAssembly. Click to spray it apart and watch it pour back together."
       }
     }
   }

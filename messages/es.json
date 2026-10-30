@@ -217,6 +217,32 @@
     "engine": "Motor",
     "engines": {"rust": "Rust (WebAssembly)", "lottie": "Lottie (lottie-react)"}
   },
+  "Water": {
+    "createdOn": "Creado en {date}",
+    "back": "Parque de juegos",
+    "title": "Esfera de agua",
+    "intro": "Una bola de agua en remolino hecha de miles de gotas, simulada y proyectada en 3D por Rust compilado a WebAssembly. Haz clic y salpica en todas direcciones; después vuelve a unirse. Arrastra para mirarla desde otros ángulos.",
+    "loading": "Cargando WebAssembly…",
+    "loadError": "No se pudo cargar WebAssembly en este navegador.",
+    "canvasLabel": "Una esfera cristalina verde y mostaza de gotas de agua que giran en cintas. Al hacer clic, las gotas salen disparadas y luego vuelven a juntarse.",
+    "hint": "Haz clic en el agua para salpicarla. Arrastra para girar la cámara alrededor de la esfera.",
+    "count": "Gotas",
+    "assembled": "De vuelta en la esfera",
+    "stepTime": "Tiempo por paso",
+    "fps": "Fotogramas por segundo",
+    "params": {
+      "swirl": "Remolino",
+      "burst": "Fuerza del chapoteo",
+      "recovery": "Tiempo para reformarse"
+    },
+    "splash": "Salpicar",
+    "play": "Reproducir",
+    "pause": "Pausar",
+    "reset": "Restablecer",
+    "howItWorks": "Cada gota tiene su lugar en una esfera: la mayoría están en seis cintas helicoidales y el resto llena el interior. Un resorte lleva cada gota hacia su lugar mientras toda la esfera gira y las cintas se enroscan y desenroscan; eso es todo el remolino. La luz desde arriba a la izquierda sombrea cada gota según hacia dónde mira su trozo de agua.",
+    "splashNote": "Un clic lanza un rayo a través de la esfera y empuja cada gota hacia fuera, con más fuerza cerca de donde golpeaste, y con un giro añadido. Los resortes se apagan, así que las gotas vuelan libres con poca resistencia y gravedad, y las más rápidas se estiran en estelas. Luego el resorte de cada una vuelve en su propio momento, con un barrido lateral para que regresen en espiral en vez de caer en línea recta.",
+    "whyWasm": "Rust lo hace todo: la física, la cámara orbital, la proyección en perspectiva y una ordenación por conteo que ordena cada gota de lejos a cerca. JavaScript solo lee la lista de dibujo terminada desde la memoria de WebAssembly y pinta sprites de burbujas de cristal en un canvas 2D, sin WebGL y sin copiar datos de las gotas. El módulo tiene unas 300 líneas y ninguna dependencia."
+  },
   "Playground": {
     "createdOn": "Creado en {date}",
     "eyebrow": "Laboratorio",
@@ -234,6 +260,10 @@
       "signature": {
         "title": "Firma en cursiva",
         "description": "Mi nombre escrito en cursiva, trazo a trazo, con Rust compilado a WebAssembly o con una animación Lottie."
+      },
+      "water": {
+        "title": "Esfera de agua",
+        "description": "Una bola 3D de gotas de agua en remolino, simulada con Rust en WebAssembly. Haz clic para salpicarla y mírala volver a unirse."
       }
     }
   }

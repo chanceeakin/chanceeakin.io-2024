@@ -30,6 +30,7 @@ The site is a small Next.js app: a handful of pages plus a blog of long-form pos
 - [Neural Net Playground](${SITE_URL}/playground/neural-net): A tiny neural network trained live with TensorFlow.js
 - [Rust Boids](${SITE_URL}/playground/boids): Flocking, predator/prey and slime-mold simulations written in Rust, compiled to WebAssembly, with a JavaScript port to compare
 - [Cursive Signature](${SITE_URL}/playground/signature): Chance's name written out in cursive, stroke by stroke, by Rust compiled to WebAssembly or a Lottie animation
+- [Water Sphere](${SITE_URL}/playground/water): A swirling 3D sphere of water droplets simulated and projected by Rust compiled to WebAssembly; click to spray it apart and watch it reform
 - [Blog](${SITE_URL}/blog): Index of all posts, newest first
 
 ## Blog posts
