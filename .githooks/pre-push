@@ -41,7 +41,7 @@ if ! "$root/scripts/build-wasm.sh" >/dev/null; then
 fi
 
 if ! git diff --quiet -- "$root/public/wasm"; then
-  echo "pre-push: public/wasm/boids.wasm differs from what is committed." >&2
+  echo "pre-push: public/wasm differs from what is committed." >&2
   echo "          Commit the rebuilt file, then push again." >&2
   exit 1
 fi

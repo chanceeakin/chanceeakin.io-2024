@@ -29,6 +29,7 @@ The site is a small Next.js app: a handful of pages plus a blog of long-form pos
 - [Playground](${SITE_URL}/playground): Small interactive experiments that run in the browser
 - [Neural Net Playground](${SITE_URL}/playground/neural-net): A tiny neural network trained live with TensorFlow.js
 - [Rust Boids](${SITE_URL}/playground/boids): Flocking, predator/prey and slime-mold simulations written in Rust, compiled to WebAssembly, with a JavaScript port to compare
+- [Cursive Signature](${SITE_URL}/playground/signature): Chance's name written out in cursive, stroke by stroke, by Rust compiled to WebAssembly or a Lottie animation
 - [Blog](${SITE_URL}/blog): Index of all posts, newest first
 
 ## Blog posts

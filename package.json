@@ -25,6 +25,7 @@
     "bright": "^1.0.0",
     "date-fns": "^4.4.0",
     "gray-matter": "^4.0.3",
+    "lottie-react": "^3.1.2",
     "next": "^16.4.2",
     "next-intl": "^4.14.9",
     "next-mdx-remote": "^6.0.0",
@@ -38,12 +39,14 @@
     "remark-toc": "^9.0.0"
   },
   "devDependencies": {
+    "@fontsource/great-vibes": "^5.3.0",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^26",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^10",
     "eslint-config-next": "16.4.2",
+    "opentype.js": "^2.0.0",
     "postcss": "^8",
     "tailwindcss": "^4.3.3",
     "typescript": "^6.0.3"

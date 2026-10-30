@@ -192,6 +192,22 @@
     "predatorNote": "In Predators mode each hunter chases the nearest boid and rests for a moment after a catch. Boids nearby panic: they steer away and can sprint a third faster than their normal top speed. A caught boid respawns somewhere else, so the flock never runs out.",
     "slimeNote": "Slime mode is a different simulation in the same Rust module. Each agent senses the trail ahead, to the left and to the right, turns toward the strongest scent, and leaves scent behind. The trail is blurred and fades every frame, and from those few rules a branching network emerges, much like the slime mold Physarum."
   },
+  "Signature": {
+    "createdOn": "Created {date}",
+    "back": "Playground",
+    "title": "Cursive Signature",
+    "intro": "My name, written out in cursive two ways: by Rust compiled to WebAssembly, and by a Lottie animation played with lottie-react. Switch between them.",
+    "label": "The name Chance Eakin being written out in cursive, letter by letter.",
+    "replay": "Replay",
+    "pause": "Pause",
+    "play": "Play",
+    "howItWorks": "Each letter is a set of bezier outlines, baked into the module from an open-licensed script font. Rust flattens them into polylines once and measures their lengths. For any moment in the animation it returns the first part of each outline, which is what a Trim Paths animation does in After Effects, plus how far the fill has faded in. The page reads those points straight out of WebAssembly's memory and draws them on a canvas.",
+    "swapIt": "The Rust engine has no animation file: its timing is a few constants in the Rust source (about 200 lines, no dependencies). The Lottie engine plays a JSON file of shape layers with Trim Paths, the same structure Bodymovin exports from After Effects, so a hand-animated export can replace it. Both come from the same outlines, generated from an open-licensed script font by a script in the repo. Both follow the site theme, and with reduced motion on they show the finished name instead of writing it.",
+    "loading": "Loading WebAssembly…",
+    "loadError": "WebAssembly could not be loaded in this browser.",
+    "engine": "Engine",
+    "engines": {"rust": "Rust (WebAssembly)", "lottie": "Lottie (lottie-react)"}
+  },
   "Playground": {
     "createdOn": "Created {date}",
     "eyebrow": "Lab",
@@ -205,6 +221,10 @@
       "boids": {
         "title": "Rust Boids",
         "description": "Thousands of agents simulated by Rust in WebAssembly: a flock, a flock hunted by predators, or slime-mold trails. Compare it with a JavaScript port."
+      },
+      "signature": {
+        "title": "Cursive Signature",
+        "description": "My name written out in cursive, stroke by stroke, by Rust compiled to WebAssembly or a Lottie animation."
       }
     }
   }

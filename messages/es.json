@@ -201,6 +201,22 @@
     "predatorNote": "En el modo Depredadores, cada cazador persigue al boid más cercano y descansa un momento tras una captura. Los boids cercanos entran en pánico: se alejan y pueden correr un tercio más rápido que su velocidad normal. Un boid capturado reaparece en otro lugar, así que la bandada nunca se acaba.",
     "slimeNote": "El modo moho es otra simulación dentro del mismo módulo de Rust. Cada agente percibe el rastro adelante, a la izquierda y a la derecha, gira hacia el aroma más fuerte y deja aroma a su paso. El rastro se difumina y se desvanece en cada cuadro, y de esas pocas reglas surge una red ramificada, parecida al moho Physarum."
   },
+  "Signature": {
+    "createdOn": "Creado en {date}",
+    "back": "Parque de juegos",
+    "title": "Firma en cursiva",
+    "intro": "Mi nombre escrito en cursiva de dos maneras: con Rust compilado a WebAssembly y con una animación Lottie reproducida con lottie-react. Cambia entre ellas.",
+    "label": "El nombre Chance Eakin escrito en cursiva, letra por letra.",
+    "replay": "Repetir",
+    "pause": "Pausar",
+    "play": "Reproducir",
+    "howItWorks": "Cada letra es un conjunto de contornos bézier, incorporados al módulo desde una tipografía script de licencia abierta. Rust los aplana una sola vez en polilíneas y mide sus longitudes. Para cualquier momento de la animación devuelve el primer tramo de cada contorno, que es lo que hace una animación de Trim Paths en After Effects, además de cuánto ha aparecido el relleno. La página lee esos puntos directamente de la memoria de WebAssembly y los dibuja en un canvas.",
+    "swapIt": "El motor de Rust no tiene archivo de animación: sus tiempos son unas pocas constantes en el código Rust (unas 200 líneas, sin dependencias). El motor de Lottie reproduce un archivo JSON de capas de forma con Trim Paths, la misma estructura que Bodymovin exporta desde After Effects, así que una exportación animada a mano puede reemplazarlo. Ambos salen de los mismos contornos, generados a partir de una tipografía script de licencia abierta con un script del repositorio. Ambos siguen el tema del sitio y, con movimiento reducido, muestran el nombre terminado en lugar de escribirlo.",
+    "loading": "Cargando WebAssembly…",
+    "loadError": "No se pudo cargar WebAssembly en este navegador.",
+    "engine": "Motor",
+    "engines": {"rust": "Rust (WebAssembly)", "lottie": "Lottie (lottie-react)"}
+  },
   "Playground": {
     "createdOn": "Creado en {date}",
     "eyebrow": "Laboratorio",
@@ -214,6 +230,10 @@
       "boids": {
         "title": "Boids en Rust",
         "description": "Miles de agentes simulados con Rust en WebAssembly: una bandada, una bandada cazada por depredadores o rastros de moho. Compara con un port de JavaScript."
+      },
+      "signature": {
+        "title": "Firma en cursiva",
+        "description": "Mi nombre escrito en cursiva, trazo a trazo, con Rust compilado a WebAssembly o con una animación Lottie."
       }
     }
   }
