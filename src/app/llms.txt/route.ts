@@ -31,6 +31,7 @@ The site is a small Next.js app: a handful of pages plus a blog of long-form pos
 - [Rust Boids](${SITE_URL}/playground/boids): Flocking, predator/prey and slime-mold simulations written in Rust, compiled to WebAssembly, with a JavaScript port to compare
 - [Cursive Signature](${SITE_URL}/playground/signature): Chance's name written out in cursive, stroke by stroke, by Rust compiled to WebAssembly or a Lottie animation
 - [Water Sphere](${SITE_URL}/playground/water): A swirling 3D sphere of water droplets simulated and projected by Rust compiled to WebAssembly; click to spray it apart and watch it reform
+- [Hidden Menu](${SITE_URL}/playground/hidden-menu): The site's navigation hidden in a 3D word search of extruded letters built with three.js; letters sink under the cursor, a word you linger on rises, and a click floods the field with its color
 - [Blog](${SITE_URL}/blog): Index of all posts, newest first
 
 ## Blog posts

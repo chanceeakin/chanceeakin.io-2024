@@ -22,6 +22,7 @@
     "@next/mdx": "^16.4.2",
     "@tensorflow/tfjs": "^4.22.0",
     "@types/mdx": "^2.0.14",
+    "@types/three": "^0.187.0",
     "bright": "^1.0.0",
     "date-fns": "^4.4.0",
     "gray-matter": "^4.0.3",
@@ -36,9 +37,11 @@
     "rehype-slug": "^6.0.0",
     "rehype-unwrap-images": "^1.0.0",
     "remark-gfm": "^4.0.1",
-    "remark-toc": "^9.0.0"
+    "remark-toc": "^9.0.0",
+    "three": "^0.187.0"
   },
   "devDependencies": {
+    "@fontsource/anton": "^5.3.0",
     "@fontsource/great-vibes": "^5.3.0",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^26",

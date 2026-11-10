@@ -234,6 +234,20 @@
     "splashNote": "A click casts a ray through the sphere and kicks every droplet outward, hardest near where you hit it, with a twist added. The springs switch off, so the droplets fly free under light drag and gravity, and the fastest stretch into streaks. Then each one's spring eases back in at its own moment, with a sideways sweep so they spiral home instead of falling straight back.",
     "whyWasm": "Rust does all of it: the physics, the orbit camera, the perspective projection and a counting sort that orders every droplet from far to near. JavaScript only reads the finished draw list out of WebAssembly's memory and paints glass-bubble sprites onto a 2D canvas, so there is no WebGL and no copying of droplet data. The module is about 300 lines with no dependencies."
   },
+  "HiddenMenu": {
+    "createdOn": "Created {date}",
+    "back": "Playground",
+    "title": "Hidden Menu",
+    "intro": "The site's menu, hidden in a word search of extruded 3D letters. Move over the grid and the letters give way beneath your cursor. Linger on a word and it rises, letter by letter, in its own color. Click it and the whole field floods with that color before taking you there.",
+    "loading": "Loading 3D…",
+    "loadError": "WebGL could not be started in this browser. The links below still work.",
+    "canvasLabel": "A grid of tall, narrow capital letters that sink away from the cursor. The site's menu words, Home, About, Links, Playground and Blog, are hidden among them; the links below go to the same places.",
+    "hint": "Hover over the letters and hold still on a word to raise it. Click or tap a word to go there.",
+    "linksLabel": "Or skip the search",
+    "howItWorks": "Every cell springs toward a target height. The cursor pushes the cells near it down, and a word you rest on lifts its own letters up one after another, starting from the one you touched, while every other letter sinks. A click starts a wave of color from that letter, and when it has covered the grid the page changes. Hovering or focusing one of the links does the same lift as hovering its word.",
+    "whyThree": "Built with three.js, loaded only on this page. The 26 letters are outlines baked from Anton (an open-licensed typeface) by a script in the repo, extruded once each, and drawn as one instanced mesh per letter, so the whole grid is a few dozen draw calls. It follows the site theme and, with reduced motion on, skips the springs and the wave.",
+    "inspiredBy": "Inspired by <a>Plain Sight</a> by Tonami Komuro."
+  },
   "Playground": {
     "createdOn": "Created {date}",
     "eyebrow": "Lab",
@@ -255,6 +269,10 @@
       "water": {
         "title": "Water Sphere",
         "description": "A swirling 3D ball of water droplets, simulated by Rust in WebAssembly. Click to spray it apart and watch it pour back together."
+      },
+      "hiddenMenu": {
+        "title": "Hidden Menu",
+        "description": "The site's menu hidden in a 3D word search. Letters sink under your cursor, a word you linger on rises, and a click floods the field with its color."
       }
     }
   }
