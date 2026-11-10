@@ -169,7 +169,7 @@
    delays the first meaningful paint and hurts LCP. */
 @media (min-width: 48rem) {
   .page-enter {
-    animation: rise 0.45s ease-out both;
+    animation: rise 0.45s ease-out backwards;
   }
 }
 
@@ -180,4 +180,35 @@
     transition-duration: 0.01ms !important;
     animation-duration: 0.01ms !important;
   }
+}
+
+/* Full-screen playground canvases (see FullscreenFrame) */
+.fs-frame[data-fs] {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  background: var(--paper);
+}
+.fs-frame[data-fs-overlay] {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+}
+.fs-frame[data-fs]:not([data-fs-natural]) canvas {
+  aspect-ratio: auto;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  border-radius: 0;
+}
+.fs-frame[data-fs][data-fs-ratio]:not([data-fs-natural]) canvas {
+  aspect-ratio: var(--fs-ratio);
+  width: min(100vw, calc(100vh * var(--fs-ratio)));
+  height: auto;
+}
+.fs-frame[data-fs][data-fs-natural] > :not(.fs-button) {
+  width: 100%;
+  border: 0;
 }

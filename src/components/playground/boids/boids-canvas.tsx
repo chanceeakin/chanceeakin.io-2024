@@ -4,6 +4,7 @@ import { useTranslations } from "next-intl";
 import { WORLD_H, WORLD_W } from "@/lib/playground/boids/types";
 import type { Mode, PointerMode } from "@/lib/playground/boids/types";
 import type { Status } from "./use-boids";
+import { FullscreenFrame } from "@/components/playground/fullscreen-frame";
 
 type Props = {
   mode: Mode;
@@ -23,7 +24,7 @@ export const BoidsCanvas = ({ mode, canvasRef, status, onPointer }: Props) => {
 
   return (
     <div>
-      <div className="relative">
+      <FullscreenFrame ratio={WORLD_W / WORLD_H}>
         <canvas
           ref={canvasRef}
           width={WORLD_W}
@@ -56,7 +57,7 @@ export const BoidsCanvas = ({ mode, canvasRef, status, onPointer }: Props) => {
             {status === "error" ? t("loadError") : t("loading")}
           </div>
         ) : null}
-      </div>
+      </FullscreenFrame>
       <p className="mt-3 text-base text-muted">{t(`hints.${mode}`)}</p>
     </div>
   );

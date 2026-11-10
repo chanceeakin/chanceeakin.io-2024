@@ -222,7 +222,10 @@
     "loading": "Cargando WebAssembly…",
     "loadError": "No se pudo cargar WebAssembly en este navegador.",
     "engine": "Motor",
-    "engines": {"rust": "Rust (WebAssembly)", "lottie": "Lottie (lottie-react)"}
+    "engines": {
+      "rust": "Rust (WebAssembly)",
+      "lottie": "Lottie (lottie-react)"
+    }
   },
   "Water": {
     "createdOn": "Creado en {date}",
@@ -316,5 +319,9 @@
         "description": "Una cámara que avanza en línea recta por un túnel de cubos que no dejan de reorganizarse. Hecho con three.js, y no termina nunca."
       }
     }
+  },
+  "Fullscreen": {
+    "enter": "Pantalla completa",
+    "exit": "Salir de pantalla completa"
   }
 }
