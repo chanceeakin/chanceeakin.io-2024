@@ -2,6 +2,7 @@
 import type { RefObject } from "react";
 import { useTranslations } from "next-intl";
 import type { Status } from "./use-plain-sight";
+import { FullscreenFrame } from "@/components/playground/fullscreen-frame";
 
 type Props = {
   canvasRef: RefObject<HTMLCanvasElement | null>;
@@ -13,7 +14,7 @@ export const PlainSightCanvas = ({ canvasRef, status, compact }: Props) => {
   const t = useTranslations("HiddenMenu");
   return (
     <div>
-      <div className="relative">
+      <FullscreenFrame>
         <canvas
           ref={canvasRef}
           role="img"
@@ -30,7 +31,7 @@ export const PlainSightCanvas = ({ canvasRef, status, compact }: Props) => {
             {status === "error" ? t("loadError") : t("loading")}
           </div>
         ) : null}
-      </div>
+      </FullscreenFrame>
       <p className="mt-3 text-base text-muted">{t("hint")}</p>
     </div>
   );

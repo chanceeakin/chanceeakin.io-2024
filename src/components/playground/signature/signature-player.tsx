@@ -3,6 +3,7 @@ import { useCallback, useState, useSyncExternalStore } from "react";
 import { FaChevronDown } from "react-icons/fa";
 import { useTranslations } from "next-intl";
 import { button, control, field } from "@/components/playground/neural-net/ui";
+import { FullscreenFrame } from "@/components/playground/fullscreen-frame";
 import { LottieSignature } from "./lottie-signature";
 import { RustSignature } from "./rust-signature";
 
@@ -30,7 +31,11 @@ export const SignaturePlayer = () => {
   const [playing, setPlaying] = useState(true);
   const [finished, setFinished] = useState(false);
   const [run, setRun] = useState(0);
-  const reduced = useSyncExternalStore(subscribeReduced, readReduced, () => false);
+  const reduced = useSyncExternalStore(
+    subscribeReduced,
+    readReduced,
+    () => false,
+  );
   const color = useSyncExternalStore(subscribeTheme, readMoss, () => "#4f5d2a");
 
   const onFinish = useCallback(() => {
@@ -55,13 +60,15 @@ export const SignaturePlayer = () => {
 
   return (
     <div>
-      <div className="relative rounded-sm border border-line-strong bg-paper-deep p-4 sm:p-8">
-        {engine === "rust" ? (
-          <RustSignature key="rust" {...props} />
-        ) : (
-          <LottieSignature key="lottie" {...props} />
-        )}
-      </div>
+      <FullscreenFrame natural>
+        <div className="rounded-sm border border-line-strong bg-paper-deep p-4 sm:p-8">
+          {engine === "rust" ? (
+            <RustSignature key="rust" {...props} />
+          ) : (
+            <LottieSignature key="lottie" {...props} />
+          )}
+        </div>
+      </FullscreenFrame>
 
       <div className="mt-4 flex flex-wrap items-end gap-x-8 gap-y-4">
         <div className="flex gap-3">

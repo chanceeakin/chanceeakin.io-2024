@@ -3,6 +3,7 @@ import { useId, type ReactNode, type RefObject } from "react";
 import { useTranslations } from "next-intl";
 import { SIZE, type Cursor } from "@/lib/playground/neural-net/renderer";
 import type { Label } from "@/lib/playground/neural-net/types";
+import { FullscreenFrame } from "@/components/playground/fullscreen-frame";
 
 const clamp = (v: number) => Math.max(-1, Math.min(1, v));
 
@@ -61,7 +62,7 @@ export const SceneCanvas = ({
 
   return (
     <>
-      <div className="relative">
+      <FullscreenFrame ratio={1}>
         <canvas
           ref={canvasRef}
           width={SIZE}
@@ -81,7 +82,7 @@ export const SceneCanvas = ({
           className="aspect-square w-full touch-manipulation rounded-sm border border-line-strong bg-paper-deep focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
         />
         {overlay}
-      </div>
+      </FullscreenFrame>
       <p id={hintId} className="mt-3 text-base text-muted">
         {t("canvasHint")}
       </p>

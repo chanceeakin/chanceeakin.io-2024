@@ -3,6 +3,7 @@ import { useRef, type RefObject } from "react";
 import { useTranslations } from "next-intl";
 import { WORLD_H, WORLD_W } from "@/lib/playground/water/types";
 import type { Status } from "./use-water";
+import { FullscreenFrame } from "@/components/playground/fullscreen-frame";
 
 type Props = {
   canvasRef: RefObject<HTMLCanvasElement | null>;
@@ -28,7 +29,7 @@ export const WaterCanvas = ({ canvasRef, status, onSplash, onOrbit }: Props) => 
 
   return (
     <div>
-      <div className="relative">
+      <FullscreenFrame ratio={WORLD_W / WORLD_H}>
         <canvas
           ref={canvasRef}
           width={WORLD_W}
@@ -63,7 +64,7 @@ export const WaterCanvas = ({ canvasRef, status, onSplash, onOrbit }: Props) => 
             {status === "error" ? t("loadError") : t("loading")}
           </div>
         ) : null}
-      </div>
+      </FullscreenFrame>
       <p className="mt-3 text-base text-muted">{t("hint")}</p>
     </div>
   );

@@ -53,9 +53,18 @@
         "note": "Robotics, animations, skyscrapers",
         "cta": "More about me →"
       },
-      "austin": { "title": "Austin", "note": "My home base" },
-      "music": { "title": "Music", "note": "Classically trained singer" },
-      "writing": { "title": "Writing", "note": "My blog" },
+      "austin": {
+        "title": "Austin",
+        "note": "My home base"
+      },
+      "music": {
+        "title": "Music",
+        "note": "Classically trained singer"
+      },
+      "writing": {
+        "title": "Writing",
+        "note": "My blog"
+      },
       "fishing": {
         "title": "Fly fishing",
         "note": "My passion, both fresh water and salt"
@@ -213,7 +222,10 @@
     "loading": "Loading WebAssembly…",
     "loadError": "WebAssembly could not be loaded in this browser.",
     "engine": "Engine",
-    "engines": {"rust": "Rust (WebAssembly)", "lottie": "Lottie (lottie-react)"}
+    "engines": {
+      "rust": "Rust (WebAssembly)",
+      "lottie": "Lottie (lottie-react)"
+    }
   },
   "Water": {
     "createdOn": "Created {date}",
@@ -307,5 +319,9 @@
         "description": "A camera gliding in a straight line through a tunnel of cubes that never stop rearranging. Built with three.js, and it never ends."
       }
     }
+  },
+  "Fullscreen": {
+    "enter": "Full screen",
+    "exit": "Exit full screen"
   }
 }
