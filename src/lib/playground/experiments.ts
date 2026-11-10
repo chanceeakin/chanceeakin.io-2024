@@ -1,5 +1,5 @@
 import type { IconType } from "react-icons";
-import { FaBrain, FaFeatherAlt, FaSearch, FaSignature, FaTint } from "react-icons/fa";
+import { FaBrain, FaCube, FaFeatherAlt, FaSearch, FaSignature, FaTint } from "react-icons/fa";
 
 // The playground menu, sitemap and llms.txt are all driven by this list:
 // adding an experiment is one entry here, a route, and its messages.
@@ -45,6 +45,13 @@ export const EXPERIMENTS: readonly Experiment[] = [
     messageKey: "hiddenMenu",
     icon: FaSearch,
     tone: "bg-mustard text-on-mustard",
+    created: "2026-11",
+  },
+  {
+    slug: "cubes",
+    messageKey: "cubes",
+    icon: FaCube,
+    tone: "bg-sage text-on-sage",
     created: "2026-11",
   },
 ];

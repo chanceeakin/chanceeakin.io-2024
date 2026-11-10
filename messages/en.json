@@ -248,6 +248,27 @@
     "whyThree": "Built with three.js, loaded only on this page. The 26 letters are outlines baked from Anton (an open-licensed typeface) by a script in the repo, extruded once each, and drawn as one instanced mesh per letter, so the whole grid is a few dozen draw calls. It follows the site theme and, with reduced motion on, skips the springs and the wave.",
     "inspiredBy": "Inspired by <a>Plain Sight</a> by Tonami Komuro."
   },
+  "Cubes": {
+    "createdOn": "Created {date}",
+    "back": "Playground",
+    "title": "Endless Cubes",
+    "intro": "A camera drifts in a straight line through a tunnel of cubes, and the cubes never stop rearranging themselves around it. It has no end: fly as long as you like.",
+    "loading": "Loading 3D…",
+    "loadError": "WebGL could not be started in this browser.",
+    "canvasLabel": "A first-person view down a long tunnel of olive, mustard and rust-colored cubes that roll one square at a time into empty spaces while the view drifts forward and fades into fog.",
+    "hint": "Click the scene to turn the camera onto a new axis. The cubes scatter and regroup along the new path.",
+    "params": {
+      "speed": "Flight speed",
+      "activity": "Rearranging"
+    },
+    "turn": "Turn",
+    "play": "Play",
+    "pause": "Pause",
+    "reset": "Reset",
+    "howItWorks": "The cubes sit on a grid of cells, about a third of them filled. Each one waits a random while, then picks a free neighbouring cell, rolls into it a quarter turn and settles. A cell is claimed the moment a cube starts toward it, so two cubes never end up in the same place. A lane down the middle is kept empty for the camera.",
+    "endless": "The camera never actually moves. The field streams toward it, and each slice of cubes that passes behind the camera is carried to the far end of the tunnel, where the fog hides the jump. A click picks a new axis, x, y or z in either direction. The camera swings round to it while every cube is blown outward on its own path, tumbling, then settles into a fresh tunnel along the new heading.",
+    "whyThree": "Built with three.js, loaded only on this page. All of the cubes are one instanced mesh, so the whole tunnel is a single draw call, and it follows the site theme. With reduced motion on, it starts paused."
+  },
   "Playground": {
     "createdOn": "Created {date}",
     "eyebrow": "Lab",
@@ -273,6 +294,10 @@
       "hiddenMenu": {
         "title": "Hidden Menu",
         "description": "The site's menu hidden in a 3D word search. Letters sink under your cursor, a word you linger on rises, and a click floods the field with its color."
+      },
+      "cubes": {
+        "title": "Endless Cubes",
+        "description": "A camera gliding in a straight line through a tunnel of cubes that never stop rearranging. Built with three.js, and it never ends."
       }
     }
   }

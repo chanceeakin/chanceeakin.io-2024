@@ -257,6 +257,27 @@
     "whyThree": "Hecho con three.js, que solo se carga en esta página. Las 26 letras son contornos extraídos de Anton (una tipografía de licencia abierta) con un script del repositorio, extruidos una vez cada uno y dibujados como una malla instanciada por letra, así que toda la cuadrícula son unas decenas de llamadas de dibujo. Sigue el tema del sitio y, con movimiento reducido, omite los resortes y la ola.",
     "inspiredBy": "Inspirado en <a>Plain Sight</a> de Tonami Komuro."
   },
+  "Cubes": {
+    "createdOn": "Creado en {date}",
+    "back": "Parque de juegos",
+    "title": "Cubos sin fin",
+    "intro": "Una cámara avanza en línea recta por un túnel de cubos, y los cubos no dejan de reorganizarse a su alrededor. No tiene final: vuela todo el tiempo que quieras.",
+    "loading": "Cargando 3D…",
+    "loadError": "No se pudo iniciar WebGL en este navegador.",
+    "canvasLabel": "Una vista en primera persona por un largo túnel de cubos color oliva, mostaza y óxido que ruedan una casilla a la vez hacia espacios vacíos mientras la vista avanza y se desvanece en la niebla.",
+    "hint": "Haz clic en la escena para girar la cámara hacia un nuevo eje. Los cubos se dispersan y se reagrupan a lo largo del nuevo camino.",
+    "params": {
+      "speed": "Velocidad de vuelo",
+      "activity": "Reorganización"
+    },
+    "turn": "Girar",
+    "play": "Reproducir",
+    "pause": "Pausar",
+    "reset": "Restablecer",
+    "howItWorks": "Los cubos están en una cuadrícula de celdas, ocupadas en un tercio aproximadamente. Cada uno espera un rato al azar, elige una celda vecina libre, rueda hacia ella un cuarto de vuelta y se asienta. Una celda se reserva en cuanto un cubo empieza a ir hacia ella, así que dos cubos nunca terminan en el mismo sitio. Un carril central se mantiene vacío para la cámara.",
+    "endless": "En realidad la cámara nunca se mueve. El campo fluye hacia ella, y cada capa de cubos que pasa por detrás se lleva al extremo lejano del túnel, donde la niebla oculta el salto. Un clic elige un nuevo eje, x, y o z, en cualquier sentido. La cámara gira hacia él mientras cada cubo sale despedido por su propio camino, dando vueltas, y luego se asienta en un túnel nuevo a lo largo del nuevo rumbo.",
+    "whyThree": "Hecho con three.js, que solo se carga en esta página. Todos los cubos son una única malla instanciada, así que el túnel entero es una sola llamada de dibujo, y sigue el tema del sitio. Con movimiento reducido, empieza en pausa."
+  },
   "Playground": {
     "createdOn": "Creado en {date}",
     "eyebrow": "Laboratorio",
@@ -282,6 +303,10 @@
       "hiddenMenu": {
         "title": "Menú escondido",
         "description": "El menú del sitio escondido en una sopa de letras 3D. Las letras se hunden bajo el cursor, la palabra en la que te detienes se eleva y un clic inunda el campo con su color."
+      },
+      "cubes": {
+        "title": "Cubos sin fin",
+        "description": "Una cámara que avanza en línea recta por un túnel de cubos que no dejan de reorganizarse. Hecho con three.js, y no termina nunca."
       }
     }
   }
