@@ -28,6 +28,13 @@
     "open": "Abrir ajustes",
     "closeLabel": "Cerrar ajustes"
   },
+  "Pwa": {
+    "updateAvailable": "Hay una nueva versión del sitio disponible.",
+    "refresh": "Actualizar",
+    "later": "Después",
+    "offlineTitle": "Sin conexión",
+    "offlineBody": "Esta página aún no está guardada en tu dispositivo. Vuelve a conectarte e inténtalo de nuevo."
+  },
   "Footer": {
     "made": "© {year} Chance Eakin — hecho en Austin.",
     "mischief": "Pase lo que pase, no hagas clic aquí.",

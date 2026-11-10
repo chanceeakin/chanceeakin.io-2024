@@ -9,6 +9,7 @@ import Nav from "@/components/nav";
 import Footer from "@/components/footer";
 import AdobeFonts from "@/components/adobe-fonts";
 import SettingsFab from "@/components/settings-fab";
+import PwaUpdater from "@/components/pwa-updater";
 import { themeInitScript } from "@/lib/theme";
 
 const Analytics = lazy(() => import("@/components/gtm"));
@@ -22,6 +23,7 @@ const caveat = Caveat({
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
+  themeColor: "#4f5d2a",
 };
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -32,6 +34,7 @@ export async function generateMetadata(): Promise<Metadata> {
       default: "Chance Eakin",
     },
     description: t("description"),
+    appleWebApp: { capable: true, title: "Chance Eakin", statusBarStyle: "default" },
   };
 }
 
@@ -76,6 +79,7 @@ export default async function LocaleLayout({
           </main>
           <Footer />
           <SettingsFab />
+          <PwaUpdater />
         </NextIntlClientProvider>
       </body>
     </html>
